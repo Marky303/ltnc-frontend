@@ -9,6 +9,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendEmailVerification,
+  signOut,
 } from "firebase/auth";
 
 import auth from "../firebase.js";
@@ -45,6 +46,8 @@ export const AuthProvider = () => {
 
   let location = useLocation();
 
+  // WTF
+
   // FUNCTIONS
   let signupUser = async (e) => {
     // PREVENT PAGE RELOAD ON FORM SUBMIT SOMEHOW IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT
@@ -66,14 +69,18 @@ export const AuthProvider = () => {
         const user = userCredential.user;
         sendEmailVerification(user);
 
-        // TEST
-        console.log(userCredential);
-        console.log(user);
-
-        notify(
-          "success",
-          "User registered successfully. Confirmation email sent."
-        );
+        // Logout after logging in (unverified email)
+        signOut(auth)
+          .then(() => {
+            // Sign-out successful.
+            notify(
+              "success",
+              "User registered successfully. Confirmation email sent."
+            );
+          })
+          .catch((error) => {
+            throw new Error(error.message);
+          });
       })
       .catch((error) => {
         var errorMessage = error.code + " " + error.message;
@@ -82,6 +89,9 @@ export const AuthProvider = () => {
 
     // Setting loading to false
     setFetching((fetching = false));
+
+    // Redirect to login page
+    navigate("/login");
   };
 
   // FUNCTIONS
@@ -94,12 +104,38 @@ export const AuthProvider = () => {
     setFetching((fetching = true));
 
     // Posting to server and get response
-    signInWithEmailAndPassword(auth, email, password);
+    signInWithEmailAndPassword(
+      auth,
+      e.target.email.value,
+      e.target.password.value
+    )
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+
+        // Check if the account is email verified
+        if (!(user && user.emailVerified)) {
+          signOut(auth)
+            .then(() => {
+              // Notify if user failed vibe check
+              notify("error", "Email has not been verified");
+            })
+            .catch((error) => {
+              throw new Error(error.message);
+            });
+        } else {
+          // Notify if successfully logged in
+          notify("success", "Logged in!");
+        }
+      })
+      .catch((error) => {
+        var errorMessage = error.code + " " + error.message;
+        notify("error", errorMessage);
+      });
 
     // Setting loading to false
     setFetching((fetching = false));
-
-    // Notify user
   };
 
   let contextData = {
@@ -110,6 +146,7 @@ export const AuthProvider = () => {
 
     // userauth related functions
     signupUser: signupUser,
+    loginUser: loginUser,
   };
 
   return (

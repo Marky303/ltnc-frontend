@@ -14,6 +14,7 @@ import Home from "./pages/Home";
 
 // Importing userath related pages
 import Signup from "./pages/userauth/Signup";
+import Login from "./pages/userauth/Login";
 
 // Importing 404 page
 import PageNotFound from "./pages/error/PageNotFound";
@@ -31,7 +32,8 @@ const App = () => (
 
             <Route exact path="/" element={<Home />} />
             <Route exact path="/signup" element={<Signup />} />
-            
+            <Route exact path="/login" element={<Login />} />
+
           </Route>
         </Route>
         <Route path="*" element={<PageNotFound />} />
