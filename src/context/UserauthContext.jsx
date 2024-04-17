@@ -8,6 +8,7 @@ import NotifyContext from "./NotifyContext";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendEmailVerification,
 } from "firebase/auth";
 
 import auth from "../firebase.js";
@@ -55,15 +56,19 @@ export const AuthProvider = () => {
 
     // Posting to server and get response
 
-    createUserWithEmailAndPassword(auth, e.target.email.value, e.target.password.value)
+    createUserWithEmailAndPassword(
+      auth,
+      e.target.email.value,
+      e.target.password.value
+    )
       .then((userCredential) => {
         // Send email verification after signing up
         const user = userCredential.user;
-        userCredential.sendEmailVerification();
+        sendEmailVerification(user);
 
         // TEST
-        console.log(userCredential)
-        console.log(user)
+        console.log(userCredential);
+        console.log(user);
 
         notify(
           "success",
