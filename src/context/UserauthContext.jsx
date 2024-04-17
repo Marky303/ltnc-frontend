@@ -10,6 +10,7 @@ import {
   signInWithEmailAndPassword,
   sendEmailVerification,
   signOut,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 
 import auth from "../firebase.js";
@@ -44,24 +45,43 @@ export const AuthProvider = () => {
 
   // FUNCTIONS
   let signupUser = async (e) => {
-    // PREVENT PAGE RELOAD ON FORM SUBMIT SOMEHOW IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT
-    // IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT
     e.preventDefault();
 
     // Setting loading to true
     setFetching((fetching = true));
 
     // Posting to server and get response
-
     createUserWithEmailAndPassword(
       auth,
       e.target.email.value,
       e.target.password.value
     )
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         // Send email verification after signing up
         const user = userCredential.user;
         sendEmailVerification(user);
+
+        // Create new user instance in database
+        // Check if token is valid
+        const token = auth.currentUser && (await auth.currentUser.getIdToken());
+
+        const payloadHeader = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            email: e.target.email.value,
+            name: e.target.username.value,
+          }),
+        };
+        const res = await fetch(
+          "http://localhost:3000/auth/signup/",
+          payloadHeader
+        );
+
+        console.log(res);
 
         // Logout after logging in (unverified email)
         signOut(auth)
@@ -89,8 +109,6 @@ export const AuthProvider = () => {
   };
 
   let loginUser = async (e) => {
-    // PREVENT PAGE RELOAD ON FORM SUBMIT SOMEHOW IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT
-    // IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT
     e.preventDefault();
 
     // Setting loading to true
@@ -102,7 +120,7 @@ export const AuthProvider = () => {
       e.target.email.value,
       e.target.password.value
     )
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         // Signed in
         const user = userCredential.user;
 
@@ -117,10 +135,31 @@ export const AuthProvider = () => {
               throw new Error(error.message);
             });
         } else {
-          // Notify if successfully logged in
-          notify("success", "Logged in!");
-          // Redirect to dashboard page
-          navigate("/");
+          // Check if token is valid
+          const token =
+            auth.currentUser && (await auth.currentUser.getIdToken());
+
+          const payloadHeader = {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          };
+          const res = await fetch(
+            "http://localhost:3000/auth/login/",
+            payloadHeader
+          );
+
+          if (res.status == 200) {
+            // Notify if successfully logged in
+            notify("success", "Logged in!");
+            // Redirect to dashboard page
+            navigate("/");
+          } else {
+            notify("error", "Cannot log in!");
+            logoutUser();
+          }
         }
       })
       .catch((error) => {
@@ -136,9 +175,20 @@ export const AuthProvider = () => {
     signOut(auth)
       .then(() => {
         // Notify if user failed vibe check
-        notify("success", "Logged out!");
+        notify("warning", "Logged out!");
       })
       .catch((error) => {
+        notify("error", error.message);
+      });
+  };
+
+  let resetPassword = async (e) => {
+    sendPasswordResetEmail(auth, e.target.email.value)
+      .then(() => {
+        notify("success", "Password reset email sent!");
+      })
+      .catch((error) => {
+        e.preventDefault()
         notify("error", error.message);
       });
   };
@@ -152,6 +202,7 @@ export const AuthProvider = () => {
     signupUser: signupUser,
     loginUser: loginUser,
     logoutUser: logoutUser,
+    resetPassword: resetPassword,
   };
 
   return (
