@@ -24,19 +24,7 @@ export const AuthProvider = () => {
   let { notify } = useContext(NotifyContext);
 
   // VARIABLES
-  // Get and set authTokens variable if it is saved in localStorage
-  // Preventing logging out when reloading page
-  let [authTokens, setauthTokens] = useState(() =>
-    localStorage.getItem("authTokens")
-      ? JSON.parse(localStorage.getItem("authTokens"))
-      : null
-  );
-
-  let [userInfo, setuserInfo] = useState(() =>
-    localStorage.getItem("userInfo")
-      ? JSON.parse(localStorage.getItem("userInfo"))
-      : null
-  );
+  let [currentUser, setCurrentUser] = useState();
 
   let [fetching, setFetching] = useState(false);
 
@@ -46,7 +34,13 @@ export const AuthProvider = () => {
 
   let location = useLocation();
 
-  // WTF
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setCurrentUser(user);
+    });
+
+    return unsubscribe;
+  }, []);
 
   // FUNCTIONS
   let signupUser = async (e) => {
@@ -94,7 +88,6 @@ export const AuthProvider = () => {
     navigate("/login");
   };
 
-  // FUNCTIONS
   let loginUser = async (e) => {
     // PREVENT PAGE RELOAD ON FORM SUBMIT SOMEHOW IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT
     // IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT
@@ -112,7 +105,6 @@ export const AuthProvider = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log(user);
 
         // Check if the account is email verified
         if (!(user && user.emailVerified)) {
@@ -127,6 +119,8 @@ export const AuthProvider = () => {
         } else {
           // Notify if successfully logged in
           notify("success", "Logged in!");
+          // Redirect to dashboard page
+          navigate("/");
         }
       })
       .catch((error) => {
@@ -138,15 +132,26 @@ export const AuthProvider = () => {
     setFetching((fetching = false));
   };
 
+  let logoutUser = async () => {
+    signOut(auth)
+      .then(() => {
+        // Notify if user failed vibe check
+        notify("success", "Logged out!");
+      })
+      .catch((error) => {
+        notify("error", error.message);
+      });
+  };
+
   let contextData = {
     // userauth related variables
-    authTokens: authTokens,
-    userInfo: userInfo,
     fetching: fetching,
+    currentUser: currentUser,
 
     // userauth related functions
     signupUser: signupUser,
     loginUser: loginUser,
+    logoutUser: logoutUser,
   };
 
   return (

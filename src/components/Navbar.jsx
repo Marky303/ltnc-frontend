@@ -1,6 +1,9 @@
 import React, { useContext, useEffect } from "react";
 import { Link, BrowserRouter, Routes, Route } from "react-router-dom";
 
+// Importing AuthContext
+import AuthContext from "../context/UserauthContext";
+
 // Import notify function
 import NotifyContext from "../context/NotifyContext";
 
@@ -12,6 +15,12 @@ const Navbar = () => {
   // Get notification from NotifyContext
   let { notification } = useContext(NotifyContext);
 
+  // Implement if authorized
+  let { currentUser } = useContext(AuthContext);
+
+  // Getting logout function
+  let { logoutUser } = useContext(AuthContext);
+
   // Display when theres a notification
   useEffect(() => {
     // Note that no parenthesis is used here
@@ -21,6 +30,13 @@ const Navbar = () => {
   return (
     <div>
       <div>This is the navbar</div>
+      {currentUser ? (
+        <button className="logout-btn" onClick={logoutUser}>Logout</button>
+      ) : (
+        <Link to="login">
+              <button className="login-btn">Login</button>
+        </Link>
+      )}
       <ToastContainer />
     </div>
   );

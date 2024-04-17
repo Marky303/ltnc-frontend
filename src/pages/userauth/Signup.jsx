@@ -6,7 +6,7 @@ import AuthContext from "../../context/UserauthContext";
 
 const Signup = () => {
   // Implement if authorized
-  let { authTokens } = useContext(AuthContext);
+  let { currentUser } = useContext(AuthContext);
 
   // Getting signup function
   let { signupUser } = useContext(AuthContext);
@@ -27,7 +27,7 @@ const Signup = () => {
     signupUser(e);
   };
 
-  return authTokens ? (
+  return currentUser ? (
     <Navigate to="/" />
   ) : (
     <div className="userauth-page-wrapper">

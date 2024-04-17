@@ -7,10 +7,11 @@ import { AuthProvider } from "./context/UserauthContext";
 
 // Importing introduction related pages
 
-// Importing main page
+// Importing opening pages
 import Home from "./pages/Home";
 
-// Importing profile related pages
+// Importing main pages
+import Dashboard from "./pages/main/Dashboard";
 
 // Importing userath related pages
 import Signup from "./pages/userauth/Signup";
@@ -30,9 +31,11 @@ const App = () => (
         <Route exact path="/" element={<AuthProvider />}>
           <Route path="/" element={<Layout />}>
 
-            <Route exact path="/" element={<Home />} />
+            <Route exact path="/home" element={<Home />} />
             <Route exact path="/signup" element={<Signup />} />
             <Route exact path="/login" element={<Login />} />
+
+            <Route exact path="/" element={<Dashboard />} />
 
           </Route>
         </Route>
