@@ -41,6 +41,7 @@ export const AuthProvider = () => {
 
     const url = "http://localhost:3000/user/register";
 
+    // TODO: Splitting error message string and notify multiple times
     try {
       const response = await axios.post(url, body);
       notify("success", response.data.message);
@@ -64,6 +65,34 @@ export const AuthProvider = () => {
     setFetching((fetching = true));
 
     // Posting to server and get response
+    try {
+      const axiosInstance = axios.create({
+        withCredentials: true, // This allows sending/receiving cookies with requests
+      });
+
+      // Posting to server and get response
+      const body = {
+        username: e.target.username.value,
+        password: e.target.password.value,
+      };
+
+      const url = "http://localhost:3000/user/register";
+
+      const response = await axiosInstance.post(url, body);
+
+      // Access the set-cookie header to get cookies
+      // const cookies = response.headers["set-cookie"]; // Array of cookie strings
+
+      console.log(response);
+
+      // if (cookies) {
+      //   console.log("Cookies:", cookies); // This should output the set cookies
+      // } else {
+      //   console.log("No cookies set");
+      // }
+    } catch (error) {
+      console.error("Error during request:", error.message);
+    }
 
     // Setting loading to false
     setFetching((fetching = false));

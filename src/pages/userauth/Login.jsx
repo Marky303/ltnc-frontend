@@ -5,9 +5,6 @@ import { Navigate, Link } from "react-router-dom";
 import AuthContext from "../../context/UserauthContext";
 
 const Login = () => {
-  // Implement if authorized
-  let { currentUser } = useContext(AuthContext);
-
   // Getting signup function
   let { loginUser } = useContext(AuthContext);
 
@@ -26,7 +23,7 @@ const Login = () => {
     loginUser(e);
   };
 
-  return currentUser ? (
+  return false ? (
     <Navigate to="/" />
   ) : (
     <div className="userauth-page-wrapper">
@@ -35,11 +32,11 @@ const Login = () => {
         <hr className="login-form-line"></hr>
         <form className="login-form" onSubmit={(e) => handleSubmit(e)}>
           <fieldset className="form-disabled">
-            <p className="form-spec">Email</p>
+            <p className="form-spec">Username</p>
             <input
               className="form-input"
               type="text"
-              name="email"
+              name="username"
               placeholder="Enter your email"
             />
             <p className="form-spec">Password</p>
