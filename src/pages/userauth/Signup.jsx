@@ -5,9 +5,6 @@ import { Link, Navigate } from "react-router-dom";
 import AuthContext from "../../context/UserauthContext";
 
 const Signup = () => {
-  // Implement if authorized
-  let { currentUser } = useContext(AuthContext);
-
   // Getting signup function
   let { signupUser } = useContext(AuthContext);
 
@@ -27,7 +24,8 @@ const Signup = () => {
     signupUser(e);
   };
 
-  return currentUser ? (
+  // TODO implement private route
+  return false ? (
     <Navigate to="/" />
   ) : (
     <div className="userauth-page-wrapper">
