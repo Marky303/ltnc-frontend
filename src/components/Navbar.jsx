@@ -11,6 +11,9 @@ import NotifyContext from "../context/NotifyContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+// import Header-home.jsx
+import Header_home from "./Header_home";
+
 const Navbar = () => {
   // Get notification from NotifyContext
   let { notification } = useContext(NotifyContext);
@@ -29,13 +32,10 @@ const Navbar = () => {
 
   return (
     <div>
-      <div>This is the navbar</div>
       {authTokens ? (
         <button className="logout-btn" onClick={logoutUser}>Logout</button>
       ) : (
-        <Link to="login">
-              <button className="login-btn">Login</button>
-        </Link>
+           <Header_home />
       )}
       <ToastContainer />
     </div>

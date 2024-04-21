@@ -23,6 +23,7 @@ import PageNotFound from "./pages/error/PageNotFound";
 
 // Layout for website
 import Layout from "./hocs/Layout.jsx";
+import VerifyEmail from "./pages/userauth/VerifyEmail";
 
 // Include/setup all pages in application wrapper/router
 const App = () => (
@@ -36,7 +37,7 @@ const App = () => (
             <Route exact path="/signup" element={<Signup />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/resetpassword" element={<ResetPassword />} />
-
+            <Route exact path="/verifyemail" element={<VerifyEmail />} />
             <Route exact path="/" element={<Dashboard />} />
 
           </Route>

@@ -4,18 +4,16 @@ import { Navigate, Link } from "react-router-dom";
 // Importing AuthContext
 import AuthContext from "../../context/UserauthContext";
 
-// import css
 import "../../assets/css/home-login.css";
 
-
-const Login = () => {
+const VerifyEmail = () => {
   // Private link
   let { authTokens } = useContext(AuthContext);
 
-  // Getting signup function
-  let { loginUser } = useContext(AuthContext);
+  // Get function from context
+  let { verifyEmail } = useContext(AuthContext);
 
-  // Implement loading
+  // Get fetching
   let { fetching } = useContext(AuthContext);
 
   useEffect(() => {
@@ -29,7 +27,7 @@ const Login = () => {
   // Retain fields on failed request
   let handleSubmit = (e) => {
     e.preventDefault();
-    loginUser(e);
+    verifyEmail(e);
   };
 
   return authTokens ? (
@@ -41,27 +39,27 @@ const Login = () => {
           <div class="login-close">
             <Link to="/Home"><i class="login-close-btn js-login-close-btn fa-solid fa-xmark"></i></Link>
           </div>
-          <div class="form-box-login js-login-box">
-            <h2 class="header-form">Login</h2>
-            <div class="body-form body-login">
-              <i class="fa-solid fa-user"></i>
-              <label for="username-login">Username</label>
-              <input type="text" id="username-login" placeholder="Username" />
 
-              <i class="fa-solid fa-lock"></i>
-              <label for="password-login">Password</label>
-              <input type="password" id="password-login" placeholder="Password" />
-
-              <button class="accept-btn">
-                Accept
-              </button>
+          <div class="form-box-verify js-verify-box">
+            <h2 class="header-form">Verify email</h2>
+            <div class="body-form body-verify">
+              <i class="fa-solid fa-envelope"></i>
+              <label for="email-verify">Emter your email address and we will send you a link to reset your
+                password and <span>Please,check your email</span></label>
+              <input type="email" id="email-verify" placeholder="Email" />
+              <Link to="/ResetPassword">
+                <button class="accept-btn js-verify-btn">
+                  Verify Email
+                </button>
+              </Link>
             </div>
-            <div class="footer-form footer-login">
+            <div class="footer-form footer-verify">
+              <Link to="/Login"><button class="login js-login-btn">Login</button></Link>
               <Link to="/Signup"><button class="signup js-signup-btn">Sign up</button></Link>
-              <Link to="/VerifyEmail"><button class="reset-password js-resetpass-btn">Reset Password</button></Link>
             </div>
           </div>
         </div>
+
       </div>
       <div id="content">
         <div class="content-section">
@@ -73,4 +71,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default VerifyEmail;

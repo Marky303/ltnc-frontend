@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/src/assets/css/hone-login.css.css">
+    <link rel="stylesheet" href="/src/assets/css/home-login.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -65,14 +65,64 @@
 
                     <div class="form-box-signup js-signup-box">
                         <h2 class="header-form">Registration</h2>
-                        <div class="body-form body-signup">
-                            <i class="fa-solid fa-user"></i>
-                            <label for="username-signup">Username</label>
-                            <input type="text" id="username-signup" placeholder="Username">
+                        <div class="body-signup">
+                            <div class="user-infor">
+                                <div class="name-flex">
+                                    <i class="fa-solid fa-user"></i>
+                                    <label for="username-signup">Username</label>
+                                    <input type="text" id="username-signup" placeholder="Username">
+                                </div>
 
-                            <i class="fa-solid fa-envelope"></i>
-                            <label for="email-signup">Email</label>
-                            <input type="email" id="email-signup" placeholder="Email">
+                                <div class="name-flex">
+                                    <i class="fa-solid fa-user"></i>
+                                    <label for="Fullname-signup">Fullname</label>
+                                    <input type="text" id="Fullname-signup" placeholder="Fullname">
+                                </div>
+                            </div>
+                            
+                            <div class="user-infor">
+                                <div class="name-flex">
+                                    <i class="fa-solid fa-envelope"></i>
+                                    <label for="email-signup">Email</label>
+                                    <input type="email" id="email-signup" placeholder="Email">
+                                </div>
+
+                                <div class="name-flex">
+                                    <i class="fa-solid fa-phone"></i>
+                                    <label for="phone_number-signup">Phone number</label>
+                                    <input type="number" id="phone_number-signup" placeholder="Phone number">
+                                </div>
+                            </div>
+
+                            <i class="fa-solid fa-location-dot"></i>
+                            <label for="address-signup">Address</label>
+                            <input type="text" id="address" placeholder="Address">
+                            
+
+                            <div class="vehical-type-form">
+                                <div class="vehical-type">
+                                    <div>
+                                        <label for="vehicle1"> Truck</label>
+                                        <input type="radio" id="vehicle1" name="vehicle" value="Truck">
+                                    </div>
+
+                                    <div>
+                                        <label for="vehicle2"> Coach</label>
+                                        <input type="radio" id="vehicle2" name="vehicle" value="Coach">
+                                    </div>
+
+                                    <div>
+                                        <label for="vehicle3"> Container</label>
+                                        <input type="radio" id="vehicle3" name="vehicle" value="Container">
+                                    </div>
+                                </div>
+                                
+                                <div class="vehical-name">
+                                    <i class="fa-solid fa-car"></i>
+                                    <label for="vehical_name-signup">Vehical name</label>
+                                    <input type="text" id="vehical_name-signup" placeholder="Vehical Name">
+                                </div>
+                            </div>
 
                             <i class="fa-solid fa-lock"></i>
                             <label for="password-signup">Password</label>
@@ -143,77 +193,7 @@
 
     </main>
 
-    <script>
-        const loginWeb = document.querySelector('.js-login-btn') // nhận sự kiện click
-        const loginSection = document.querySelector('.js-login-section')
-        const loginClose = document.querySelector('.js-login-close-btn')
-        const signUp = document.querySelector('.js-signup-box')
-        const login = document.querySelector('.js-login-box')
-        const verify = document.querySelector('.js-verify-box')
-        const resetPass = document.querySelector('.js-resetpass-box')
-        const btnSignUps = document.querySelectorAll('.js-signup-btn')
-        const btnLogins = document.querySelectorAll('.js-login-btn')
-        const btnResetPasss = document.querySelectorAll('.js-resetpass-btn')
-        const btnVerifyBtn = document.querySelector('.js-verify-btn')
-        const btnAcceptResetpassBtn = document.querySelector('.js-accept-resetpass-btn')
-
-        function showLogin() {
-            loginSection.classList.add('open')
-
-            // add vào sẽ hiễn thị none
-            signUp.classList.add('sign-box')
-            verify.classList.add('verify-box')
-            resetPass.classList.add('resetpass-box')
-        }
-        function hideLogin() {
-            loginSection.classList.remove('open')
-
-            //remove sẽ tắt none
-            login.classList.remove('login-box')
-            signUp.classList.remove('sign-box')
-            verify.classList.remove('verify-box')
-            resetPass.classList.remove('resetpass-box')
-        }
-
-        loginWeb.addEventListener('click', showLogin)
-        loginClose.addEventListener('click', hideLogin)
-        for (const btnSignUp of btnSignUps) {
-            btnSignUp.addEventListener('click', function () {
-                signUp.classList.remove('sign-box')
-                login.classList.add('login-box')
-                verify.classList.add('verify-box')
-                resetPass.classList.add('resetpass-box')
-            })
-        }
-        for (const btnLogin of btnLogins) {
-            btnLogin.addEventListener('click', function () {
-                login.classList.remove('login-box')
-                signUp.classList.add('sign-box')
-                verify.classList.add('verify-box')
-                resetPass.classList.add('resetpass-box')
-            })
-        }
-        for (const btnResetPass of btnResetPasss) {
-            btnResetPass.addEventListener('click', function () {
-                verify.classList.remove('verify-box')
-                signUp.classList.add('sign-box')
-                login.classList.add('login-box')
-                resetPass.classList.add('resetpass-box')
-            })
-        }  
-        // khi nhấn vào button verify email thì sẽ hiện cửa sổ resetpass-box
-        btnVerifyBtn.addEventListener('click', function (){
-            resetPass.classList.remove('resetpass-box')
-            verify.classList.add('verify-box')
-            signUp.classList.add('sign-box')
-            login.classList.add('login-box')
-        })
-        // khi nhấn vào accept thay đổi pass thì sẽ quay về login để đăng nhập
-        btnAcceptResetpassBtn.addEventListener('click', function (){
-            hideLogin();
-            showLogin();
-        })
-    </script>
+    
 </body>
 
 </html>

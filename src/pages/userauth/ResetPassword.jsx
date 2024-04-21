@@ -4,63 +4,74 @@ import { Navigate, Link } from "react-router-dom";
 // Importing AuthContext
 import AuthContext from "../../context/UserauthContext";
 
+import "../../assets/css/home-login.css";
+
 const ResetPassword = () => {
-    // Private link
-    let { authTokens } = useContext(AuthContext);
-  
-    // Get function from context
-    let { resetPassword } = useContext(AuthContext);
-  
-    // Get fetching
-    let { fetching } = useContext(AuthContext);
+  // Private link
+  let { authTokens } = useContext(AuthContext);
 
-    useEffect(() => {
-      let element = document.getElementsByClassName("form-disabled");
-      if (element.length > 0) {
-        if (fetching) element[0].setAttribute("disabled", "disabled");
-        else element[0].removeAttribute("disabled");
-      }
-    }, [fetching]);
+  // Get function from context
+  let { resetPassword } = useContext(AuthContext);
 
-    // Retain fields on failed request
-    let handleSubmit = (e) => {
-      e.preventDefault();
-      resetPassword(e);
-    };
-  
-    return authTokens ? (
-      <Navigate to="/" />
-    ) : (
-      <div className="userauth-page-wrapper">
-          <div className="resetpassword-form-cont">
-            <p className="resetpassword-form-prompt">Reset Password</p>
-            <hr className="resetpassword-form-line"></hr>
-            <form className="resetpassword-form" onSubmit={(e) => handleSubmit(e)}>
-              <fieldset className="form-disabled">
-                <p className="form-spec">Email</p>
-                <input
-                  className="form-input"
-                  type="text"
-                  name="email"
-                  placeholder="Enter your email"
-                />
-                <button className="resetpassword-submit-btn" type="submit">
-                  Get email
-                </button>
-                <div className="resetpassword-redirect-cont">
-                  <Link to="/login" className="resetpassword-redirect">
-                    Login
-                  </Link>
-                  <span className="or-redirect-text">|</span>
-                  <Link to="/signup" className="resetpassword-redirect">
-                    Sign up
-                  </Link>
-                </div>
-              </fieldset>
-            </form>
-          </div>
-      </div>
-    );
+  // Get fetching
+  let { fetching } = useContext(AuthContext);
+
+  useEffect(() => {
+    let element = document.getElementsByClassName("form-disabled");
+    if (element.length > 0) {
+      if (fetching) element[0].setAttribute("disabled", "disabled");
+      else element[0].removeAttribute("disabled");
+    }
+  }, [fetching]);
+
+  // Retain fields on failed request
+  let handleSubmit = (e) => {
+    e.preventDefault();
+    resetPassword(e);
   };
-  
-  export default ResetPassword;
+
+  return authTokens ? (
+    <Navigate to="/" />
+  ) : (
+    <div id="body">
+      <div class="login-section js-login-section">
+        <div class="login-content">
+          <div class="login-close">
+            <Link to="/Home"><i class="login-close-btn js-login-close-btn fa-solid fa-xmark"></i></Link>
+          </div>
+          <div class="form-box-resetpass js-resetpass-box">
+            <h2 class="header-form">Reset Password</h2>
+            <div class="body-form body-resetpass">
+
+              <i class="fa-solid fa-lock"></i>
+              <label for="password-resetpass">Password</label>
+              <input type="password" id="password-resetpass" placeholder="Password" />
+
+              <i class="fa-solid fa-lock"></i>
+              <label for="repassword-resetpass">Nhập lại password</label>
+              <input type="password" id="repassword-resetpass" placeholder="Password" />
+
+              <Link to="/Login">
+                <button class="accept-btn js-accept-resetpass-btn">
+                  Accept
+                </button>
+              </Link>
+            </div>
+            <div class="footer-form footer-verify">
+              <Link to="/Login"><button class="login js-login-btn">Login</button></Link>
+              <Link to="/Signup"><button class="signup js-signup-btn">Sign up</button></Link>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="content">
+        <div class="content-section">
+          <p class="text-title">Quản lí vận chuyển</p>
+          <p class="text-title-next">Hàng đầu<br />thế giới</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ResetPassword;

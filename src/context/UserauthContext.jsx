@@ -127,6 +127,8 @@ export const AuthProvider = () => {
   };
 
   let resetPassword = async (e) => {};
+  
+  let verifyEmail = async (e) => {};
 
   let contextData = {
     // userauth related variables
@@ -138,7 +140,9 @@ export const AuthProvider = () => {
     loginUser: loginUser,
     logoutUser: logoutUser,
     resetPassword: resetPassword,
+    verifyEmail: verifyEmail,
   };
+
 
   return (
     // If loading is true, render nothing, else render everything as normal
