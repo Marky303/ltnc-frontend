@@ -33,23 +33,38 @@ export const AuthProvider = () => {
     setFetching((fetching = true));
 
     // Posting to server and get response
-    const body = {
-      username: e.target.username.value,
-      password: e.target.password.value,
-      email: e.target.email.value,
-    };
-
-    const url = "http://localhost:3000/user/register";
-
     // TODO: Splitting error message string and notify multiple times
+    // USING PREDETERMINED RESULTS
     try {
-      const response = await axios.post(url, body);
+      const response = await axios.post(
+        "http://localhost:3000/user/register",
+        {
+          "username": "markstanley",
+          "password": "nhyenhyu69",
+          "email": "nhienhuu303@gmail.com",
+          "phoneNumber": "12345678909",
+          "address": "penacony",
+          "drivingLicense": ["truck", "coach"],
+          "fullName": "nhyen hyu"
+        },
+        {
+          headers: {
+            "Content-Type": "application/json", // Custom headers
+          },
+        }
+      );
       notify("success", response.data.message);
       navigate("/login");
     } catch (error) {
+      // Error from backend
       if (error.response) {
-        notify("error", error.response.data.error);
-      } else {
+        let messages = error.response.data.error;
+        for (let i = 0; i < messages.length; i++) {
+          notify("error", messages[i]);
+        }
+      }
+      // Error from anywhere
+      else {
         notify("error", error.message);
       }
     }
@@ -76,14 +91,14 @@ export const AuthProvider = () => {
         password: e.target.password.value,
       };
 
-      const url = "http://localhost:3000/user/register";
+      const url = "http://localhost:3000/user/login";
 
       const response = await axiosInstance.post(url, body);
 
       // Access the set-cookie header to get cookies
-      // const cookies = response.headers["set-cookie"]; // Array of cookie strings
+      const cookies = response.headers["set-cookie"]; // Array of cookie strings
 
-      console.log(response);
+      console.log("Cookies from response:", cookies);
 
       // if (cookies) {
       //   console.log("Cookies:", cookies); // This should output the set cookies
@@ -91,7 +106,7 @@ export const AuthProvider = () => {
       //   console.log("No cookies set");
       // }
     } catch (error) {
-      console.error("Error during request:", error.message);
+      console.log("Error during request:", error);
     }
 
     // Setting loading to false
