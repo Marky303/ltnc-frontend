@@ -1,6 +1,7 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 // Importing NotifyContext to get notify function
 import NotifyContext from "./NotifyContext";
@@ -39,13 +40,13 @@ export const AuthProvider = () => {
       const response = await axios.post(
         "http://localhost:3000/user/register",
         {
-          "username": "markstanley",
-          "password": "nhyenhyu69",
-          "email": "nhienhuu303@gmail.com",
-          "phoneNumber": "12345678909",
-          "address": "penacony",
-          "drivingLicense": ["truck", "coach"],
-          "fullName": "nhyen hyu"
+          username: "markstanley",
+          password: "nhyenhyu69",
+          email: "nhienhuu303@gmail.com",
+          phoneNumber: "12345678909",
+          address: "penacony",
+          drivingLicense: ["truck", "coach"],
+          fullName: "nhyen hyu",
         },
         {
           headers: {
@@ -59,8 +60,12 @@ export const AuthProvider = () => {
       // Error from backend
       if (error.response) {
         let messages = error.response.data.error;
-        for (let i = 0; i < messages.length; i++) {
-          notify("error", messages[i]);
+        if (Array.isArray(messages)) {
+          for (let i = 0; i < messages.length; i++) {
+            notify("error", messages[i]);
+          }
+        } else {
+          notify("error", messages);
         }
       }
       // Error from anywhere
@@ -87,33 +92,35 @@ export const AuthProvider = () => {
 
       // Posting to server and get response
       const body = {
-        username: e.target.username.value,
-        password: e.target.password.value,
+        username: "markstanley",
+        password: "nhyenhyu69",
       };
 
       const url = "http://localhost:3000/user/login";
 
       const response = await axiosInstance.post(url, body);
 
-      // Access the set-cookie header to get cookies
-      const cookies = response.headers["set-cookie"]; // Array of cookie strings
-
-      console.log("Cookies from response:", cookies);
-
-      // if (cookies) {
-      //   console.log("Cookies:", cookies); // This should output the set cookies
-      // } else {
-      //   console.log("No cookies set");
-      // }
+      // Check if the cookies is actually acquired
+      const token = Cookies.get("token");
+      if (token) {
+        notify("success", "Logged in!");
+        navigate("/mainpage");
+      } else {
+        notify("error", "Something happened!");
+      }
     } catch (error) {
-      console.log("Error during request:", error);
+      notify("error", error.response.data.error);
     }
 
     // Setting loading to false
     setFetching((fetching = false));
   };
 
-  let logoutUser = async () => {};
+  // TODO: maybe theres something more
+  let logoutUser = async () => {
+    Cookies.remove('cookieName')
+    navigate("/login");
+  };
 
   let resetPassword = async (e) => {};
 
