@@ -16,7 +16,7 @@ const Navbar = () => {
   let { notification } = useContext(NotifyContext);
 
   // Implement if authorized
-  let { currentUser } = useContext(AuthContext);
+  let { authTokens } = useContext(AuthContext);
 
   // Getting logout function
   let { logoutUser } = useContext(AuthContext);
@@ -30,7 +30,7 @@ const Navbar = () => {
   return (
     <div>
       <div>This is the navbar</div>
-      {currentUser ? (
+      {authTokens ? (
         <button className="logout-btn" onClick={logoutUser}>Logout</button>
       ) : (
         <Link to="login">

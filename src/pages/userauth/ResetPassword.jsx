@@ -5,8 +5,8 @@ import { Navigate, Link } from "react-router-dom";
 import AuthContext from "../../context/UserauthContext";
 
 const ResetPassword = () => {
-    // Implement if authorized
-    let { currentUser } = useContext(AuthContext);
+    // Private link
+    let { authTokens } = useContext(AuthContext);
   
     // Get function from context
     let { resetPassword } = useContext(AuthContext);
@@ -16,8 +16,10 @@ const ResetPassword = () => {
 
     useEffect(() => {
       let element = document.getElementsByClassName("form-disabled");
-      if (fetching) element[0].setAttribute("disabled", "disabled");
-      else element[0].removeAttribute("disabled");
+      if (element.length > 0) {
+        if (fetching) element[0].setAttribute("disabled", "disabled");
+        else element[0].removeAttribute("disabled");
+      }
     }, [fetching]);
 
     // Retain fields on failed request
@@ -26,7 +28,7 @@ const ResetPassword = () => {
       resetPassword(e);
     };
   
-    return currentUser ? (
+    return authTokens ? (
       <Navigate to="/" />
     ) : (
       <div className="userauth-page-wrapper">

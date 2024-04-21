@@ -6,9 +6,9 @@ import AuthContext from "../../context/UserauthContext";
 
 const Dashboard = () => {
   // Implement if authorized
-  let { currentUser } = useContext(AuthContext);
+  let { authTokens } = useContext(AuthContext);
 
-  return currentUser ? (<div>This is the dashboard page</div>) : (<Navigate to="/login" />);
+  return authTokens ? (<div>This is the dashboard page</div>) : (<Navigate to="/login" />);
 };
 
 export default Dashboard;

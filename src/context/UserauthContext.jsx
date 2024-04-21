@@ -16,7 +16,9 @@ export const AuthProvider = () => {
   let { notify } = useContext(NotifyContext);
 
   // VARIABLES
-  let [authToken, setAuthToken] = useState();
+  let [authTokens, setauthTokens] = useState(() =>
+    Cookies.get("token") ? Cookies.get("token") : null
+  );
 
   let [fetching, setFetching] = useState(false);
 
@@ -103,8 +105,9 @@ export const AuthProvider = () => {
       // Check if the cookies is actually acquired
       const token = Cookies.get("token");
       if (token) {
+        setauthTokens(token);
         notify("success", "Logged in!");
-        navigate("/mainpage");
+        navigate("/");
       } else {
         notify("error", "Something happened!");
       }
@@ -118,7 +121,8 @@ export const AuthProvider = () => {
 
   // TODO: maybe theres something more
   let logoutUser = async () => {
-    Cookies.remove('cookieName')
+    setauthTokens(null);
+    Cookies.remove("token");
     navigate("/login");
   };
 
@@ -127,7 +131,7 @@ export const AuthProvider = () => {
   let contextData = {
     // userauth related variables
     fetching: fetching,
-    authToken: authToken,
+    authTokens: authTokens,
 
     // userauth related functions
     signupUser: signupUser,

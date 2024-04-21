@@ -5,6 +5,9 @@ import { Link, Navigate } from "react-router-dom";
 import AuthContext from "../../context/UserauthContext";
 
 const Signup = () => {
+  // Private link
+  let { authTokens } = useContext(AuthContext);
+
   // Getting signup function
   let { signupUser } = useContext(AuthContext);
 
@@ -14,8 +17,10 @@ const Signup = () => {
   // Useeffect to implement loading
   useEffect(() => {
     let element = document.getElementsByClassName("form-disabled");
-    if (fetching) element[0].setAttribute("disabled", "disabled");
-    else element[0].removeAttribute("disabled");
+    if (element.length > 0) {
+      if (fetching) element[0].setAttribute("disabled", "disabled");
+      else element[0].removeAttribute("disabled");
+    }
   }, [fetching]);
 
   // Retain fields on failed request
@@ -25,7 +30,7 @@ const Signup = () => {
   };
 
   // TODO implement private route
-  return false ? (
+  return authTokens ? (
     <Navigate to="/" />
   ) : (
     <div className="userauth-page-wrapper">

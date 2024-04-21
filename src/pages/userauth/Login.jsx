@@ -5,6 +5,9 @@ import { Navigate, Link } from "react-router-dom";
 import AuthContext from "../../context/UserauthContext";
 
 const Login = () => {
+  // Private link
+  let { authTokens } = useContext(AuthContext);
+
   // Getting signup function
   let { loginUser } = useContext(AuthContext);
 
@@ -13,8 +16,10 @@ const Login = () => {
 
   useEffect(() => {
     let element = document.getElementsByClassName("form-disabled");
-    if (fetching) element[0].setAttribute("disabled", "disabled");
-    else element[0].removeAttribute("disabled");
+    if (element.length > 0) {
+      if (fetching) element[0].setAttribute("disabled", "disabled");
+      else element[0].removeAttribute("disabled");
+    }
   }, [fetching]);
 
   // Retain fields on failed request
@@ -23,7 +28,7 @@ const Login = () => {
     loginUser(e);
   };
 
-  return false ? (
+  return authTokens ? (
     <Navigate to="/" />
   ) : (
     <div className="userauth-page-wrapper">
