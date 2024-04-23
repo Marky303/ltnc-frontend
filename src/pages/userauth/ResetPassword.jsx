@@ -41,22 +41,22 @@ const ResetPassword = () => {
           </div>
           <div class="form-box-resetpass js-resetpass-box">
             <h2 class="header-form">Reset Password</h2>
-            <div class="body-form body-resetpass">
+            <form action="" method="" class="body-form body-resetpass">
 
               <i class="fa-solid fa-lock"></i>
               <label for="password-resetpass">Password</label>
-              <input type="password" id="password-resetpass" placeholder="Password" />
+              <input type="password" id="password-resetpass" name="password-resetpass" placeholder="Password" required/>
 
               <i class="fa-solid fa-lock"></i>
               <label for="repassword-resetpass">Nhập lại password</label>
-              <input type="password" id="repassword-resetpass" placeholder="Password" />
+              <input type="password" id="repassword-resetpass" name="repassword-resetpass" placeholder="Password" required/>
 
               <Link to="/Login">
-                <button class="accept-btn js-accept-resetpass-btn">
+                <button type="submit" class="accept-btn js-accept-resetpass-btn">
                   Accept
                 </button>
               </Link>
-            </div>
+            </form>
             <div class="footer-form footer-verify">
               <Link to="/Login"><button class="login js-login-btn">Login</button></Link>
               <Link to="/Signup"><button class="signup js-signup-btn">Sign up</button></Link>

@@ -43,76 +43,70 @@ const Signup = () => {
           </div>
           <div class="form-box-signup js-signup-box">
             <h2 class="header-form">Registration</h2>
-            <div class="body-signup">
+            <form action="" method="" class="body-signup">
               <div class="user-infor">
                 <div class="name-flex">
                   <i class="fa-solid fa-user"></i>
-                  <label for="username-signup">Username</label>
-                  <input type="text" id="username-signup" placeholder="Username" />
+                  <label for="username">Username</label>
+                  <input type="text" id="username" name="username" placeholder="Username" required/>
                 </div>
 
                 <div class="name-flex">
                   <i class="fa-solid fa-user"></i>
-                  <label for="Fullname-signup">Fullname</label>
-                  <input type="text" id="Fullname-signup" placeholder="Fullname" />
+                  <label for="Fullname">Fullname</label>
+                  <input type="text" id="Fullname" name="Fullname" placeholder="Fullname" required/>
                 </div>
               </div>
 
               <div class="user-infor">
                 <div class="name-flex">
                   <i class="fa-solid fa-envelope"></i>
-                  <label for="email-signup">Email</label>
-                  <input type="email" id="email-signup" placeholder="Email" />
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" placeholder="Email" required/>
                 </div>
 
                 <div class="name-flex">
                   <i class="fa-solid fa-phone"></i>
-                  <label for="phone_number-signup">Phone number</label>
-                  <input type="number" id="phone_number-signup" placeholder="Phone number" />
+                  <label for="phone_number">Phone number</label>
+                  <input type="text" id="phone_number" name="phone_number" placeholder="Phone number" required/>
                 </div>
               </div>
 
               <i class="fa-solid fa-location-dot"></i>
-              <label for="address-signup">Address</label>
-              <input type="text" id="address" placeholder="Address" />
+              <label for="address">Address</label>
+              <input type="text" id="address" name="address" placeholder="Address"required />
 
               <div class="vehical-type-form">
-                <div class="vehical-type">
+                <div class="vehical-type" >
                   <div>
                     <label for="vehicle1"> Truck</label>
-                    <input type="radio" id="vehicle1" name="vehicle" value="Truck" />
+                    <input type="radio" id="vehicle1" name="vehicle" value="Truck" required/>
                   </div>
 
                   <div>
                     <label for="vehicle2"> Coach</label>
-                    <input type="radio" id="vehicle2" name="vehicle" value="Coach" />
+                    <input type="radio" id="vehicle2" name="vehicle" value="Coach" required/>
                   </div>
 
                   <div>
                     <label for="vehicle3"> Container</label>
-                    <input type="radio" id="vehicle3" name="vehicle" value="Container" />
+                    <input type="radio" id="vehicle3" name="vehicle" value="Container" required/>
                   </div>
-                </div>
-
-                <div class="vehical-name">
-                  <i class="fa-solid fa-car"></i>
-                  <label for="vehical_name-signup">Vehical name</label>
-                  <input type="text" id="vehical_name-signup" placeholder="Vehical Name" />
                 </div>
               </div>
 
               <i class="fa-solid fa-lock"></i>
-              <label for="password-signup">Password</label>
-              <input type="password" id="password-signup" placeholder="Password" />
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password" placeholder="Password" required/>
 
               <i class="fa-solid fa-lock"></i>
-              <label for="repassword-signup">Nhập lại password</label>
-              <input type="password" id="repassword-signup" placeholder="Password" />
+              <label for="repassword">Nhập lại password</label>
+              <input type="password" id="repassword" name="repassword" placeholder="Password" required/>
 
-              <button class="accept-btn">
+              <button type="submit" class="accept-btn">
                 Accept
               </button>
-            </div>
+            </form>
             <div class="footer-form">
               <Link to="/Login"><button class="login js-login-btn">Login</button></Link>
               <Link to="/VerifyEmail"><button class="reset-password js-resetpass-btn">Reset password</button></Link>

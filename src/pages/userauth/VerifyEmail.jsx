@@ -42,17 +42,17 @@ const VerifyEmail = () => {
 
           <div class="form-box-verify js-verify-box">
             <h2 class="header-form">Verify email</h2>
-            <div class="body-form body-verify">
+            <form action="" method="" class="body-form body-verify">
               <i class="fa-solid fa-envelope"></i>
               <label for="email-verify">Emter your email address and we will send you a link to reset your
                 password and <span>Please,check your email</span></label>
-              <input type="email" id="email-verify" placeholder="Email" />
+              <input type="email" id="email-verify" name="email-verify" placeholder="Email"/>
               <Link to="/ResetPassword">
-                <button class="accept-btn js-verify-btn">
+                <button type="submit" class="accept-btn js-verify-btn">
                   Verify Email
                 </button>
               </Link>
-            </div>
+            </form>
             <div class="footer-form footer-verify">
               <Link to="/Login"><button class="login js-login-btn">Login</button></Link>
               <Link to="/Signup"><button class="signup js-signup-btn">Sign up</button></Link>

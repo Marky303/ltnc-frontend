@@ -43,19 +43,19 @@ const Login = () => {
           </div>
           <div class="form-box-login js-login-box">
             <h2 class="header-form">Login</h2>
-            <div class="body-form body-login">
+            <form action="" method="" class="body-form body-login">
               <i class="fa-solid fa-user"></i>
-              <label for="username-login">Username</label>
-              <input type="text" id="username-login" placeholder="Username" />
+              <label for="username">Username</label>
+              <input type="text" id="username" name="username"  placeholder="Username" required/>
 
               <i class="fa-solid fa-lock"></i>
-              <label for="password-login">Password</label>
-              <input type="password" id="password-login" placeholder="Password" />
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password"  placeholder="Password" required/>
 
-              <button class="accept-btn">
+              <button type="submit" class="accept-btn">
                 Accept
               </button>
-            </div>
+            </form>
             <div class="footer-form footer-login">
               <Link to="/Signup"><button class="signup js-signup-btn">Sign up</button></Link>
               <Link to="/VerifyEmail"><button class="reset-password js-resetpass-btn">Reset Password</button></Link>
