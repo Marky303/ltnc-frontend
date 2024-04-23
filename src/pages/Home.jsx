@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Navigate } from "react-router-dom";
 
-import "../assets/css/home-login.css"
+import "../pagestyles/home-login.css";
 import Header_home from "../components/Header_home";
 
 const Home = () => {

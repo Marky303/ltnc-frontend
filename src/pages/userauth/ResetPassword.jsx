@@ -4,7 +4,7 @@ import { Navigate, Link } from "react-router-dom";
 // Importing AuthContext
 import AuthContext from "../../context/UserauthContext";
 
-import "../../assets/css/home-login.css";
+import "../../pagestyles/home-login.css";
 
 const ResetPassword = () => {
   // Private link

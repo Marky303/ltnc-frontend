@@ -4,7 +4,7 @@ import { Link, Navigate } from "react-router-dom";
 // Importing AuthContext
 import AuthContext from "../../context/UserauthContext";
 
-import "../../assets/css/home-login.css";
+import "../../pagestyles/home-login.css";
 
 const Signup = () => {
   // Private link
