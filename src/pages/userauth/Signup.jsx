@@ -36,88 +36,90 @@ const Signup = () => {
     <Navigate to="/" />
   ) : (
     <div id="body">
-      <div class="login-section js-login-section">
-        <div class="login-content">
-          <div class="login-close">
-            <Link to="/Home"><i class="login-close-btn js-login-close-btn fa-solid fa-xmark"></i></Link>
+      <div className="login-section js-login-section">
+        <div className="login-content">
+          <div className="login-close">
+            <Link to="/Home"><i className="login-close-btn js-login-close-btn fa-solid fa-xmark"></i></Link>
           </div>
-          <div class="form-box-signup js-signup-box">
-            <h2 class="header-form">Registration</h2>
-            <form action="" method="" class="body-signup">
-              <div class="user-infor">
-                <div class="name-flex">
-                  <i class="fa-solid fa-user"></i>
+          <div className="form-box-signup js-signup-box">
+            <h2 className="header-form">Registration</h2>
+            <form action="" method="" className="body-signup" onSubmit={(e) => handleSubmit(e)}>
+            <fieldset className="form-disabled">
+              <div className="user-infor">
+                <div className="name-flex">
+                  <i className="fa-solid fa-user"></i>
                   <label for="username">Username</label>
-                  <input type="text" id="username" name="username" placeholder="Username" required/>
+                  <input type="text" id="username" name="username" placeholder="Username"/>
                 </div>
 
-                <div class="name-flex">
-                  <i class="fa-solid fa-user"></i>
+                <div className="name-flex">
+                  <i className="fa-solid fa-user"></i>
                   <label for="Fullname">Fullname</label>
-                  <input type="text" id="Fullname" name="Fullname" placeholder="Fullname" required/>
+                  <input type="text" id="Fullname" name="Fullname" placeholder="Fullname"/>
                 </div>
               </div>
 
-              <div class="user-infor">
-                <div class="name-flex">
-                  <i class="fa-solid fa-envelope"></i>
+              <div className="user-infor">
+                <div className="name-flex">
+                  <i className="fa-solid fa-envelope"></i>
                   <label for="email">Email</label>
-                  <input type="email" id="email" name="email" placeholder="Email" required/>
+                  <input type="email" id="email" name="email" placeholder="Email"/>
                 </div>
 
-                <div class="name-flex">
-                  <i class="fa-solid fa-phone"></i>
+                <div className="name-flex">
+                  <i className="fa-solid fa-phone"></i>
                   <label for="phone_number">Phone number</label>
-                  <input type="text" id="phone_number" name="phone_number" placeholder="Phone number" required/>
+                  <input type="text" id="phone_number" name="phone_number" placeholder="Phone number"/>
                 </div>
               </div>
 
-              <i class="fa-solid fa-location-dot"></i>
+              <i className="fa-solid fa-location-dot"></i>
               <label for="address">Address</label>
-              <input type="text" id="address" name="address" placeholder="Address"required />
+              <input type="text" id="address" name="address" placeholder="Address"/>
 
-              <div class="vehical-type-form">
-                <div class="vehical-type" >
+              <div className="vehical-type-form">
+                <div className="vehical-type" >
                   <div>
                     <label for="vehicle1"> Truck</label>
-                    <input type="radio" id="vehicle1" name="vehicle" value="Truck" required/>
+                    <input type="checkbox" id="truck" name="vehicles" value="truck"/>
                   </div>
 
                   <div>
                     <label for="vehicle2"> Coach</label>
-                    <input type="radio" id="vehicle2" name="vehicle" value="Coach" required/>
+                    <input type="checkbox" id="coach" name="vehicles" value="coach"/>
                   </div>
 
                   <div>
                     <label for="vehicle3"> Container</label>
-                    <input type="radio" id="vehicle3" name="vehicle" value="Container" required/>
+                    <input type="checkbox" id="container" name="vehicles" value="container"/>
                   </div>
                 </div>
               </div>
 
-              <i class="fa-solid fa-lock"></i>
+              <i className="fa-solid fa-lock"></i>
               <label for="password">Password</label>
-              <input type="password" id="password" name="password" placeholder="Password" required/>
+              <input type="password" id="password" name="password" placeholder="Password"/>
 
-              <i class="fa-solid fa-lock"></i>
+              <i className="fa-solid fa-lock"></i>
               <label for="repassword">Nhập lại password</label>
-              <input type="password" id="repassword" name="repassword" placeholder="Password" required/>
+              <input type="password" id="repassword" name="repassword" placeholder="Password"/>
 
-              <button type="submit" class="accept-btn">
+              <button type="submit" className="accept-btn">
                 Accept
               </button>
+            </fieldset>
             </form>
-            <div class="footer-form">
-              <Link to="/Login"><button class="login js-login-btn">Login</button></Link>
-              <Link to="/VerifyEmail"><button class="reset-password js-resetpass-btn">Reset password</button></Link>
+            <div className="footer-form">
+              <Link to="/Login"><button className="login js-login-btn">Login</button></Link>
+              <Link to="/VerifyEmail"><button className="reset-password js-resetpass-btn">Reset password</button></Link>
             </div>
           </div>
         </div>
       </div>
       <div id="content">
-        <div class="content-section">
-          <p class="text-title">Quản lí vận chuyển</p>
-          <p class="text-title-next">Hàng đầu<br />thế giới</p>
+        <div className="content-section">
+          <p className="text-title">Quản lí vận chuyển</p>
+          <p className="text-title-next">Hàng đầu<br />thế giới</p>
         </div>
       </div>
     </div>

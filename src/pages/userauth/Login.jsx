@@ -7,7 +7,6 @@ import AuthContext from "../../context/UserauthContext";
 // import css
 import "../../pagestyles/home-login.css";
 
-
 const Login = () => {
   // Private link
   let { authTokens } = useContext(AuthContext);
@@ -39,26 +38,46 @@ const Login = () => {
       <div class="login-section js-login-section">
         <div class="login-content">
           <div class="login-close">
-            <Link to="/Home"><i class="login-close-btn js-login-close-btn fa-solid fa-xmark"></i></Link>
+            <Link to="/Home">
+              <i class="login-close-btn js-login-close-btn fa-solid fa-xmark"></i>
+            </Link>
           </div>
           <div class="form-box-login js-login-box">
             <h2 class="header-form">Login</h2>
-            <form action="" method="" class="body-form body-login">
-              <i class="fa-solid fa-user"></i>
-              <label for="username">Username</label>
-              <input type="text" id="username" name="username"  placeholder="Username" required/>
+            <form action="" method="" class="body-form body-login" onSubmit={(e) => handleSubmit(e)}>
+              <fieldset className="form-disabled">
+                <i class="fa-solid fa-user"></i>
+                <label for="username">Username</label>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  placeholder="Username"
+                />
 
-              <i class="fa-solid fa-lock"></i>
-              <label for="password">Password</label>
-              <input type="password" id="password" name="password"  placeholder="Password" required/>
+                <i class="fa-solid fa-lock"></i>
+                <label for="password">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Password"
+                />
 
-              <button type="submit" class="accept-btn">
-                Accept
-              </button>
+                <button type="submit" class="accept-btn">
+                  Accept
+                </button>
+              </fieldset>
             </form>
             <div class="footer-form footer-login">
-              <Link to="/Signup"><button class="signup js-signup-btn">Sign up</button></Link>
-              <Link to="/VerifyEmail"><button class="reset-password js-resetpass-btn">Reset Password</button></Link>
+              <Link to="/Signup">
+                <button class="signup js-signup-btn">Sign up</button>
+              </Link>
+              <Link to="/VerifyEmail">
+                <button class="reset-password js-resetpass-btn">
+                  Reset Password
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -66,7 +85,11 @@ const Login = () => {
       <div id="content">
         <div class="content-section">
           <p class="text-title">Quản lí vận chuyển</p>
-          <p class="text-title-next">Hàng đầu<br />thế giới</p>
+          <p class="text-title-next">
+            Hàng đầu
+            <br />
+            thế giới
+          </p>
         </div>
       </div>
     </div>

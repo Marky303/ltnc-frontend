@@ -30,50 +30,60 @@ export const AuthProvider = () => {
   let signupUser = async (e) => {
     e.preventDefault();
 
+    // Getting checked boxes' values
+    const checkedBoxes = e.target.querySelectorAll(
+      'input[name="vehicles"]:checked'
+    );
+    const values = Array.from(checkedBoxes).map((box) => box.value);
+    // console.log(values);
+
     // TODO check if repassword and password is the same
+    if (e.target.password.value === e.target.repassword.value) {
+      // Setting loading to true
+      setFetching((fetching = true));
 
-    // Setting loading to true
-    setFetching((fetching = true));
-
-    // Posting to server and get response
-    // TODO: Splitting error message string and notify multiple times
-    // USING PREDETERMINED RESULTS
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/user/register",
-        {
-          username: "markstanley",
-          password: "nhyenhyu69",
-          email: "nhienhuu303@gmail.com",
-          phoneNumber: "12345678909",
-          address: "penacony",
-          drivingLicense: ["truck", "coach"],
-          fullName: "nhyen hyu",
-        },
-        {
-          headers: {
-            "Content-Type": "application/json", // Custom headers
+      // Posting to server and get response
+      // TODO: Splitting error message string and notify multiple times
+      // USING PREDETERMINED RESULTS
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/user/register",
+          {
+            username: e.target.username.value,
+            password: e.target.password.value,
+            email: e.target.email.value,
+            phoneNumber: e.target.phone_number.value,
+            address: e.target.address.value,
+            drivingLicense: values,
+            fullName: e.target.Fullname.value,
           },
-        }
-      );
-      notify("success", response.data.message);
-      navigate("/login");
-    } catch (error) {
-      // Error from backend
-      if (error.response) {
-        let messages = error.response.data.error;
-        if (Array.isArray(messages)) {
-          for (let i = 0; i < messages.length; i++) {
-            notify("error", messages[i]);
+          {
+            headers: {
+              "Content-Type": "application/json", // Custom headers
+            },
           }
-        } else {
-          notify("error", messages);
+        );
+        notify("success", response.data.message);
+        navigate("/login");
+      } catch (error) {
+        // Error from backend
+        if (error.response) {
+          let messages = error.response.data.error;
+          if (Array.isArray(messages)) {
+            for (let i = 0; i < messages.length; i++) {
+              notify("error", messages[i]);
+            }
+          } else {
+            notify("error", messages);
+          }
+        }
+        // Error from anywhere
+        else {
+          notify("error", error.message);
         }
       }
-      // Error from anywhere
-      else {
-        notify("error", error.message);
-      }
+    } else {
+      notify("error", "Password fields does NOT match!");
     }
 
     // Setting loading to false
@@ -94,13 +104,15 @@ export const AuthProvider = () => {
 
       // Posting to server and get response
       const body = {
-        username: "markstanley",
-        password: "nhyenhyu69",
+        username: e.target.username.value,
+        password: e.target.password.value,
       };
 
       const url = "http://localhost:3000/user/login";
 
       const response = await axiosInstance.post(url, body);
+
+      console.log(response);
 
       // Check if the cookies is actually acquired
       const token = Cookies.get("token");
@@ -127,7 +139,7 @@ export const AuthProvider = () => {
   };
 
   let resetPassword = async (e) => {};
-  
+
   let verifyEmail = async (e) => {};
 
   let contextData = {
@@ -142,7 +154,6 @@ export const AuthProvider = () => {
     resetPassword: resetPassword,
     verifyEmail: verifyEmail,
   };
-
 
   return (
     // If loading is true, render nothing, else render everything as normal
