@@ -30,6 +30,15 @@ html{
     padding-right: 5px;
 }
 
+#header .fa-regular{
+    padding-right: 5px;
+}
+
+#header .fa-solid{
+    padding-right: 5px;
+}
+
+
 .nav li{
     display: inline-block;
 }
@@ -348,4 +357,10 @@ input[type=radio] {
 
 .form-disabled {
     border: none;
+}
+
+.navbar-wrapper {
+    height: 45px;
+    margin: 0px;
+    padding: 0px;
 }

@@ -8,7 +8,7 @@ const Dashboard = () => {
   // Implement if authorized
   let { authTokens } = useContext(AuthContext);
 
-  return authTokens ? (<div>This is the dashboard page</div>) : (<Navigate to="/login" />);
+  return authTokens ? (<div>This is the dashboard page</div>) : (<Navigate to="/home" />);
 };
 
 export default Dashboard;

@@ -11,19 +11,21 @@ import { AuthProvider } from "./context/UserauthContext";
 import Home from "./pages/Home";
 
 // Importing main pages
+import Profile from "./pages/profile/Profile";
 import Dashboard from "./pages/main/Dashboard";
 
 // Importing userath related pages
 import Signup from "./pages/userauth/Signup";
 import Login from "./pages/userauth/Login";
 import ResetPassword from "./pages/userauth/ResetPassword";
+import VerifyEmail from "./pages/userauth/VerifyEmail";
 
 // Importing 404 page
 import PageNotFound from "./pages/error/PageNotFound";
 
 // Layout for website
 import Layout from "./hocs/Layout.jsx";
-import VerifyEmail from "./pages/userauth/VerifyEmail";
+
 
 // Include/setup all pages in application wrapper/router
 const App = () => (
@@ -39,6 +41,9 @@ const App = () => (
             <Route exact path="/resetpassword" element={<ResetPassword />} />
             <Route exact path="/verifyemail" element={<VerifyEmail />} />
             <Route exact path="/" element={<Dashboard />} />
+
+            <Route exact path="/profile" element={<Profile />} />
+            
 
           </Route>
         </Route>

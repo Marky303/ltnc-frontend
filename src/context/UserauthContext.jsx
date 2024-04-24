@@ -20,6 +20,12 @@ export const AuthProvider = () => {
     Cookies.get("token") ? Cookies.get("token") : null
   );
 
+  let [userInfo, setuserInfo] = useState(() =>
+    localStorage.getItem("userInfo")
+      ? JSON.parse(localStorage.getItem("userInfo"))
+      : null
+  );
+
   let [fetching, setFetching] = useState(false);
 
   let navigate = useNavigate();
@@ -112,12 +118,17 @@ export const AuthProvider = () => {
 
       const response = await axiosInstance.post(url, body);
 
-      console.log(response);
-
       // Check if the cookies is actually acquired
       const token = Cookies.get("token");
       if (token) {
+        // Set userinfo
+        setuserInfo(response.data);
+        localStorage.setItem("userInfo", JSON.stringify(response.data));
+
+        // Set token
         setauthTokens(token);
+
+        // Notify and redirect
         notify("success", "Logged in!");
         navigate("/");
       } else {
@@ -133,6 +144,34 @@ export const AuthProvider = () => {
 
   // TODO: maybe theres something more
   let logoutUser = async () => {
+    // Posting to server and get response
+    try {
+      const axiosInstance = axios.create({
+        withCredentials: true, // This allows sending/receiving cookies with requests
+      });
+
+      // Posting to server and get response
+      const url = "http://localhost:3000/user/logout";
+
+      const response = await axiosInstance.get(url);
+
+      if (response.status==200)
+      {
+        notify("success", response.data);
+      }
+      else 
+      {
+        notify("error", response.error);
+      }
+    } catch (error) {
+      notify("error", error.response.data.error);
+    }
+
+    // Delete userinfo
+    setuserInfo(null);
+    localStorage.removeItem("userInfo");
+
+    // Delete token
     setauthTokens(null);
     Cookies.remove("token");
     navigate("/login");
@@ -146,6 +185,7 @@ export const AuthProvider = () => {
     // userauth related variables
     fetching: fetching,
     authTokens: authTokens,
+    userInfo: userInfo,
 
     // userauth related functions
     signupUser: signupUser,
