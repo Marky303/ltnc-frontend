@@ -1,12 +1,13 @@
-body
-{
-    margin-top:0px;
-}
+
 .div-all
 {
     display:flex;
     flex-direction:column;
-    
+    padding-top:2px;
+    position:fixed;
+    top:45px;
+    left:0;
+    right:0;
 }
 
 .div-category
@@ -98,7 +99,7 @@ body
 {
     display:flex;
     flex-direction:column;
-
+    
 }
 .div-row
 {
