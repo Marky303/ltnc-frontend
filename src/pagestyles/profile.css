@@ -1,0 +1,23 @@
+.body-profile {
+    width: 100%;
+    height: 100%;
+}
+
+.profile-content-wrapper {
+    width: 100%;
+    height: 93dvh;
+    background: url(../assets/img/background/userauthbg.webp) bottom center / cover no-repeat;
+}
+
+.profile-section{
+    width: 100%;
+    scale: 0.8;
+    height: inherit;
+    justify-content: center;
+    align-items: center;
+    color: #69737a;
+    position: fixed;
+    z-index: 9999;
+    display: flex;
+    animation: loginFadeIn ease .3s;
+}

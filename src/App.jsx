@@ -26,6 +26,8 @@ import PageNotFound from "./pages/error/PageNotFound";
 // Layout for website
 import Layout from "./hocs/Layout.jsx";
 
+// Manager pages
+import DriverList from "./pages/manager/DriverList";
 
 // Include/setup all pages in application wrapper/router
 const App = () => (
@@ -44,6 +46,7 @@ const App = () => (
 
             <Route exact path="/profile" element={<Profile />} />
             
+            <Route exact path="/driverlist" element={<DriverList />} />
 
           </Route>
         </Route>

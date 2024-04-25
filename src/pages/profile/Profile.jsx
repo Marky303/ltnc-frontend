@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Navigate, Link } from "react-router-dom";
 
+// Importing styles
+import "../../pagestyles/profile.css";
+
 // Importing AuthContext
 import AuthContext from "../../context/UserauthContext";
 
@@ -36,11 +39,11 @@ const Profile = () => {
   }, []);
 
   return (
-    <div>
+    <div className="profile-content-wrapper">
       {authTokens ? (
         userInfo.admin ? (
-          <div id="body">
-            <div className="login-section js-login-section">
+          <div id="body-profile">
+            <div className="profile-section js-login-section">
               <div className="login-content">
                 <div className="form-box-signup js-signup-box">
                   <h2 className="header-form">Profile</h2>
@@ -118,8 +121,8 @@ const Profile = () => {
             </div>
           </div>
         ) : (
-          <div id="body">
-            <div className="login-section js-login-section">
+          <div id="body-profile">
+            <div className="profile-section js-login-section">
               <div className="login-content">
                 <div className="form-box-signup js-signup-box">
                   <h2 className="header-form">Profile</h2>
