@@ -1,0 +1,150 @@
+body
+{
+    margin-top:0px;
+}
+.div-all
+{
+    display:flex;
+    flex-direction:column;
+    
+}
+
+.div-category
+{
+    display:flex;
+    flex-direction:row;
+    margin-top:0px;
+    
+}
+.routine
+{
+    flex:2;
+    background-color:rgba(217, 217, 217, 1);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:solid;
+    border-radius:10px;
+    margin-right:0px;
+    border-width:1px;
+    
+}
+.driver
+{
+    flex:2;
+    background-color:rgba(217, 217, 217, 1);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    border:solid;
+    border-width:1px;
+
+}
+.timestart
+{
+    flex:1;
+    background-color:rgba(217, 217, 217, 1);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    border:solid;
+    border-width:1px;
+
+}
+.timeend
+{
+    flex:1;
+    background-color:rgba(217, 217, 217, 1);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    border:solid;
+    border-width:1px;
+
+}
+.distance
+{
+    flex:1;
+    background-color:rgba(217, 217, 217, 1);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    border:solid;
+    border-width:1px;
+
+}
+.state
+{
+    flex:1;
+    background-color:rgba(217, 217, 217, 1);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    border:solid;
+    border-width:1px;
+
+}
+.category 
+{
+    font-family:Arial;
+    font-size:20px;
+}
+.div-fillup
+{
+    display:flex;
+    flex-direction:column;
+
+}
+.div-row
+{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center; 
+    border:solid;
+    border-width:2px;
+    margin-top:10px;
+    height:50px;
+}
+.fill-routine,
+.fill-driver
+{
+    flex:2;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100%;
+    border-radius:10px;
+    border:solid;
+    background-color:rgba(217, 217, 217, 1);
+    border-width:1px;
+
+}
+.fill-timestart,
+.fill-timeend,
+.fill-distance,
+.fill-state
+{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:50px;
+    border-radius:10px;
+    border:solid;
+    background-color:rgba(217, 217, 217, 1);
+    border-width:1px;
+    height:100%;
+}   
+.category-text
+{
+    color:white;
+    font-weight:bold;
+    font-size:large;
+    cursor:pointer;
+}

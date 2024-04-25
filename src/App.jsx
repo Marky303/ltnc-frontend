@@ -25,7 +25,7 @@ import PageNotFound from "./pages/error/PageNotFound";
 
 // Layout for website
 import Layout from "./hocs/Layout.jsx";
-
+import History from "./pages/main/History";
 
 // Include/setup all pages in application wrapper/router
 const App = () => (
@@ -43,7 +43,7 @@ const App = () => (
             <Route exact path="/" element={<Dashboard />} />
 
             <Route exact path="/profile" element={<Profile />} />
-            
+            <Route exact path="/history" element={<History />} />
 
           </Route>
         </Route>
