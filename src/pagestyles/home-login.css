@@ -14,7 +14,7 @@ html{
 
 /* main */
 #header {
-    height: 7dvh;
+    height: 45px;
     width: 100%;
     background-color: #8c9ba5af;
     box-shadow: 3px 3px 20px rgba(0,0,0,0.3);
@@ -29,15 +29,6 @@ html{
 #header .home-icon{
     padding-right: 5px;
 }
-
-#header .fa-regular{
-    padding-right: 5px;
-}
-
-#header .fa-solid{
-    padding-right: 5px;
-}
-
 
 .nav li{
     display: inline-block;
@@ -94,7 +85,7 @@ html{
 
 #body{
     width: 100%;
-    height: 93dvh;
+    height: 100vh;
     background: url(../assets/img/background/background1.jpg) bottom center / cover no-repeat;
     animation: change 90s ease-in-out infinite;
 }
@@ -360,7 +351,7 @@ input[type=radio] {
 }
 
 .navbar-wrapper {
-    height: 7dvh;
+    height: 45px;
     margin: 0px;
     padding: 0px;
 }

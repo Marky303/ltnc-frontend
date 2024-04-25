@@ -21,7 +21,7 @@ const NavbarManager = () => {
           </Link>
         </li>
         <li class="nav-item">
-          <Link to="/drivers">
+          <Link to="/driverlist">
           <i class="fa-solid fa-id-card"></i>
             Drivers
           </Link>

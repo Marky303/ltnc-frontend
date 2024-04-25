@@ -28,6 +28,8 @@ import Layout from "./hocs/Layout.jsx";
 
 // Manager pages
 import DriverList from "./pages/manager/DriverList";
+import CreateTrip1 from "./pages/manager/CreateTrip1";
+import CreateTrip2 from "./pages/manager/CreateTrip2";
 
 // Include/setup all pages in application wrapper/router
 const App = () => (
@@ -47,6 +49,9 @@ const App = () => (
             <Route exact path="/profile" element={<Profile />} />
             
             <Route exact path="/driverlist" element={<DriverList />} />
+            <Route exact path="/createtrip1" element={<CreateTrip1 />} />
+            <Route exact path="/createtrip1/:title/:desc/:start/:end/:departdate/:departtime/:arrivaldate/:arrivaltime/:expense/:revenue/:vehicle" element={<CreateTrip1 />} />
+            <Route exact path="/createtrip2/:title/:desc/:start/:end/:departdate/:departtime/:arrivaldate/:arrivaltime/:expense/:revenue/:vehicle" element={<CreateTrip2 />} />
 
           </Route>
         </Route>
