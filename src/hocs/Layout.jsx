@@ -12,9 +12,8 @@ import Navbar from "../components/navbar/Navbar";
 // renders whatever it is rendering from nested routes
 const Layout = (props) => (
   <>
-    <div className="navbar-wrapper">
-      <Navbar></Navbar>
-    </div>
+
+    <Navbar></Navbar>
 
     <Outlet />
   </>

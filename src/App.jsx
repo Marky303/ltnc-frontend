@@ -26,6 +26,13 @@ import PageNotFound from "./pages/error/PageNotFound";
 // Layout for website
 import Layout from "./hocs/Layout.jsx";
 
+// Manager pages
+import DriverList from "./pages/manager/DriverList";
+import CreateTrip1 from "./pages/manager/CreateTrip1";
+import CreateTrip2 from "./pages/manager/CreateTrip2";
+import CreateTrip3 from "./pages/manager/CreateTrip3";
+import CreateTrip4 from "./pages/manager/CreateTrip4";
+import History from "./pages/main/History";
 
 // Include/setup all pages in application wrapper/router
 const App = () => (
@@ -44,6 +51,14 @@ const App = () => (
 
             <Route exact path="/profile" element={<Profile />} />
             
+            <Route exact path="/driverlist" element={<DriverList />} />
+            <Route exact path="/createtrip1" element={<CreateTrip1 />} />
+            <Route exact path="/createtrip1/:title/:desc/:start/:end/:departdate/:departtime/:expense/:revenue/:vehicle" element={<CreateTrip1 />} />
+            <Route exact path="/createtrip2/:title/:desc/:start/:end/:departdate/:departtime/:expense/:revenue/:vehicle" element={<CreateTrip2 />} />
+            <Route exact path="/createtrip3/:title/:desc/:start/:end/:departdate/:departtime/:expense/:revenue/:vehicle/:driverid" element={<CreateTrip3 />} />
+            <Route exact path="/createtrip4/:title/:desc/:start/:end/:departdate/:departtime/:expense/:revenue/:vehicle/:driverid/:vehicleid" element={<CreateTrip4 />} />
+
+            <Route exact path="/history" element={<History />} />
 
           </Route>
         </Route>

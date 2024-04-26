@@ -1,0 +1,20 @@
+
+.dashboard-wrapper {
+  display: grid;
+  grid-template-columns: 3.7fr 5fr;
+
+  margin-top: 45px;
+}
+
+
+.dashboard-left-content {
+  margin: auto;
+
+  height: 90vh;
+
+}
+
+.dashboard-right-content {
+
+  height: 90vh;
+}

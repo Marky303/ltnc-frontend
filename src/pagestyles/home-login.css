@@ -30,15 +30,6 @@ html{
     padding-right: 5px;
 }
 
-#header .fa-regular{
-    padding-right: 5px;
-}
-
-#header .fa-solid{
-    padding-right: 5px;
-}
-
-
 .nav li{
     display: inline-block;
 }
@@ -311,7 +302,7 @@ html{
     flex-direction: column;
 }
 
-input[type=radio] {
+input[type=checkbox] {
     transform: scale(2);
 }
 
