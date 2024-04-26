@@ -15,9 +15,9 @@ import background from "../../assets/img/background/userauthbg.webp";
 import "../../pagestyles/createtrip2.css";
 
 // Importing table component
-import SmallTableDriver from "../../components/smalltable/SmallTableDriver";
+import SmallTableVehicle from "../../components/smalltable/SmallTableVehicle";
 
-const CreateTrip2 = () => {
+const CreateTrip3 = () => {
   // Get navigate function
   const navigate = useNavigate();
 
@@ -35,6 +35,7 @@ const CreateTrip2 = () => {
     expense,
     revenue,
     vehicle,
+    driverid,
   } = useParams();
 
   const tripInfo = {
@@ -47,7 +48,9 @@ const CreateTrip2 = () => {
     expense: expense,
     revenue: revenue,
     vehicle: vehicle,
+    driverid: driverid,
   };
+
 
   // Private link
   let { authTokens, userInfo } = useContext(AuthContext);
@@ -58,7 +61,7 @@ const CreateTrip2 = () => {
   // Going back to form
   let handleBack = () => {
     navigate(
-      "/createtrip1/" +
+      "/createtrip2/" +
         title +
         "/" +
         desc +
@@ -77,7 +80,7 @@ const CreateTrip2 = () => {
         "/" +
         vehicle
     );
-  }
+  };
 
   return authTokens ? (
     userInfo.admin ? (
@@ -85,14 +88,16 @@ const CreateTrip2 = () => {
         <img className="viewprofile-bg" src={background}></img>
         <div className="createtrip1-content">
           <div className="form-box-signup js-signup-box">
-            <h2 className="header-form">Choose a driver (Step 2)</h2>
+            <h2 className="header-form">Choose a vehicle (Step 3)</h2>
 
             <div className="table-wrapper">
-              <SmallTableDriver data={data} tripInfo={tripInfo}/>
+              <SmallTableVehicle data={data} tripInfo={tripInfo} />
             </div>
 
             <div className="user-infor">
-              <button className="back-btn" onClick={handleBack}>Back</button>
+              <button className="back-btn" onClick={handleBack}>
+                Back
+              </button>
             </div>
           </div>
         </div>
@@ -105,4 +110,4 @@ const CreateTrip2 = () => {
   );
 };
 
-export default CreateTrip2;
+export default CreateTrip3;

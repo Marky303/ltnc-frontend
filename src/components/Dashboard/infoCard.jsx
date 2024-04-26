@@ -43,7 +43,7 @@ const Infocard = () => {
   };
 
   return true ? (
-    false ? (
+    true ? (
       <div className="trip-card-inprogress">
         <div className="trip-title">
           <button className="stop-trip-btn">Stop</button>

@@ -2,9 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { Navigate, Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 
-// Importing style
-import "../../pagestyles/createtrip1.css";
-
 // Importing AuthContext
 import AuthContext from "../../context/UserauthContext";
 
@@ -14,7 +11,13 @@ import NotifyContext from "../../context/NotifyContext";
 // Importing assets
 import background from "../../assets/img/background/userauthbg.webp";
 
-const CreateTrip1 = () => {
+// Importing style
+import "../../pagestyles/createtrip2.css";
+
+// Importing table component
+import SmallTableVehicle from "../../components/smalltable/SmallTableVehicle";
+
+const CreateTrip4 = () => {
   // Get navigate function
   const navigate = useNavigate();
 
@@ -32,6 +35,8 @@ const CreateTrip1 = () => {
     expense,
     revenue,
     vehicle,
+    driverid,
+    vehicleid,
   } = useParams();
 
   const tripInfo = {
@@ -44,6 +49,8 @@ const CreateTrip1 = () => {
     expense: expense,
     revenue: revenue,
     vehicle: vehicle,
+    driverid: driverid,
+    vehicleid: vehicleid,
   };
 
   const textFieldList = [
@@ -63,7 +70,7 @@ const CreateTrip1 = () => {
       let element;
       for (let i of textFieldList) {
         if (i === "vehicle") {
-          let query = document.getElementsByName(tripInfo[i]);          
+          let query = document.getElementsByName(tripInfo[i]);
           if (query[0]) {
             element = query[0];
             element.setAttribute("selected", "selected");
@@ -76,78 +83,38 @@ const CreateTrip1 = () => {
           element.setAttribute("value", tripInfo[i]);
         }
       }
+    notify("warning", "Please double check one last time")
     }
   }, []);
 
-  // Programming warcrime
-  let handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Check for empty field
-    let check = true;
-
-    if (!e.target.title.value) {
-      notify("warning", "Title must not be empty");
-      check = false;
-    }
-    if (!e.target.desc.value) {
-      notify("warning", "Description must not be empty");
-      check = false;
-    }
-    if (!e.target.start.value) {
-      notify("warning", "Starting point must not be empty");
-      check = false;
-    }
-    if (!e.target.end.value) {
-      notify("warning", "Ending point must not be empty");
-      check = false;
-    }
-    if (!e.target.departdate.value) {
-      notify("warning", "Departure date must not be empty");
-      check = false;
-    }
-    if (!e.target.departtime.value) {
-      notify("warning", "Departure time must not be empty");
-      check = false;
-    }
-    if (!e.target.revenue.value) {
-      notify("warning", "Revenue must not be empty");
-      check = false;
-    }
-    if (!e.target.expense.value) {
-      notify("warning", "Expense must not be empty");
-      check = false;
-    }
-    if (!e.target.vehicle.value) {
-      notify("warning", "A vehicle type must be chosen");
-      check = false;
-    }
-
-    if (check)
-      navigate(
-        "/createtrip2/" +
-          e.target.title.value +
-          "/" +
-          e.target.desc.value +
-          "/" +
-          e.target.start.value +
-          "/" +
-          e.target.end.value +
-          "/" +
-          e.target.departdate.value +
-          "/" +
-          e.target.departtime.value +
-          "/" +
-          e.target.expense.value +
-          "/" +
-          e.target.revenue.value +
-          "/" +
-          e.target.vehicle.value
-      );
-  };
-
   // Private link
   let { authTokens, userInfo } = useContext(AuthContext);
+
+  // Going back to form
+  let handleBack = () => {
+    navigate(
+      "/createtrip3/" +
+        title +
+        "/" +
+        desc +
+        "/" +
+        start +
+        "/" +
+        end +
+        "/" +
+        departdate +
+        "/" +
+        departtime +
+        "/" +
+        expense +
+        "/" +
+        revenue +
+        "/" +
+        vehicle +
+        "/" +
+        vehicleid
+    );
+  };
 
   return authTokens ? (
     userInfo.admin ? (
@@ -155,14 +122,14 @@ const CreateTrip1 = () => {
         <img className="viewprofile-bg" src={background}></img>
         <div className="createtrip1-content">
           <div className="form-box-signup js-signup-box">
-            <h2 className="header-form">Create a trip (Step 1)</h2>
+            <h2 className="header-form">Confirmation (Step 4)</h2>
             <form
               action=""
               method=""
               className="body-signup"
               onSubmit={(e) => handleSubmit(e)}
             >
-              <fieldset className="form-disabled">
+              <fieldset className="form-disabled" disabled>
                 <div className="user-infor">
                   <div className="name-flex">
                     <i class="fa-solid fa-box"></i>
@@ -262,12 +229,13 @@ const CreateTrip1 = () => {
                     Van
                   </option>
                 </select>
-
-                <button type="submit" className="accept-btn">
-                  Accept
-                </button>
               </fieldset>
             </form>
+            <div className="user-infor">
+              <button className="back-btn" onClick={handleBack}>
+                Back
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -279,4 +247,4 @@ const CreateTrip1 = () => {
   );
 };
 
-export default CreateTrip1;
+export default CreateTrip4;
