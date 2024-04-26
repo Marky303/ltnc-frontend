@@ -14,6 +14,73 @@ import NotifyContext from "../../context/NotifyContext";
 // Importing assets
 import background from "../../assets/img/background/userauthbg.webp";
 
+// Warcrime #2
+const places = [
+  "HaNoi",
+  "HoChiMinh",
+  "HaiPhong",
+  "DaNang",
+  "CanTho",
+  "AnGiang",
+  "BaRiaVungTau",
+  "BacLieu",
+  "BacKan",
+  "BacGiang",
+  "BacNinh",
+  "BenTre",
+  "BinhDuong",
+  "BinhDinh",
+  "BinhPhuoc",
+  "BinhThuan",
+  "CaMau",
+  "CaoBang",
+  "DakLak",
+  "DakNong",
+  "DienBien",
+  "DongNai",
+  "DongThap",
+  "GiaLai",
+  "HaGiang",
+  "HaNam",
+  "HaTinh",
+  "HaiDuong",
+  "HauGiang",
+  "HoaBinh",
+  "HungYen",
+  "KhanhHoa",
+  "KienGiang",
+  "KonTum",
+  "LaiChau",
+  "LamDong",
+  "LangSon",
+  "LaoCai",
+  "LongAn",
+  "NamDinh",
+  "NgheAn",
+  "NinhBinh",
+  "NinhThuan",
+  "PhuTho",
+  "PhuYen",
+  "QuangBinh",
+  "QuangNam",
+  "QuangNgai",
+  "QuangNinh",
+  "QuangTri",
+  "SocTrang",
+  "SonLa",
+  "TayNinh",
+  "ThaiBinh",
+  "ThaiNguyen",
+  "ThanhHoa",
+  "ThuaThienHue",
+  "TienGiang",
+  "TraVinh",
+  "TuyenQuang",
+  "VinhLong",
+  "VinhPhuc",
+  "YenBai",
+];
+
 const CreateTrip1 = () => {
   // Get navigate function
   const navigate = useNavigate();
@@ -63,7 +130,7 @@ const CreateTrip1 = () => {
       let element;
       for (let i of textFieldList) {
         if (i === "vehicle") {
-          let query = document.getElementsByName(tripInfo[i]);          
+          let query = document.getElementsByName(tripInfo[i]);
           if (query[0]) {
             element = query[0];
             element.setAttribute("selected", "selected");
@@ -191,23 +258,25 @@ const CreateTrip1 = () => {
                   <div className="name-flex">
                     <i class="fa-solid fa-location-dot"></i>
                     <label>Start</label>
-                    <input
-                      type="text"
-                      id="start"
-                      name="start"
-                      placeholder="Starting point..."
-                    />
+                    <select className="vehicle-select" id="start" name="start">
+                      {places.map((place) => (
+                        <option id={place} name={place} value={place}>
+                          {place}
+                        </option>
+                      ))}
+                    </select>
                   </div>
 
                   <div className="name-flex">
                     <i class="fa-solid fa-flag-checkered"></i>
                     <label>End</label>
-                    <input
-                      type="text"
-                      id="end"
-                      name="end"
-                      placeholder="Ending point..."
-                    />
+                    <select className="vehicle-select" id="end" name="end">
+                      {places.map((place) => (
+                        <option id={place} name={place} value={place}>
+                          {place}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
 

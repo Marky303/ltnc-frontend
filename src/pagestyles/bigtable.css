@@ -1,0 +1,108 @@
+.bigtable-content {
+  border: none;
+
+  width: 95%;
+  height: 90vh;
+  margin: auto;
+  margin-top: 70px;
+  margin-bottom: 10px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 23px;
+  box-shadow: 0 0 3px black;
+  z-index: 10;
+}
+
+.bigtable-header {
+  border: none;
+
+  width: 100%;
+  height: 65px;
+  border-radius: 23px 23px 0px 0px;
+  background-color: rgb(216, 216, 216);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 0.6fr 0.3fr 0.2fr;
+}
+
+.bigtable-header-vehicle {
+  border: none;
+
+  width: 100%;
+  height: 65px;
+  border-radius: 23px 23px 0px 0px;
+  background-color: rgb(216, 216, 216);
+  display: grid;
+  grid-template-columns: 0.1fr 1fr 1fr 1fr 1fr 1fr 1fr 0.6fr 0.1fr;
+}
+
+.column-header {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 65px;
+  font-size: 20px;
+}
+
+.bigtable-body {
+  overflow-y: auto;
+  max-height: calc(90vh - 65px);
+}
+
+.bigtable-entry {
+  border: none;
+
+  width: 98%;
+  height: 55px;
+  border-radius: 12px;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 3px black;
+  z-index: 15;
+
+  cursor: pointer;
+  background-color: white;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 0.6fr 0.3fr 0.1fr;
+
+  transition: opacity background-color box-shadow 0.2s;
+}
+
+.bigtable-entry:hover {
+  opacity: 0.8;
+  background-color: rgb(242, 242, 242);
+  box-shadow: 0 0 5px black;
+}
+
+.bigtable-entry-field {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 55px;
+  font-size: 18px;
+}
+
+.bigtable-entryvehicle {
+    border: none;
+  
+    width: 98%;
+    height: 55px;
+    border-radius: 12px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 3px black;
+    z-index: 15;
+  
+    cursor: pointer;
+    background-color: white;
+  
+    display: grid;
+    grid-template-columns: 0.2fr 0.8fr 1.05fr 1.05fr 1.1fr 1fr 1fr 0.6fr 0.1fr;
+  
+    transition: opacity background-color box-shadow 0.2s;
+  }
+
+  .bigtable-entryvehicle:hover {
+    opacity: 0.8;
+    background-color: rgb(242, 242, 242);
+    box-shadow: 0 0 5px black;
+  }

@@ -4,18 +4,18 @@ import { Navigate, Link } from "react-router-dom";
 // Importing AuthContext
 import AuthContext from "../../context/UserauthContext";
 
-import BigTableDriver from "../../components/bigtable/BigTableDriver";
+import BigTableVehicle from "../../components/bigtable/BigTableVehicle";
 
 import "../../pagestyles/Listingpages/driverlist.css"
 
-const VehicleList = () => {
+const DriverList = () => {
   // Private link
   let { authTokens, userInfo } = useContext(AuthContext);
 
   return authTokens ? (
     userInfo.admin ? (
       <div className="driverpage-wrapper">
-        <BigTableDriver/>
+        <BigTableVehicle/>
       </div>
     ) : (
       <Navigate to="/" />
@@ -25,4 +25,4 @@ const VehicleList = () => {
   );
 };
 
-export default VehicleList;
+export default DriverList;
