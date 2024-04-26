@@ -12,10 +12,7 @@ import background from "../../assets/img/background/userauthbg.webp";
 
 const Profile = () => {
   // Implement if authorized
-  let { authTokens } = useContext(AuthContext);
-
-  // Driver/manager check
-  let { userInfo } = useContext(AuthContext);
+  let { authTokens, userInfo } = useContext(AuthContext);
 
   // Loading userinfo
   useEffect(() => {

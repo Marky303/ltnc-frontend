@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.info-card {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: left;
+    color: black;
+}
+
+.info-card h3 {
+    margin: -4px 0;
+    font-family: monospace;
+    font-size: 1.5rem;
+    justify-items: center;
+}
+
+.trip-card,
+.vehicle-card {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #000;
+    border-radius: 7px;
+    width: 310px;
+    height: 300px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+    justify-items: left;
+}
+
+
+
