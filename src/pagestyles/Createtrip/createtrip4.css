@@ -1,0 +1,117 @@
+.driverct-card {
+  padding: 12px;
+  font-size: 16px;
+  margin: 30px;
+  margin-top: -10px;
+  margin-bottom: 15px;
+  width: auto;
+  border: none;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.8);
+  border-radius: 6px;
+  height: 250px;
+
+  background-color: rgb(255, 255, 255);
+}
+
+.createtrip-info {
+  border-radius: 15px;
+  background-color: white;
+  box-shadow: 0 0 3px black;
+  z-index: 15;
+
+  padding: 0px;
+  margin-top: 0px;
+
+  height: 225px;
+}
+
+.createtrip-vehicle {
+  border-radius: 15px;
+  background-color: white;
+  box-shadow: 0 0 3px black;
+  z-index: 15;
+
+  padding: 0px;
+  margin-top: 0px;
+  margin-left: 20px;
+
+  height: 225;
+}
+
+.createtrip-user-infor{
+    margin: 30px;
+    margin-top: 0px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.back-btn {
+    width: 80%;
+    font-size: 22px;
+    padding: 10px;
+    border-radius: 6px;
+    color: #fff;
+    background-color: #db3737;
+    border: none;
+    cursor: pointer;
+    margin: auto;
+    margin-bottom: 18px;
+    margin-top: 13px;
+    transition: opacity 0.15s;
+}
+
+.createtrip-back-btn {
+    width: 50%;
+    font-size: 22px;
+    padding: 10px;
+    border-radius: 6px;
+    color: #fff;
+    background-color: #db3737;
+    border: none;
+    cursor: pointer;
+    
+    margin-right: 10px;
+
+    margin-bottom: 18px;
+    margin-top: 13px;
+    transition: opacity 0.15s;
+}
+
+.createtrip-back-btn:hover {
+    box-shadow: 0 0 10px rgb(255, 17, 17);
+    z-index: 99;
+    opacity: 0.8;
+}
+
+.createtrip-back-btn:active {
+    opacity: 0.5;
+}
+
+
+.createtrip-accept-btn {
+    width: 50%;
+    font-size: 22px;
+    padding: 10px;
+    border-radius: 6px;
+    color: #fff;
+    background-color: #2d45de;
+    border: none;
+    cursor: pointer;
+    
+    margin-left: 10px;
+
+    margin-bottom: 18px;
+    margin-top: 13px;
+    transition: opacity 0.15s;
+}
+
+.createtrip-accept-btn:hover {
+    box-shadow: 0 0 10px #2d45de;
+    z-index: 99;
+    opacity: 0.8;
+}
+
+.createtrip-accept-btn:active {
+    opacity: 0.5;
+}

@@ -12,7 +12,7 @@ import NotifyContext from "../../context/NotifyContext";
 import background from "../../assets/img/background/userauthbg.webp";
 
 // Importing style
-import "../../pagestyles/createtrip2.css";
+import "../../pagestyles/Createtrip/createtrip2.css";
 
 // Importing table component
 import SmallTableVehicle from "../../components/smalltable/SmallTableVehicle";

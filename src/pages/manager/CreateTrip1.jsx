@@ -3,7 +3,7 @@ import { Navigate, Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 
 // Importing style
-import "../../pagestyles/createtrip1.css";
+import "../../pagestyles/Createtrip/createtrip1.css";
 
 // Importing AuthContext
 import AuthContext from "../../context/UserauthContext";

@@ -12,7 +12,8 @@ import NotifyContext from "../../context/NotifyContext";
 import background from "../../assets/img/background/userauthbg.webp";
 
 // Importing style
-import "../../pagestyles/createtrip2.css";
+import "../../pagestyles/Createtrip/createtrip2.css";
+import "../../pagestyles/Createtrip/createtrip4.css";
 
 // Importing table component
 import SmallTableVehicle from "../../components/smalltable/SmallTableVehicle";
@@ -83,7 +84,7 @@ const CreateTrip4 = () => {
           element.setAttribute("value", tripInfo[i]);
         }
       }
-    notify("warning", "Please double check one last time")
+      notify("warning", "Please double check one last time");
     }
   }, []);
 
@@ -231,9 +232,53 @@ const CreateTrip4 = () => {
                 </select>
               </fieldset>
             </form>
-            <div className="user-infor">
-              <button className="back-btn" onClick={handleBack}>
+
+            <div className="driverct-card">
+              <div className="trip-content">
+                <div className="createtrip-info">
+                  <div className="trip-info-title">Driver</div>
+                  <hr></hr>
+                  <div className="trip-info-text-wrapper">
+                    <div className="trip-info-text">Social credit: 99</div>
+                    <div className="trip-info-text">Tel: 99199213</div>
+                    <div className="trip-info-text">
+                      Address: 123 colonial str
+                    </div>
+                    <div className="trip-info-text">Hello</div>
+                    <div className="trip-info-text">Hello</div>
+                    <div className="trip-info-text">Hello</div>
+                    <div className="trip-info-text">Hello</div>
+                    <div className="trip-info-text">Hello</div>
+                    <div className="trip-info-text">Hello</div>
+                  </div>
+                </div>
+                <div className="createtrip-vehicle">
+                  <div className="trip-vehicle-title">Vehicle</div>
+                  <hr></hr>
+                  <div className="trip-vehicle-text-wrapper">
+                    <div className="trip-info-text">
+                      Helloasdasssssssssssssssssssssssssssssssssssssss
+                    </div>
+                    <div className="trip-info-text">Hello</div>
+                    <div className="trip-info-text">Hello</div>
+                    <div className="trip-info-text">Hello</div>
+                    <div className="trip-info-text">Hello</div>
+                    <div className="trip-info-text">Hello</div>
+                    <div className="trip-info-text">Hello</div>
+                    <div className="trip-info-text">Hello</div>
+                    <div className="trip-info-text">Hello</div>
+                    <div className="trip-info-text">Hello</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="createtrip-user-infor">
+              <button className="createtrip-back-btn" onClick={handleBack}>
                 Back
+              </button>
+              <button className="createtrip-accept-btn">
+                Accept
               </button>
             </div>
           </div>
