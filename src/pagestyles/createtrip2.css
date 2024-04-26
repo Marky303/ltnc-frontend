@@ -1,0 +1,37 @@
+.user-infor-hidden {
+  display: none;
+}
+
+.vehicle-select-hidden {
+  display: none;
+}
+
+.table-wrapper{
+    width: 85%;
+    margin: auto;
+    margin-top: 20px;
+
+}
+
+.back-btn {
+    width: 80%;
+    font-size: 22px;
+    padding: 10px;
+    border-radius: 6px;
+    color: #fff;
+    background-color: #db3737;
+    border: none;
+    cursor: pointer;
+    margin: auto;
+    margin-bottom: 18px;
+    margin-top: 13px;
+    transition: opacity 0.15s;
+}
+
+.back-btn:hover {
+    opacity: 0.7;
+}
+
+.back-btn:active {
+    opacity: 0.4;
+}

@@ -2,13 +2,14 @@
 
 .profile-content-wrapper {
   width: 100%;
-  height: 93dvh;
+  height: 100%;
   align-items: center;
+  margin-top: 45px;
 }
 
 .profile-content {
     position: absolute;
-    top: 16dvh;
+    top: 150px;
     min-width: 600px;
     max-width: 830px;
     backdrop-filter: blur(50px);
@@ -20,6 +21,6 @@
 }
 
 .viewprofile-bg {
-    width: 100%;
-    height: auto;
+    max-height: 100dvh;
+    overflow: hidden;
 }

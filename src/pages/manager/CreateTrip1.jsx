@@ -237,13 +237,14 @@ const CreateTrip1 = () => {
                 <i className="fa-solid fa-location-dot"></i>
                 <label for="address">Vehicle</label>
                 <select className="vehicle-select" id="vehicle" name="vehicle">
-                  <option name="coachid" value="Some vehicle">
+                  
+                  <option name="coachid" value="coachid">
                     Some vehicle
                   </option>
-                  <option name="contid" value="Some other vehicle">
+                  <option name="contid" value="contid">
                     Some other vehicle
                   </option>
-                  <option name="vanid" value="Some other other vehicle">
+                  <option name="vanid" value="vanid">
                     Some other van vehicle
                   </option>
                 </select>
