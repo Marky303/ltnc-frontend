@@ -10,6 +10,11 @@ import Infocard from "../../components/Dashboard/infoCard";
 import Tripschart from "../../components/Dashboard/tripsChart";
 import Distancechart from "../../components/Dashboard/distanceChart";
 
+{/* <Infocard />
+<Tripschart /> */}
+
+// <Distancechart />
+
 const Dashboard = () => {
   // Implement if authorized
   let { authTokens, userInfo } = useContext(AuthContext);
@@ -19,14 +24,15 @@ const Dashboard = () => {
       <div> Manager dashboard </div>
     ) : (
       <div className="dashboard-wrapper">
-        <div className="dashboard-content">
-          <div style={{ display: "flex", alignItems: "flex-start" }}>
-            <Outlet />
-            <Infocard />
-            <Tripschart />
-          </div>
+        <div className="dashboard-left-content">
+            <div className="infocard-wrapper">
+              <Infocard/>
+            </div>
+            <Distancechart />
         </div>
-        <Distancechart />
+        <div className="dashboard-right-content">
+        <Tripschart />
+        </div>
       </div>
     )
   ) : (

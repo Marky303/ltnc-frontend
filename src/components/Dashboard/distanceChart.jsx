@@ -2,6 +2,8 @@ import * as React from 'react';
 import { LineChart } from '@mui/x-charts/LineChart';
 import Typography from '@mui/material/Typography';
 
+import "../../pagestyles/Dashboard/distanceChart.css"
+
 const Data = [579, 321, 763, 438, 910, 526, 571];
 const Labels = [
   'Mon',
@@ -15,7 +17,7 @@ const Labels = [
 
 export default function Distancechart() {
   return (
-    <div style={{ height: '300px', width: '710px', marginTop: '-290px', marginLeft: '40px', display: 'grid' }}>
+    <div className="distance-chart">
         <Typography variant="h6" gutterBottom>
           Distance Driven
         </Typography>

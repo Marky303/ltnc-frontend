@@ -3,6 +3,8 @@ import { BarChart } from '@mui/x-charts/BarChart';
 import { axisClasses } from '@mui/x-charts';
 import Typography from '@mui/material/Typography';
 
+import "../../pagestyles/Dashboard/tripsChart.css"
+
 const chartSetting = {
   yAxis: [
     {
@@ -46,7 +48,7 @@ const valueFormatter = (value) => `${value}`;
 
 export default function Tripschart() {
   return (
-    <div style={{ height: '600px', width: 'calc(100% - 740px)', marginTop: '40px', display: 'grid' }}>
+    <div className="tripchart-wrapper">
       <Typography variant="h5" gutterBottom>
           Performance
         </Typography>
@@ -56,7 +58,6 @@ export default function Tripschart() {
       series={[
         { dataKey: 'ontime', label: 'On-time Delivery', valueFormatter },
         { dataKey: 'offtime', label: 'Off-time Delivery', valueFormatter },
-        { dataKey: 'cancelled', label: 'Cancelled', valueFormatter },
       ]}
     />
     </div>

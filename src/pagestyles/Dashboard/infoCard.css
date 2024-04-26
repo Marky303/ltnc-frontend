@@ -1,40 +1,129 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.trip-card {
+  box-shadow: 0 0 3px black;
+  z-index: 15;
+  border-radius: 23px;
+
+  background-color: rgb(239, 239, 239);
+  padding: 30px;
+  padding-top: 21px;
+  border-radius: 23px;
+
+  height: 330px;
+  width: 38dvw;
+  margin: auto;
+  margin-top: 25px;
 }
 
-.info-card {
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: left;
-    color: black;
+.trip-title {
+  display: grid;
+  grid-template-columns: 1fr 8fr;
+
+  border-radius: 15px;
+  background-color: white;
+  box-shadow: 0 0 3px black;
+  z-index: 15;
+
+  height: 50px;
 }
 
-.info-card h3 {
-    margin: -4px 0;
-    font-family: monospace;
-    font-size: 1.5rem;
-    justify-items: center;
+.stop-trip-btn {
+  height: 50px;
+
+  background-color: rgb(255, 42, 42);
+  color: rgb(0, 0, 0);
+  font-size: 100%;
+  border: solid;
+  border-width: 1px;
+  border-radius: 15px 0px 0px 15px;
+  cursor: pointer;
+  transition: opacity 0.2s;
 }
 
-.trip-card,
-.vehicle-card {
-    margin: 20px;
-    display: flex;
-    flex-direction: column;
-    border: 2px solid #000;
-    border-radius: 7px;
-    width: 310px;
-    height: 300px;
-    padding: 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 20px;
-    justify-items: left;
+.stop-trip-btn:hover {
+  box-shadow: 0 0 10px rgb(255, 17, 17);
+  z-index: 99;
+  opacity: 0.8;
+  color: rgb(255, 255, 255);
 }
 
+.stop-trip-btn:active {
+    box-shadow: 0 0 20px rgb(255, 17, 17);
+    z-index: 99;
+    opacity: 0.5;
+    color: rgb(230, 0, 0);
+  }
 
+.trip-title-text {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50px;
 
+  font-size: 23px;
+}
+
+.trip-content {
+  display: grid;
+  grid-template-columns: 5.7fr 4fr;
+}
+
+.trip-info {
+  border-radius: 15px;
+  background-color: white;
+  box-shadow: 0 0 3px black;
+  z-index: 15;
+
+  padding: 0px;
+  margin-top: 20px;
+
+  height: 220px;
+}
+
+.trip-vehicle {
+  border-radius: 15px;
+  background-color: white;
+  box-shadow: 0 0 3px black;
+  z-index: 15;
+
+  padding: 0px;
+  margin-top: 20px;
+  margin-left: 20px;
+
+  height: 220px;
+}
+
+.trip-info-text-wrapper {
+  overflow-y: auto;
+  overflow-x: auto;
+  max-height: 178px;
+  width: 20.2dvw;
+}
+
+.trip-info-title {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 40px;
+
+  font-size: 23px;
+}
+
+.trip-info-text {
+  vertical-align: middle;
+  line-height: 35px;
+  word-wrap: break-word;
+  font-size: 23px;
+}
+
+.trip-vehicle-title {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 40px;
+
+  font-size: 23px;
+}
+
+.trip-vehicle-text-wrapper {
+  overflow-y: auto;
+  overflow-x: auto;
+  max-height: 178px;
+  width: 13dvw;
+}
