@@ -1,18 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Navigate, Link, useNavigate } from "react-router-dom";
 
+import ManagerContext from "../../context/ManagerContext";
+
 import "../../pagestyles/smalltable.css";
 
-const SmallTable = ({data, tripInfo}) => {
-  // Get navigate function
+const SmallTable = ({ tripInfo }) => {
   const navigate = useNavigate();
-
-  
+  let { listDriver } = useContext(ManagerContext);
 
   let handleNext = (driverid) => {
-    console.log(data);
-    console.log(tripInfo)
-
     navigate(
       "/createtrip3/" +
         tripInfo.title +
@@ -27,37 +24,40 @@ const SmallTable = ({data, tripInfo}) => {
         "/" +
         tripInfo.departtime +
         "/" +
-        tripInfo.expense +
-        "/" +
         tripInfo.revenue +
         "/" +
         tripInfo.vehicle +
         "/" +
         driverid
     );
-
   };
 
   return (
     <div className="smalltable-content">
-      <div className="smalltable-header">
+      <div className="smalltable-header-driver">
         <div className="column-header">Name</div>
         <div className="column-header">Tel</div>
         <div className="column-header">Rating</div>
         <div className="fillerdiv"></div>
       </div>
       <div className="smalltable-body">
-        <button className="smalltable-entry" id="69420" onClick={() => {handleNext(69420)}}>
-          <div className="smalltable-entry-field">Mark</div>
-          <div className="smalltable-entry-field">123456</div>
-          <div className="smalltable-entry-field">42</div>
-        </button>
-
-        <button className="smalltable-entry" id="69420">
-          <div className="smalltable-entry-field">Mark</div>
-          <div className="smalltable-entry-field">123456</div>
-          <div className="smalltable-entry-field">42</div>
-        </button>
+        {listDriver ? (
+          listDriver.map((driver) => (
+            <button
+              className="smalltable-entry-driver"
+              id={driver._id}
+              onClick={() => {
+                handleNext(driver._id);
+              }}
+            >
+              <div className="smalltable-entry-field">{driver.fullName}</div>
+              <div className="smalltable-entry-field">{driver.phoneNumber}</div>
+              <div className="smalltable-entry-field">{driver.point}</div>
+            </button>
+          ))
+        ) : (
+          <div>No driver found</div>
+        )}
       </div>
     </div>
   );

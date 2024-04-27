@@ -12,7 +12,7 @@ import background from "../../assets/img/background/userauthbg.webp";
 
 const Profile = () => {
   // Implement if authorized
-  let { authTokens, userInfo } = useContext(AuthContext);
+  let { authTokens, userInfo, updateProfile } = useContext(AuthContext);
 
   // Loading userinfo
   useEffect(() => {
@@ -37,6 +37,12 @@ const Profile = () => {
       }
     }
   }, []);
+
+  // Handle changing profile
+  let handleSubmit = (e) => {
+    e.preventDefault();
+    updateProfile(e);
+  };
 
   return (
     <div className="profile-content-wrapper">
@@ -86,6 +92,7 @@ const Profile = () => {
                         id="email"
                         name="email"
                         placeholder="Email"
+                        disabled
                       />
                     </div>
 
@@ -161,6 +168,7 @@ const Profile = () => {
                         id="email"
                         name="email"
                         placeholder="Email"
+                        disabled
                       />
                     </div>
 

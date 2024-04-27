@@ -10,7 +10,14 @@ import { Navigate, useNavigate } from "react-router-dom";
 
 import "../../pagestyles/Dashboard/infoCard.css";
 
+import DriverContext from "../../context/DriverContext";
+import UserauthContext from "../../context/UserauthContext";
+
 const Infocard = () => {
+  // Get le stack
+  const { switchStatus } = useContext(DriverContext);
+  const { userInfo } = useContext(UserauthContext);
+
   // Initialize state to track the checkbox status
   const [isChecked, setIsChecked] = useState(false);
 
@@ -22,27 +29,34 @@ const Infocard = () => {
     // Update the state
     setIsChecked(checked);
 
-    // Call the desired function based on the new state
     if (checked) {
-      onCheckboxChecked(); // Function to be triggered when checked
+      onCheckboxChecked();
     } else {
-      onCheckboxUnchecked(); // Function to be triggered when unchecked
+      onCheckboxUnchecked();
     }
   };
 
+  // Load slider on page load
+  useEffect(() => {
+    if (userInfo.status==="available")
+    {
+      setIsChecked(true)
+    }
+    else 
+    setIsChecked(false);
+  }, [userInfo]);
+
   // Function to trigger when checkbox is checked
   const onCheckboxChecked = () => {
-    console.log("Checkbox is checked!");
-    // Additional logic can be added here
+    switchStatus(true);
   };
 
   // Function to trigger when checkbox is unchecked
   const onCheckboxUnchecked = () => {
-    console.log("Checkbox is unchecked!");
-    // Additional logic can be added here
+    switchStatus(false);
   };
 
-  return true ? (
+  return false ? (
     true ? (
       <div className="trip-card-inprogress">
         <div className="trip-title">
@@ -148,7 +162,11 @@ const Infocard = () => {
             <span className="slider"></span>
           </label>
         </div>
-        <div className="trip-title-text">{isChecked ? ("You are receiving trips") : ("You are NOT receiving trips")}</div>
+        <div className="trip-title-text">
+          {isChecked
+            ? "You are receiving trips"
+            : "You are NOT receiving trips"}
+        </div>
       </div>
     </div>
   );

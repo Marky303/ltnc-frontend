@@ -32,7 +32,6 @@ const CreateTrip3 = () => {
     end,
     departdate,
     departtime,
-    expense,
     revenue,
     vehicle,
     driverid,
@@ -45,18 +44,13 @@ const CreateTrip3 = () => {
     end: end,
     departdate: departdate,
     departtime: departtime,
-    expense: expense,
     revenue: revenue,
     vehicle: vehicle,
     driverid: driverid,
   };
 
-
   // Private link
   let { authTokens, userInfo } = useContext(AuthContext);
-
-  // Test
-  let data = "something";
 
   // Going back to form
   let handleBack = () => {
@@ -74,8 +68,6 @@ const CreateTrip3 = () => {
         "/" +
         departtime +
         "/" +
-        expense +
-        "/" +
         revenue +
         "/" +
         vehicle
@@ -91,7 +83,7 @@ const CreateTrip3 = () => {
             <h2 className="header-form">Choose a vehicle (Step 3)</h2>
 
             <div className="table-wrapper">
-              <SmallTableVehicle data={data} tripInfo={tripInfo} />
+              <SmallTableVehicle tripInfo={tripInfo} />
             </div>
 
             <div className="user-infor">

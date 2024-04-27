@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, version } from "react";
 import { Navigate, Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 
-// Importing AuthContext
 import AuthContext from "../../context/UserauthContext";
-
-// Importing NotifyContext to get notify function
+import ManagerContext from "../../context/ManagerContext";
 import NotifyContext from "../../context/NotifyContext";
 
 // Importing assets
@@ -17,12 +15,12 @@ import "../../pagestyles/Createtrip/createtrip4.css";
 
 // Importing table component
 import SmallTableVehicle from "../../components/smalltable/SmallTableVehicle";
+import DriverList from "./VehicleList";
+import { cardActionsClasses } from "@mui/material";
 
 const CreateTrip4 = () => {
-  // Get navigate function
   const navigate = useNavigate();
-
-  // Getting notify function
+  let { listCar, listDriver, createTrip } = useContext(ManagerContext);
   let { notify } = useContext(NotifyContext);
 
   // Load params if theres any
@@ -33,7 +31,6 @@ const CreateTrip4 = () => {
     end,
     departdate,
     departtime,
-    expense,
     revenue,
     vehicle,
     driverid,
@@ -47,7 +44,6 @@ const CreateTrip4 = () => {
     end: end,
     departdate: departdate,
     departtime: departtime,
-    expense: expense,
     revenue: revenue,
     vehicle: vehicle,
     driverid: driverid,
@@ -61,7 +57,6 @@ const CreateTrip4 = () => {
     "end",
     "departdate",
     "departtime",
-    "expense",
     "revenue",
     "vehicle",
   ];
@@ -86,7 +81,7 @@ const CreateTrip4 = () => {
       }
       notify("warning", "Please double check one last time");
     }
-  }, []);
+  }, [listCar, listDriver]);
 
   // Private link
   let { authTokens, userInfo } = useContext(AuthContext);
@@ -107,14 +102,22 @@ const CreateTrip4 = () => {
         "/" +
         departtime +
         "/" +
-        expense +
-        "/" +
         revenue +
         "/" +
         vehicle +
         "/" +
-        vehicleid
+        driverid
     );
+  };
+
+  let handleSubmit = () => {
+    let i;
+    for (i = 0; i < listCar; i++) {
+      if (listCar[i]._id == vehicleid) {
+        break;
+      }
+    }
+    createTrip(title, desc, start, end, departdate, departtime, revenue, driverid, vehicleid, listCar[i].type, listCar[i].fuel);
   };
 
   return authTokens ? (
@@ -128,7 +131,6 @@ const CreateTrip4 = () => {
               action=""
               method=""
               className="body-signup"
-              onSubmit={(e) => handleSubmit(e)}
             >
               <fieldset className="form-disabled" disabled>
                 <div className="user-infor">
@@ -144,12 +146,12 @@ const CreateTrip4 = () => {
                   </div>
 
                   <div className="name-flex">
-                    <i class="fa-solid fa-boxes-stacked"></i>
-                    <label>Description</label>
+                    <i class="fa-solid fa-money-bill-trend-up"></i>
+                    <label>Revenue</label>
                     <input
                       type="text"
-                      id="desc"
-                      name="desc"
+                      id="revenue"
+                      name="revenue"
                       placeholder="Short description..."
                     />
                   </div>
@@ -193,29 +195,15 @@ const CreateTrip4 = () => {
                   </div>
                 </div>
 
-                <div className="user-infor">
-                  <div className="name-flex">
-                    <i class="fa-solid fa-receipt"></i>
-                    <label for="username">Expense</label>
-                    <input
-                      type="text"
-                      id="expense"
-                      name="expense"
-                      placeholder="Expense of your trip..."
-                    />
-                  </div>
-
-                  <div className="name-flex">
-                    <i class="fa-solid fa-money-bill-trend-up"></i>
-                    <label for="Fullname">Revenue</label>
-                    <input
-                      type="text"
-                      id="revenue"
-                      name="revenue"
-                      placeholder="Revenue to be made..."
-                    />
-                  </div>
-                </div>
+                <i class="fa-solid fa-boxes-stacked"></i>
+                <label for="address">Description</label>
+                <input
+                  className="vehicle-select"
+                  type="text"
+                  id="desc"
+                  name="desc"
+                  placeholder="Short description about your trip..."
+                ></input>
 
                 <i class="fa-solid fa-truck"></i>
                 <label for="address">Vehicle</label>
@@ -238,37 +226,61 @@ const CreateTrip4 = () => {
                 <div className="createtrip-info">
                   <div className="trip-info-title">Driver</div>
                   <hr></hr>
-                  <div className="trip-info-text-wrapper">
-                    <div className="trip-info-text">Social credit: 99</div>
-                    <div className="trip-info-text">Tel: 99199213</div>
-                    <div className="trip-info-text">
-                      Address: 123 colonial str
-                    </div>
-                    <div className="trip-info-text">Hello</div>
-                    <div className="trip-info-text">Hello</div>
-                    <div className="trip-info-text">Hello</div>
-                    <div className="trip-info-text">Hello</div>
-                    <div className="trip-info-text">Hello</div>
-                    <div className="trip-info-text">Hello</div>
-                  </div>
+                  {listDriver ? (
+                    listDriver.map((driver) =>
+                      driver._id == driverid ? (
+                        <div className="trip-info-text-wrapper">
+                          <div className="trip-info-text">
+                            Name: {driver.fullName}
+                          </div>
+                          <div className="trip-info-text">
+                            Point: {driver.point}
+                          </div>
+                          <div className="trip-info-text">
+                            Tel: {driver.phoneNumber}
+                          </div>
+                          <div className="trip-info-text">
+                            Address: {driver.address}
+                          </div>
+                          <div className="trip-info-text">
+                            Email: {driver.email}
+                          </div>
+                        </div>
+                      ) : (
+                        <div></div>
+                      )
+                    )
+                  ) : (
+                    <div>No driver found</div>
+                  )}
                 </div>
                 <div className="createtrip-vehicle">
                   <div className="trip-vehicle-title">Vehicle</div>
                   <hr></hr>
-                  <div className="trip-vehicle-text-wrapper">
-                    <div className="trip-info-text">
-                      Helloasdasssssssssssssssssssssssssssssssssssssss
-                    </div>
-                    <div className="trip-info-text">Hello</div>
-                    <div className="trip-info-text">Hello</div>
-                    <div className="trip-info-text">Hello</div>
-                    <div className="trip-info-text">Hello</div>
-                    <div className="trip-info-text">Hello</div>
-                    <div className="trip-info-text">Hello</div>
-                    <div className="trip-info-text">Hello</div>
-                    <div className="trip-info-text">Hello</div>
-                    <div className="trip-info-text">Hello</div>
-                  </div>
+                  {listCar ? (
+                    listCar.map((car) =>
+                      car._id == vehicleid ? (
+                        <div className="trip-vehicle-text-wrapper">
+                          <div className="trip-info-text">
+                            Plate: {car.licensePlate}
+                          </div>
+                          <div className="trip-info-text">Fuel: {car.fuel}</div>
+                          <div className="trip-info-text">
+                            Maint. Status: {car.kmTraveled}/{car.kmMaintenance}
+                            (km)
+                          </div>
+                          <div className="trip-info-text">Size: {car.size}</div>
+                          <div className="trip-info-text">
+                            Weight: {car.weight}
+                          </div>
+                        </div>
+                      ) : (
+                        <div></div>
+                      )
+                    )
+                  ) : (
+                    <div>No driver found</div>
+                  )}
                 </div>
               </div>
             </div>
@@ -277,7 +289,7 @@ const CreateTrip4 = () => {
               <button className="createtrip-back-btn" onClick={handleBack}>
                 Back
               </button>
-              <button className="createtrip-accept-btn">
+              <button className="createtrip-accept-btn" onClick={handleSubmit}>
                 Accept
               </button>
             </div>

@@ -4,6 +4,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // AuthContext calls function from NotifyContext -> NotifyProvider wraps AuthProvider
 import { NotifyProvider } from "./context/NotifyContext";
 import { AuthProvider } from "./context/UserauthContext";
+import { DriverProvider } from "./context/DriverContext";
+import { ManagerProvider } from "./context/ManagerContext";
 
 // Importing introduction related pages
 
@@ -41,30 +43,50 @@ const App = () => (
     <Routes>
       <Route exact path="/" element={<NotifyProvider />}>
         <Route exact path="/" element={<AuthProvider />}>
-          <Route path="/" element={<Layout />}>
+          <Route exact path="/" element={<DriverProvider />}>
+            <Route exact path="/" element={<ManagerProvider />}>
+              <Route path="/" element={<Layout />}>
+                <Route exact path="/home" element={<Home />} />
+                <Route exact path="/signup" element={<Signup />} />
+                <Route exact path="/login" element={<Login />} />
+                <Route
+                  exact
+                  path="/resetpassword"
+                  element={<ResetPassword />}
+                />
+                <Route exact path="/verifyemail" element={<VerifyEmail />} />
+                <Route exact path="/" element={<Dashboard />} />
 
-            <Route exact path="/home" element={<Home />} />
-            <Route exact path="/signup" element={<Signup />} />
-            <Route exact path="/login" element={<Login />} />
-            <Route exact path="/resetpassword" element={<ResetPassword />} />
-            <Route exact path="/verifyemail" element={<VerifyEmail />} />
-            <Route exact path="/" element={<Dashboard />} />
+                <Route exact path="/profile" element={<Profile />} />
 
-            <Route exact path="/profile" element={<Profile />} />
-            
-            <Route exact path="/driverlist" element={<DriverList />} />
-            <Route exact path="/vehicles" element={<VehicleList />} />
+                <Route exact path="/driverlist" element={<DriverList />} />
+                <Route exact path="/vehicles" element={<VehicleList />} />
 
-            <Route exact path="/createtrip1" element={<CreateTrip1 />} />
-            <Route exact path="/createtrip1/:title/:desc/:start/:end/:departdate/:departtime/:expense/:revenue/:vehicle" element={<CreateTrip1 />} />
-            <Route exact path="/createtrip2/:title/:desc/:start/:end/:departdate/:departtime/:expense/:revenue/:vehicle" element={<CreateTrip2 />} />
-            <Route exact path="/createtrip3/:title/:desc/:start/:end/:departdate/:departtime/:expense/:revenue/:vehicle/:driverid" element={<CreateTrip3 />} />
-            <Route exact path="/createtrip4/:title/:desc/:start/:end/:departdate/:departtime/:expense/:revenue/:vehicle/:driverid/:vehicleid" element={<CreateTrip4 />} />
+                <Route exact path="/createtrip1" element={<CreateTrip1 />} />
+                <Route
+                  exact
+                  path="/createtrip1/:title/:desc/:start/:end/:departdate/:departtime/:revenue/:vehicle"
+                  element={<CreateTrip1 />}
+                />
+                <Route
+                  exact
+                  path="/createtrip2/:title/:desc/:start/:end/:departdate/:departtime/:revenue/:vehicle"
+                  element={<CreateTrip2 />}
+                />
+                <Route
+                  exact
+                  path="/createtrip3/:title/:desc/:start/:end/:departdate/:departtime/:revenue/:vehicle/:driverid"
+                  element={<CreateTrip3 />}
+                />
+                <Route
+                  exact
+                  path="/createtrip4/:title/:desc/:start/:end/:departdate/:departtime/:revenue/:vehicle/:driverid/:vehicleid"
+                  element={<CreateTrip4 />}
+                />
 
-            <Route exact path="/history" element={<History />} />
-            
-
-
+                <Route exact path="/history" element={<History />} />
+              </Route>
+            </Route>
           </Route>
         </Route>
         <Route path="*" element={<PageNotFound />} />

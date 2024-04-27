@@ -1,18 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Navigate, Link, useNavigate } from "react-router-dom";
 
+import ManagerContext from "../../context/ManagerContext";
+
 import "../../pagestyles/smalltable.css";
 
-const SmallTable = ({data, tripInfo}) => {
-  // Get navigate function
+const SmallTable = ({ tripInfo }) => {
   const navigate = useNavigate();
-
-  
+  let { listCar } = useContext(ManagerContext);
 
   let handleNext = (vehicleid) => {
-    console.log(data);
-    console.log(tripInfo)
-
     navigate(
       "/createtrip4/" +
         tripInfo.title +
@@ -27,93 +24,44 @@ const SmallTable = ({data, tripInfo}) => {
         "/" +
         tripInfo.departtime +
         "/" +
-        tripInfo.expense +
-        "/" +
         tripInfo.revenue +
         "/" +
         tripInfo.vehicle +
         "/" +
-        tripInfo.driverid + 
+        tripInfo.driverid +
         "/" +
         vehicleid
     );
-
   };
 
   return (
     <div className="smalltable-content">
-      <div className="smalltable-header-vehicle">
-      <div className="fillerdiv"></div>
-        <div className="column-header">Type</div>
+      <div className="smalltable-header">
         <div className="column-header">Liscence Plate</div>
-        <div className="column-header">Volume</div>
+        <div className="column-header">Size</div>
+        <div className="column-header">Weight</div>
         <div className="column-header">Maint.</div>
         <div className="fillerdiv"></div>
       </div>
       <div className="smalltable-body">
-        <button className="smalltable-entry" id="69420" onClick={() => {handleNext(69420)}}>
-          <div className="smalltable-entry-field">Coach</div>
-          <div className="smalltable-entry-field">77F1-65757</div>
-          <div className="smalltable-entry-field">42</div>
-          <div className="smalltable-entry-field">23%</div>
-        </button>
-        <button className="smalltable-entry" id="69420" onClick={() => {handleNext(69420)}}>
-          <div className="smalltable-entry-field">Coach</div>
-          <div className="smalltable-entry-field">77F1-65757</div>
-          <div className="smalltable-entry-field">42</div>
-          <div className="smalltable-entry-field">23%</div>
-        </button>
-        <button className="smalltable-entry" id="69420" onClick={() => {handleNext(69420)}}>
-          <div className="smalltable-entry-field">Coach</div>
-          <div className="smalltable-entry-field">77F1-65757</div>
-          <div className="smalltable-entry-field">42</div>
-          <div className="smalltable-entry-field">23%</div>
-        </button>
-        <button className="smalltable-entry" id="69420" onClick={() => {handleNext(69420)}}>
-          <div className="smalltable-entry-field">Coach</div>
-          <div className="smalltable-entry-field">77F1-65757</div>
-          <div className="smalltable-entry-field">42</div>
-          <div className="smalltable-entry-field">23%</div>
-        </button>
-        <button className="smalltable-entry" id="69420" onClick={() => {handleNext(69420)}}>
-          <div className="smalltable-entry-field">Coach</div>
-          <div className="smalltable-entry-field">77F1-65757</div>
-          <div className="smalltable-entry-field">42</div>
-          <div className="smalltable-entry-field">23%</div>
-        </button>
-        <button className="smalltable-entry" id="69420" onClick={() => {handleNext(69420)}}>
-          <div className="smalltable-entry-field">Coach</div>
-          <div className="smalltable-entry-field">77F1-65757</div>
-          <div className="smalltable-entry-field">42</div>
-          <div className="smalltable-entry-field">23%</div>
-        </button>
-        <button className="smalltable-entry" id="69420" onClick={() => {handleNext(69420)}}>
-          <div className="smalltable-entry-field">Coach</div>
-          <div className="smalltable-entry-field">77F1-65757</div>
-          <div className="smalltable-entry-field">42</div>
-          <div className="smalltable-entry-field">23%</div>
-        </button>
-        <button className="smalltable-entry" id="69420" onClick={() => {handleNext(69420)}}>
-          <div className="smalltable-entry-field">Coach</div>
-          <div className="smalltable-entry-field">77F1-65757</div>
-          <div className="smalltable-entry-field">42</div>
-          <div className="smalltable-entry-field">23%</div>
-        </button>
-        <button className="smalltable-entry" id="69420" onClick={() => {handleNext(69420)}}>
-          <div className="smalltable-entry-field">Coach</div>
-          <div className="smalltable-entry-field">77F1-65757</div>
-          <div className="smalltable-entry-field">42</div>
-          <div className="smalltable-entry-field">23%</div>
-        </button>
-        <button className="smalltable-entry" id="69420" onClick={() => {handleNext(69420)}}>
-          <div className="smalltable-entry-field">Coach</div>
-          <div className="smalltable-entry-field">77F1-65757</div>
-          <div className="smalltable-entry-field">42</div>
-          <div className="smalltable-entry-field">23%</div>
-        </button>
-
-
-        
+        {listCar ? (
+          listCar.map((car) => (
+            <button
+              className="smalltable-entry"
+              id={car._id}
+              onClick={() => {
+                handleNext(car._id);
+              }}
+            >
+              <div className="smalltable-entry-field">{car.licensePlate}</div>
+              <div className="smalltable-entry-field">{car.size}</div>
+              <div className="smalltable-entry-field">{car.weight}</div>
+              <div className="smalltable-entry-field">{Math.round((1 - car.kmTraveled/car.kmMaintenance)*100)}%</div>
+            </button>
+          ))
+        ) : (
+          <div>No driver found</div>
+        )}
       </div>
     </div>
   );
