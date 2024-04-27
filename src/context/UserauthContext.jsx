@@ -121,8 +121,6 @@ export const AuthProvider = () => {
       // Check if the cookies is actually acquired
       const token = Cookies.get("token");
 
-      console.log(token);
-
       if (token) {
         // Set userinfo
         setuserInfo(response.data);

@@ -48,6 +48,8 @@ export const ManagerProvider = () => {
 
       const response = await axiosInstance.post(url, body);
 
+      console.log(body);
+
       if (response.status == 200) {
         setlistCar(response.data.listCar);
         setlistDriver(response.data.listDriver);
@@ -107,7 +109,7 @@ export const ManagerProvider = () => {
     fuel
   ) => {
     let time = departdate + "T" + departtime;
-    const timeObject = new Date(time);
+    const timeObject = new Date(time).getTime();
 
     try {
       const axiosInstance = axios.create({

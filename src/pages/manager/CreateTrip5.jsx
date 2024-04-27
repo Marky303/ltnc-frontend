@@ -3,7 +3,6 @@ import { Navigate, Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 
 import AuthContext from "../../context/UserauthContext";
-import NotifyContext from "../../context/NotifyContext";
 import ManagerContext from "../../context/ManagerContext";
 
 // Importing assets
@@ -40,27 +39,23 @@ const CreateTrip5 = () => {
                   From <u>{tripCreated.source}</u> To{" "}
                   <u>{tripCreated.target}</u>
                 </div>
-                <div className="tripoverview-text">
+                <div className="tripoverview-text-time">
                   Departure:{" "}
                   <u>
-                    {tripCreated.departureTime
-                      .slice(0, -8)
-                      .replaceAll("T", " / ")}
+                    {Date(tripCreated.departureTime)}
                   </u>
                 </div>
-                <div className="tripoverview-text">
+                <div className="tripoverview-text-time">
                   Estimated arrival:{" "}
                   <u>
-                    {tripCreated.expectedTimeCome
-                      .slice(0, -16)
-                      .replaceAll("T", " / ")}
+                    {Date(tripCreated.expectedTimeCome)}
                   </u>
                 </div>
                 <div className="tripoverview-text">
-                  Estimated Expense: <u>{tripCreated.expense}$</u>
+                  Estimated Expense: <u>{tripCreated.expense} $</u>
                 </div>
                 <div className="tripoverview-text">
-                  Revenue: <u>{tripCreated.revenue}$</u>
+                  Revenue: <u>{tripCreated.revenue} $</u>
                 </div>
               </div>
             </div>

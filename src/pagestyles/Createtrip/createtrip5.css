@@ -25,3 +25,10 @@
     margin: auto;
     margin-bottom: 25px;
 }
+
+.tripoverview-text-time {
+    height: 80px;
+
+    font-size: 30px;
+    margin-bottom: 10px;
+}
