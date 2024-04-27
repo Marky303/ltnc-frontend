@@ -245,8 +245,8 @@ const CreateTrip1 = () => {
                   <option name="container" value="container">
                     Container
                   </option>
-                  <option name="coach" value="coach">
-                    Coach
+                  <option name="truck" value="truck">
+                    Truck
                   </option>
                 </select>
 

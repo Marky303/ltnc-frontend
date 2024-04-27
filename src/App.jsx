@@ -35,6 +35,7 @@ import CreateTrip1 from "./pages/manager/CreateTrip1";
 import CreateTrip2 from "./pages/manager/CreateTrip2";
 import CreateTrip3 from "./pages/manager/CreateTrip3";
 import CreateTrip4 from "./pages/manager/CreateTrip4";
+import CreateTrip5 from "./pages/manager/CreateTrip5";
 import History from "./pages/main/History";
 
 // Include/setup all pages in application wrapper/router
@@ -82,6 +83,11 @@ const App = () => (
                   exact
                   path="/createtrip4/:title/:desc/:start/:end/:departdate/:departtime/:revenue/:vehicle/:driverid/:vehicleid"
                   element={<CreateTrip4 />}
+                />
+                <Route
+                  exact
+                  path="/createtrip5"
+                  element={<CreateTrip5 />}
                 />
 
                 <Route exact path="/history" element={<History />} />

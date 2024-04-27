@@ -17,6 +17,7 @@ export const ManagerProvider = () => {
 
   let [listCar, setlistCar] = useState();
   let [listDriver, setlistDriver] = useState();
+  let [tripCreated, settripCreated] = useState();
   let [fetching, setFetching] = useState(false);
 
   const navigate = useNavigate();
@@ -131,13 +132,12 @@ export const ManagerProvider = () => {
 
       const response = await axiosInstance.post(url, body);
 
-      console.log(response);
-
       if (response.status == 201) {
         setlistCar(null);
         setlistDriver(null);
-        navigate("/");
-        notify("success", "Trip created with expense: "+response.data.expense+"$");
+        navigate("/createtrip5");
+        notify("success", "Trip created");
+        settripCreated(response.data);
       } else {
         notify("error", "Something happened");
       }
@@ -165,6 +165,7 @@ export const ManagerProvider = () => {
     listCar: listCar,
     listDriver: listDriver,
     fetching: fetching,
+    tripCreated: tripCreated,
 
     // trucking related functions
     findOperator: findOperator,
