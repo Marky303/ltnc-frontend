@@ -214,8 +214,8 @@ const CreateTrip4 = () => {
                   <option name="container" value="container">
                     Container
                   </option>
-                  <option name="van" value="van">
-                    Van
+                  <option name="truck" value="truck">
+                    Truck
                   </option>
                 </select>
               </fieldset>
