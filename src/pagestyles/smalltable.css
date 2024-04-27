@@ -20,10 +20,10 @@
   border-radius: 23px 23px 0px 0px;
   background-color: rgb(216, 216, 216);
   display: grid;
-  grid-template-columns: 1fr 1fr 0.5fr 0.2fr;
+  grid-template-columns: 1fr 0.5fr 0.5fr 0.5fr 0.1fr;
 }
 
-.smalltable-header-vehicle {
+.smalltable-header-driver {
   border: none;
 
   width: 100%;
@@ -31,7 +31,7 @@
   border-radius: 23px 23px 0px 0px;
   background-color: rgb(216, 216, 216);
   display: grid;
-  grid-template-columns: 0.1fr 0.4fr 1fr 0.5fr 0.5fr 0.1fr;
+  grid-template-columns: 1fr 1.2fr 1fr 0.1fr;
 }
 
 .column-header {
@@ -63,7 +63,29 @@
   background-color: white;
 
   display: grid;
-  grid-template-columns: 0.48fr 1fr 0.5fr 0.5fr;
+  grid-template-columns: 1fr 0.7fr 0.7fr 0.5fr;
+
+  transition: opacity background-color box-shadow 0.2s;
+}
+
+.smalltable-entry-driver {
+  border: none;
+
+  width: 80%;
+  width: 90%;
+  height: 55px;
+  border-radius: 12px;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 3px black;
+  z-index: 15;
+
+  cursor: pointer;
+  background-color: white;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.7fr;
 
   transition: opacity background-color box-shadow 0.2s;
 }
@@ -74,10 +96,22 @@
     box-shadow: 0 0 5px black;
 }
 
+.smalltable-entry-driver:hover {
+  opacity: 0.8;
+  background-color: rgb(242, 242, 242);
+  box-shadow: 0 0 5px black;
+}
+
 .smalltable-entry:active {
     opacity: 0.5;
     background-color: rgb(229, 229, 229);
     box-shadow: 0 0 5px black;
+}
+
+.smalltable-entry-driver:active {
+  opacity: 0.5;
+  background-color: rgb(229, 229, 229);
+  box-shadow: 0 0 5px black;
 }
 
 .smalltable-entry-field {

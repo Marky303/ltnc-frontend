@@ -120,6 +120,9 @@ export const AuthProvider = () => {
 
       // Check if the cookies is actually acquired
       const token = Cookies.get("token");
+
+      console.log(token);
+
       if (token) {
         // Set userinfo
         setuserInfo(response.data);
@@ -155,12 +158,9 @@ export const AuthProvider = () => {
 
       const response = await axiosInstance.get(url);
 
-      if (response.status==200)
-      {
+      if (response.status == 200) {
         notify("success", response.data);
-      }
-      else 
-      {
+      } else {
         notify("error", response.error);
       }
     } catch (error) {
@@ -177,9 +177,96 @@ export const AuthProvider = () => {
     navigate("/login");
   };
 
-  let resetPassword = async (e) => {};
+  let updateProfile = async (e) => {
+    // Getting checked boxes' values
+    const checkedBoxes = e.target.querySelectorAll(
+      'input[name="vehicles"]:checked'
+    );
+    const values = userInfo.admin
+      ? userInfo.drivingLicense
+      : Array.from(checkedBoxes).map((box) => box.value);
 
-  let verifyEmail = async (e) => {};
+    try {
+      const axiosInstance = axios.create({
+        withCredentials: true, // This allows sending/receiving cookies with requests
+      });
+
+      // Posting to server and get response
+      const url = "http://localhost:3000/user/profile";
+
+      const body = {
+        username: e.target.username.value,
+        fullName: e.target.fullName.value,
+        phoneNumber: e.target.phoneNumber.value,
+        address: e.target.address.value,
+        drivingLicense: values,
+      };
+
+      const response = await axiosInstance.put(url, body);
+
+      if (response.status == 200) {
+        notify("success", "Profile changed!");
+
+        // Change user info
+        setuserInfo(response.data);
+        localStorage.setItem("userInfo", JSON.stringify(response.data));
+      } else {
+        notify("error", "Something happened");
+      }
+    } catch (error) {
+      // Error from backend
+      if (error.response) {
+        let messages = error.response.data.error;
+        if (Array.isArray(messages)) {
+          for (let i = 0; i < messages.length; i++) {
+            notify("error", messages[i]);
+          }
+        } else {
+          notify("error", messages);
+        }
+      }
+      // Error from anywhere
+      else {
+        notify("error", error.message);
+      }
+    }
+  };
+
+  let updateUserinfo = async () => {
+    try {
+      const axiosInstance = axios.create({
+        withCredentials: true, // This allows sending/receiving cookies with requests
+      });
+
+      // Posting to server and get response
+      const url = "http://localhost:3000/user/profile";
+
+      const response = await axiosInstance.get(url);
+
+      if (response.status == 200) {
+        setuserInfo(response.data);
+        localStorage.setItem("userInfo", JSON.stringify(response.data));
+      } else {
+        notify("error", "Something happened");
+      }
+    } catch (error) {
+      // Error from backend
+      if (error.response) {
+        let messages = error.response.data.error;
+        if (Array.isArray(messages)) {
+          for (let i = 0; i < messages.length; i++) {
+            notify("error", messages[i]);
+          }
+        } else {
+          notify("error", messages);
+        }
+      }
+      // Error from anywhere
+      else {
+        notify("error", error.message);
+      }
+    }
+  };
 
   let contextData = {
     // userauth related variables
@@ -191,8 +278,8 @@ export const AuthProvider = () => {
     signupUser: signupUser,
     loginUser: loginUser,
     logoutUser: logoutUser,
-    resetPassword: resetPassword,
-    verifyEmail: verifyEmail,
+    updateProfile: updateProfile,
+    updateUserinfo: updateUserinfo,
   };
 
   return (

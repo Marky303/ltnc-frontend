@@ -7,9 +7,8 @@ import "../../pagestyles/Createtrip/createtrip1.css";
 
 // Importing AuthContext
 import AuthContext from "../../context/UserauthContext";
-
-// Importing NotifyContext to get notify function
 import NotifyContext from "../../context/NotifyContext";
+import ManagerContext from "../../context/ManagerContext";
 
 // Importing assets
 import background from "../../assets/img/background/userauthbg.webp";
@@ -82,24 +81,13 @@ const places = [
 ];
 
 const CreateTrip1 = () => {
-  // Get navigate function
   const navigate = useNavigate();
-
-  // Getting notify function
   let { notify } = useContext(NotifyContext);
+  let { findOperator, fetching } = useContext(ManagerContext);
 
   // Load params if theres any
-  const {
-    title,
-    desc,
-    start,
-    end,
-    departdate,
-    departtime,
-    expense,
-    revenue,
-    vehicle,
-  } = useParams();
+  const { title, desc, start, end, departdate, departtime, revenue, vehicle } =
+    useParams();
 
   const tripInfo = {
     title: title,
@@ -108,7 +96,6 @@ const CreateTrip1 = () => {
     end: end,
     departdate: departdate,
     departtime: departtime,
-    expense: expense,
     revenue: revenue,
     vehicle: vehicle,
   };
@@ -120,7 +107,6 @@ const CreateTrip1 = () => {
     "end",
     "departdate",
     "departtime",
-    "expense",
     "revenue",
     "vehicle",
   ];
@@ -146,71 +132,17 @@ const CreateTrip1 = () => {
     }
   }, []);
 
-  // Programming warcrime
+  useEffect(() => {
+    let element = document.getElementsByClassName("form-disabled");
+    if (element.length > 0) {
+      if (fetching) element[0].setAttribute("disabled", "disabled");
+      else element[0].removeAttribute("disabled");
+    }
+  }, [fetching]);
+
   let handleSubmit = (e) => {
     e.preventDefault();
-
-    // Check for empty field
-    let check = true;
-
-    if (!e.target.title.value) {
-      notify("warning", "Title must not be empty");
-      check = false;
-    }
-    if (!e.target.desc.value) {
-      notify("warning", "Description must not be empty");
-      check = false;
-    }
-    if (!e.target.start.value) {
-      notify("warning", "Starting point must not be empty");
-      check = false;
-    }
-    if (!e.target.end.value) {
-      notify("warning", "Ending point must not be empty");
-      check = false;
-    }
-    if (!e.target.departdate.value) {
-      notify("warning", "Departure date must not be empty");
-      check = false;
-    }
-    if (!e.target.departtime.value) {
-      notify("warning", "Departure time must not be empty");
-      check = false;
-    }
-    if (!e.target.revenue.value) {
-      notify("warning", "Revenue must not be empty");
-      check = false;
-    }
-    if (!e.target.expense.value) {
-      notify("warning", "Expense must not be empty");
-      check = false;
-    }
-    if (!e.target.vehicle.value) {
-      notify("warning", "A vehicle type must be chosen");
-      check = false;
-    }
-
-    if (check)
-      navigate(
-        "/createtrip2/" +
-          e.target.title.value +
-          "/" +
-          e.target.desc.value +
-          "/" +
-          e.target.start.value +
-          "/" +
-          e.target.end.value +
-          "/" +
-          e.target.departdate.value +
-          "/" +
-          e.target.departtime.value +
-          "/" +
-          e.target.expense.value +
-          "/" +
-          e.target.revenue.value +
-          "/" +
-          e.target.vehicle.value
-      );
+    findOperator(e);
   };
 
   // Private link
@@ -243,12 +175,12 @@ const CreateTrip1 = () => {
                   </div>
 
                   <div className="name-flex">
-                    <i class="fa-solid fa-boxes-stacked"></i>
-                    <label>Description</label>
+                    <i class="fa-solid fa-money-bill-trend-up"></i>
+                    <label>Revenue</label>
                     <input
                       type="text"
-                      id="desc"
-                      name="desc"
+                      id="revenue"
+                      name="revenue"
                       placeholder="Short description..."
                     />
                   </div>
@@ -294,29 +226,15 @@ const CreateTrip1 = () => {
                   </div>
                 </div>
 
-                <div className="user-infor">
-                  <div className="name-flex">
-                    <i class="fa-solid fa-receipt"></i>
-                    <label for="username">Expense</label>
-                    <input
-                      type="text"
-                      id="expense"
-                      name="expense"
-                      placeholder="Expense of your trip..."
-                    />
-                  </div>
 
-                  <div className="name-flex">
-                    <i class="fa-solid fa-money-bill-trend-up"></i>
-                    <label for="Fullname">Revenue</label>
-                    <input
-                      type="text"
-                      id="revenue"
-                      name="revenue"
-                      placeholder="Revenue to be made..."
-                    />
-                  </div>
-                </div>
+                
+                <i class="fa-solid fa-boxes-stacked"></i>
+                <label for="address">Description</label>
+                <input className="vehicle-select" type="text"
+                      id="desc"
+                      name="desc"
+                      placeholder="Short description about your trip...">
+                </input>
 
                 <i class="fa-solid fa-truck"></i>
                 <label for="address">Vehicle</label>
@@ -327,8 +245,8 @@ const CreateTrip1 = () => {
                   <option name="container" value="container">
                     Container
                   </option>
-                  <option name="van" value="van">
-                    Van
+                  <option name="coach" value="coach">
+                    Coach
                   </option>
                 </select>
 
