@@ -13,7 +13,9 @@ export default DriverContext;
 
 export const DriverProvider = () => {
   let { notify } = useContext(NotifyContext);
-  let { updateUserinfo } = useContext(AuthContext);
+  let { updateUserinfo, userInfo } = useContext(AuthContext);
+
+  let [waitingTrip, setwaitingTrip] = useState(null);
 
   let switchStatus = async (status) => {
     try {
@@ -32,7 +34,7 @@ export const DriverProvider = () => {
 
       if (response.status == 200) {
         updateUserinfo();
-        notify("success", "State changed!")
+        notify("success", "State changed!");
       } else {
         notify("error", "Something happened");
       }
@@ -53,20 +55,133 @@ export const DriverProvider = () => {
         notify("error", error.message);
       }
     }
+  };
 
-  }
+  let getwaitingTrip = async () => {
+    try {
+      const axiosInstance = axios.create({
+        withCredentials: true, // This allows sending/receiving cookies with requests
+      });
 
-  
+      const url = "http://localhost:3000/user/getWaitingTrip";
 
+      const response = await axiosInstance.get(url);
 
+      if (response.status == 200) {
+        setwaitingTrip(response.data);
+      } else {
+        notify("error", "Something happened");
+      }
+    } catch (error) {
+      console.log(error);
 
+      // Error from backend
+      if (error.response) {
+        let messages = error.response.data.error;
+        if (Array.isArray(messages)) {
+          for (let i = 0; i < messages.length; i++) {
+            notify("error", messages[i]);
+          }
+        } else {
+          notify("error", messages);
+        }
+      }
+      // Error from anywhere
+      else {
+        notify("error", error.message);
+      }
+    }
+  };
+
+  let cancelTrip = async () => {
+    try {
+      const axiosInstance = axios.create({
+        withCredentials: true, // This allows sending/receiving cookies with requests
+      });
+
+      const url =
+        "http://localhost:3000/user/cancelTrip/" + waitingTrip.trip._id;
+
+      const response = await axiosInstance.get(url);
+
+      console.log(response);
+
+      if (response.status == 200) {
+        notify("success", response.data.message);
+        setwaitingTrip(null);
+      } else {
+        notify("error", "Something happened");
+      }
+    } catch (error) {
+      console.log(error);
+
+      // Error from backend
+      if (error.response) {
+        let messages = error.response.data.error;
+        if (Array.isArray(messages)) {
+          for (let i = 0; i < messages.length; i++) {
+            notify("error", messages[i]);
+          }
+        } else {
+          notify("error", messages);
+        }
+      }
+      // Error from anywhere
+      else {
+        notify("error", error.message);
+      }
+    }
+  };
+
+  let startTrip = async () => {
+    try {
+      const axiosInstance = axios.create({
+        withCredentials: true, // This allows sending/receiving cookies with requests
+      });
+
+      const url =
+        "http://localhost:3000/user/startTrip/" + waitingTrip.trip._id;
+
+      const response = await axiosInstance.get(url);
+
+      console.log(response.data);
+
+      if (response.status == 200) {
+        notify("success", "Started trip!");
+        setwaitingTrip(response.data);
+      } else {
+        notify("error", "Something happened");
+      }
+    } catch (error) {
+      console.log(error);
+
+      // Error from backend
+      if (error.response) {
+        let messages = error.response.data.error;
+        if (Array.isArray(messages)) {
+          for (let i = 0; i < messages.length; i++) {
+            notify("error", messages[i]);
+          }
+        } else {
+          notify("error", messages);
+        }
+      }
+      // Error from anywhere
+      else {
+        notify("error", error.message);
+      }
+    }
+  };
 
   let contextData = {
     // trucking related variables
-    
+    waitingTrip: waitingTrip,
 
     // trucking related functions
     switchStatus: switchStatus,
+    getwaitingTrip: getwaitingTrip,
+    cancelTrip: cancelTrip,
+    startTrip: startTrip,
   };
 
   return (

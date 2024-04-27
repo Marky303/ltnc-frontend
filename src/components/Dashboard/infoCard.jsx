@@ -15,7 +15,8 @@ import UserauthContext from "../../context/UserauthContext";
 
 const Infocard = () => {
   // Get le stack
-  const { switchStatus } = useContext(DriverContext);
+  const { switchStatus, getwaitingTrip, waitingTrip, cancelTrip, startTrip } =
+    useContext(DriverContext);
   const { userInfo } = useContext(UserauthContext);
 
   // Initialize state to track the checkbox status
@@ -38,12 +39,9 @@ const Infocard = () => {
 
   // Load slider on page load
   useEffect(() => {
-    if (userInfo.status==="available")
-    {
-      setIsChecked(true)
-    }
-    else 
-    setIsChecked(false);
+    if (userInfo.status === "available") {
+      setIsChecked(true);
+    } else setIsChecked(false);
   }, [userInfo]);
 
   // Function to trigger when checkbox is checked
@@ -56,11 +54,26 @@ const Infocard = () => {
     switchStatus(false);
   };
 
-  return false ? (
-    true ? (
+  // Load waiting trip on page load
+  useEffect(() => {
+    getwaitingTrip();
+  }, []);
+
+  useEffect(() => {}, [waitingTrip]);
+
+  let handleCancel = () => {
+    cancelTrip();
+  };
+
+  let handleStart = () => {
+    startTrip();
+  };
+
+  return waitingTrip ? (
+    waitingTrip.trip.done == false ? (
       <div className="trip-card-inprogress">
         <div className="trip-title">
-          <button className="stop-trip-btn">Stop</button>
+          <button className="stop-trip-btn" onClick={()=>{handleCancel()}}>Stop</button>
           <div className="trip-title-text">Trip in progress</div>
         </div>
         <div className="trip-content">
@@ -83,7 +96,7 @@ const Infocard = () => {
             </div>
           </div>
           <div className="trip-vehicle">
-            <div className="trip-vehicle-title">Vehicle</div>
+            <div className="trip-vehicle-title">waitingTrip.car</div>
             <hr></hr>
             <div className="trip-vehicle-text-wrapper">
               <div className="trip-info-text">
@@ -105,31 +118,34 @@ const Infocard = () => {
     ) : (
       <div className="trip-card-pending">
         <div className="trip-title-pending">
-          <button className="stop-trip-btn">Cancel</button>
+          <button className="stop-trip-btn" onClick={()=>{handleCancel()}}>Cancel</button>
           <div className="trip-title-text">Pending trip</div>
-          <button className="accept-trip-btn">Accept</button>
+          <button className="accept-trip-btn" onClick={()=>{handleStart()}}>Accept</button>
         </div>
         <div className="trip-content">
           <div className="trip-info">
-            <div className="trip-info-title">Info</div>
+            <div className="trip-info-title">{waitingTrip.trip.title}</div>
             <hr></hr>
             <div className="trip-info-text-wrapper">
               <div className="trip-info-text">
-                Helloasdasssssssssssssssssssssssssssssssssssssss
+                <u>Desc</u>: {waitingTrip.trip.description}
               </div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
+              <div className="trip-info-text">
+                From {waitingTrip.trip.source} to {waitingTrip.trip.target}
+              </div>
+              <div className="trip-info-text">
+                <u>Departure</u>: {Date(waitingTrip.trip.departureTime)}
+              </div>
+              <div className="trip-info-text">
+                <u>Arrival</u>: {Date(waitingTrip.trip.expectedTimeCome)}
+              </div>
+              <div className="trip-info-text">
+                <u>Route</u>: {waitingTrip.trip.route}
+              </div>
             </div>
           </div>
           <div className="trip-vehicle">
-            <div className="trip-vehicle-title">Vehicle</div>
+            <div className="trip-vehicle-title">{waitingTrip.trip.vehicle}</div>
             <hr></hr>
             <div className="trip-vehicle-text-wrapper">
               <div className="trip-info-text">
