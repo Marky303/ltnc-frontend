@@ -54,6 +54,19 @@ export const AuthProvider = () => {
     return dateTimeString;
   };
 
+  let parseDateOnly = (unix) => {
+    // Create a Date object from Unix time (convert to milliseconds)
+    const date = new Date(unix);
+
+    // Get the date in 'YYYY-MM-DD' format
+    const datePart = date.toISOString().split("T")[0];
+
+    // Combine date and time without timezone information
+    const dateTimeString = `${datePart}`;
+
+    return dateTimeString;
+  };
+
   // FUNCTIONS
   let signupUser = async (e) => {
     e.preventDefault();
@@ -301,6 +314,7 @@ export const AuthProvider = () => {
     updateProfile: updateProfile,
     updateUserinfo: updateUserinfo,
     parseDate: parseDate,
+    parseDateOnly: parseDateOnly,
   };
 
   return (
