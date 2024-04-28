@@ -15,9 +15,15 @@ import UserauthContext from "../../context/UserauthContext";
 
 const Infocard = () => {
   // Get le stack
-  const { switchStatus, getwaitingTrip, waitingTrip, cancelTrip, startTrip, finishTrip } =
-    useContext(DriverContext);
-  const { userInfo } = useContext(UserauthContext);
+  const {
+    switchStatus,
+    getwaitingTrip,
+    waitingTrip,
+    cancelTrip,
+    startTrip,
+    finishTrip,
+  } = useContext(DriverContext);
+  const { userInfo, parseDate } = useContext(UserauthContext);
 
   // Initialize state to track the checkbox status
   const [isChecked, setIsChecked] = useState(false);
@@ -71,29 +77,21 @@ const Infocard = () => {
 
   let handleFinish = () => {
     finishTrip();
-  }
+  };
 
   return waitingTrip ? (
     waitingTrip.trip.done == false ? (
       <div className="trip-card-inprogress">
-        <div className="trip-title-pending">
+        <div className="trip-title">
           <button
-            className="stop-trip-btn"
-            onClick={() => {
-              handleCancel();
-            }}
-          >
-            Cancel
-          </button>
-          <div className="trip-title-text">Trip in progress</div>
-          <button
-            className="accept-trip-btn"
+            className="finish-trip-btn"
             onClick={() => {
               handleFinish();
             }}
           >
             Finish
           </button>
+          <div className="trip-title-text">Trip in progress</div>
         </div>
         <div className="trip-content">
           <div className="trip-info">
@@ -107,10 +105,13 @@ const Infocard = () => {
                 From {waitingTrip.trip.source} to {waitingTrip.trip.target}
               </div>
               <div className="trip-info-text">
-                <u>Departure</u>: {Date(waitingTrip.trip.departureTime)}
+                <u>Distance</u>: {waitingTrip.trip.distance}{" "}km
               </div>
               <div className="trip-info-text">
-                <u>Arrival</u>: {Date(waitingTrip.trip.expectedTimeCome)}
+                <u>Departure</u>: {parseDate(waitingTrip.trip.departureTime)}
+              </div>
+              <div className="trip-info-text">
+                <u>Est Arrival</u>: {parseDate(waitingTrip.trip.expectedTimeCome)}
               </div>
               <div className="trip-info-text">
                 <u>Route</u>: {waitingTrip.trip.route}
@@ -118,7 +119,7 @@ const Infocard = () => {
             </div>
           </div>
           <div className="trip-vehicle">
-            <div className="trip-vehicle-title">waitingTrip.car</div>
+            <div className="trip-vehicle-title">{waitingTrip.car.type}</div>
             <hr></hr>
             <div className="trip-vehicle-text-wrapper">
               <div className="trip-info-text">
@@ -128,10 +129,10 @@ const Infocard = () => {
                 <u>Fuel</u>: {waitingTrip.car.fuel}
               </div>
               <div className="trip-info-text">
-                <u>Size</u>: {waitingTrip.car.size}
+                <u>Size</u>: {waitingTrip.car.size}{" "}(m*m)
               </div>
               <div className="trip-info-text">
-                <u>Size</u>: {waitingTrip.car.weight}
+                <u>Size</u>: {waitingTrip.car.weight}{" "}(ton)
               </div>
             </div>
           </div>
@@ -170,10 +171,13 @@ const Infocard = () => {
                 From {waitingTrip.trip.source} to {waitingTrip.trip.target}
               </div>
               <div className="trip-info-text">
-                <u>Departure</u>: {Date(waitingTrip.trip.departureTime)}
+                <u>Distance</u>: {waitingTrip.trip.distance}{" "}km
               </div>
               <div className="trip-info-text">
-                <u>Arrival</u>: {Date(waitingTrip.trip.expectedTimeCome)}
+                <u>Departure</u>: {parseDate(waitingTrip.trip.departureTime)}
+              </div>
+              <div className="trip-info-text">
+                <u>Est Arrival</u>: {parseDate(waitingTrip.trip.expectedTimeCome)}
               </div>
               <div className="trip-info-text">
                 <u>Route</u>: {waitingTrip.trip.route}
@@ -191,10 +195,10 @@ const Infocard = () => {
                 <u>Fuel</u>: {waitingTrip.car.fuel}
               </div>
               <div className="trip-info-text">
-                <u>Size</u>: {waitingTrip.car.size}
+                <u>Size</u>: {waitingTrip.car.size}{" "}(m*m)
               </div>
               <div className="trip-info-text">
-                <u>Size</u>: {waitingTrip.car.weight}
+                <u>Weight</u>: {waitingTrip.car.weight}{" "}(ton)
               </div>
             </div>
           </div>

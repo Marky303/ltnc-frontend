@@ -14,7 +14,6 @@
   margin-top: 25px;
 }
 
-
 .trip-card-inprogress {
   box-shadow: 0 0 3px black;
   z-index: 15;
@@ -88,6 +87,19 @@
   transition: opacity 0.2s;
 }
 
+.finish-trip-btn {
+  height: 50px;
+
+  background-color: rgb(93, 238, 9);
+  color: rgb(0, 0, 0);
+  font-size: 100%;
+  border: solid;
+  border-width: 1px;
+  border-radius: 15px 0px 0px 15px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
 .accept-trip-btn:hover {
   box-shadow: 0 0 10px rgb(93, 238, 9);
   z-index: 99;
@@ -95,12 +107,26 @@
   color: rgb(255, 255, 255);
 }
 
+.finish-trip-btn:hover {
+  box-shadow: 0 0 10px rgb(93, 238, 9);
+  z-index: 99;
+  opacity: 0.8;
+  color: rgb(255, 255, 255);
+}
+
 .accept-trip-btn:active {
-    box-shadow: 0 0 20px rgb(93, 238, 9);
-    z-index: 99;
-    opacity: 0.5;
-    color: rgb(15, 230, 0);
-  }
+  box-shadow: 0 0 20px rgb(93, 238, 9);
+  z-index: 99;
+  opacity: 0.5;
+  color: rgb(15, 230, 0);
+}
+
+.finish-trip-btn:active {
+  box-shadow: 0 0 20px rgb(93, 238, 9);
+  z-index: 99;
+  opacity: 0.5;
+  color: rgb(15, 230, 0);
+}
 
 .stop-trip-btn {
   height: 50px;
@@ -123,11 +149,11 @@
 }
 
 .stop-trip-btn:active {
-    box-shadow: 0 0 20px rgb(255, 17, 17);
-    z-index: 99;
-    opacity: 0.5;
-    color: rgb(230, 0, 0);
-  }
+  box-shadow: 0 0 20px rgb(255, 17, 17);
+  z-index: 99;
+  opacity: 0.5;
+  color: rgb(230, 0, 0);
+}
 
 .trip-title-text {
   text-align: center;
@@ -228,8 +254,8 @@
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 .slider:before {
@@ -241,8 +267,8 @@
   left: 4px;
   bottom: 4px;
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 input:checked + .slider {

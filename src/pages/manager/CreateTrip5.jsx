@@ -13,14 +13,20 @@ import "../../pagestyles/Createtrip/createtrip5.css";
 
 const CreateTrip5 = () => {
   const navigate = useNavigate();
-  let { tripCreated } = useContext(ManagerContext);
+  let { tripCreated, delCreatedTrip } = useContext(ManagerContext);
 
   useEffect(() => {
     if (!tripCreated) navigate("/");
   }, []);
 
   // Private link
-  let { authTokens, userInfo } = useContext(AuthContext);
+  let { authTokens, userInfo, parseDate } = useContext(AuthContext);
+
+  let handleDel = (id) => {
+    delCreatedTrip(id);
+  };
+
+  const formatter = new Intl.NumberFormat('de-DE');
 
   return authTokens ? (
     userInfo.admin && tripCreated ? (
@@ -39,28 +45,31 @@ const CreateTrip5 = () => {
                   From <u>{tripCreated.source}</u> To{" "}
                   <u>{tripCreated.target}</u>
                 </div>
-                <div className="tripoverview-text-time">
-                  Departure:{" "}
-                  <u>
-                    {Date(tripCreated.departureTime)}
-                  </u>
-                </div>
-                <div className="tripoverview-text-time">
-                  Estimated arrival:{" "}
-                  <u>
-                    {Date(tripCreated.expectedTimeCome)}
-                  </u>
+                <div className="tripoverview-text">
+                  Departure: <u>{parseDate(tripCreated.departureTime)}</u>
                 </div>
                 <div className="tripoverview-text">
-                  Estimated Expense: <u>{tripCreated.expense} $</u>
+                  Est arrival: <u>{parseDate(tripCreated.expectedTimeCome)}</u>
                 </div>
                 <div className="tripoverview-text">
-                  Revenue: <u>{tripCreated.revenue} $</u>
+                  Est Expense: <u>{formatter.format(tripCreated.expense+"000")+" "}vnd</u>
+                </div>
+                <div className="tripoverview-text">
+                  Revenue: <u>{formatter.format(tripCreated.revenue+"000")+" "}vnd</u>
                 </div>
               </div>
             </div>
 
             <div className="user-infor-tripcreated">
+              <button
+                className="deletecreated-trip-btn"
+                onClick={() => {
+                  handleDel(tripCreated._id);
+                }}
+              >
+                Delete trip
+              </button>
+              <div className="fillerdiv"></div>
               <button
                 className="accept-btn"
                 onClick={() => {

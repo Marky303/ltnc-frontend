@@ -28,7 +28,11 @@ const BigTableVehicle = ({ data, tripInfo }) => {
   };
 
   let handleDel = (id) => {
-    delVehicle(id);
+    let foo = prompt('Type "accept" to delete the vehicle');
+    if (foo=="accept")
+      delVehicle(id);
+    else 
+      notify("warning", "Wrong input")
   };
 
   let handleMaint = (id, kmMaint) => {
@@ -48,14 +52,16 @@ const BigTableVehicle = ({ data, tripInfo }) => {
     navigate("/vehicles/" + i);
   };
 
+  const formatter = new Intl.NumberFormat('de-DE');
+
   return (
     <div className="bigtable-content">
       <div className="bigtable-header-vehicle">
         <div className="fillerdiv"></div>
         <div className="column-header">Type</div>
         <div className="column-header">Liscence Plate</div>
-        <div className="column-header">Params</div>
-        <div className="column-header">Volume</div>
+        <div className="column-header">Size</div>
+        <div className="column-header">Weight</div>
         <div className="column-header">Fuel</div>
         <div className="column-header">Maint.</div>
         <div className="column-header">Status</div>
@@ -82,11 +88,11 @@ const BigTableVehicle = ({ data, tripInfo }) => {
                   <div className="bigtable-entry-field">
                     {vehicle.licensePlate}
                   </div>
-                  <div className="bigtable-entry-field">{vehicle.size}</div>
-                  <div className="bigtable-entry-field">{vehicle.weight}</div>
+                  <div className="bigtable-entry-field">{vehicle.size}{" "}(m*m)</div>
+                  <div className="bigtable-entry-field">{formatter.format(vehicle.weight)}{" "}(ton)</div>
                   <div className="bigtable-entry-field">{vehicle.fuel}</div>
                   <div className="bigtable-entry-field">
-                    {vehicle.kmTraveled}/{vehicle.kmMaintenance} (km)
+                    {vehicle.kmTraveled}/{vehicle.kmMaintenance}{" "}(km)
                   </div>
                   <div className="bigtable-entry-field">{vehicle.status}</div>
                 </button>

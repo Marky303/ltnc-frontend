@@ -30,8 +30,6 @@ export const DriverProvider = () => {
 
       const response = await axiosInstance.get(url);
 
-      console.log(response);
-
       if (response.status == 200) {
         setHistory(response.data);
         notify("success", "History acquired!");
@@ -108,8 +106,6 @@ export const DriverProvider = () => {
 
         const response = await axiosInstance.get(url);
 
-        console.log(response);
-
         if (response.status == 200) {
           setwaitingTrip(response.data);
           if (response.data.trip.done == false)
@@ -119,8 +115,6 @@ export const DriverProvider = () => {
           notify("error", "Something happened");
         }
       } catch (error) {
-        console.log(error);
-
         // Error from backend
         if (error.response) {
           let messages = error.response.data.error;
@@ -151,8 +145,6 @@ export const DriverProvider = () => {
 
       const response = await axiosInstance.get(url);
 
-      console.log(response);
-
       if (response.status == 200) {
         notify("success", response.data.message);
         setwaitingTrip(null);
@@ -160,8 +152,6 @@ export const DriverProvider = () => {
         notify("error", "Something happened");
       }
     } catch (error) {
-      console.log(error);
-
       // Error from backend
       if (error.response) {
         let messages = error.response.data.error;
@@ -191,8 +181,6 @@ export const DriverProvider = () => {
 
       const response = await axiosInstance.get(url);
 
-      console.log(response.data);
-
       if (response.status == 200) {
         notify("success", "Started trip!");
         setwaitingTrip(response.data);
@@ -201,8 +189,6 @@ export const DriverProvider = () => {
         notify("error", "Something happened");
       }
     } catch (error) {
-      console.log(error);
-
       // Error from backend
       if (error.response) {
         let messages = error.response.data.error;
@@ -242,8 +228,6 @@ export const DriverProvider = () => {
         notify("error", "Something happened");
       }
     } catch (error) {
-      console.log(error);
-
       // Error from backend
       if (error.response) {
         let messages = error.response.data.error;

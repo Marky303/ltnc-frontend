@@ -1,5 +1,5 @@
 .tripoverview-card {
-    width: 95%;
+    width: 99%;
     margin: auto;
     margin-bottom: 20px;
     margin-top: 32px;
@@ -21,6 +21,8 @@
 }
 
 .user-infor-tripcreated{
+    display: grid;
+    grid-template-columns: 1fr 0.1fr 1fr;
     width: 81%;
     margin: auto;
     margin-bottom: 25px;
@@ -31,4 +33,25 @@
 
     font-size: 30px;
     margin-bottom: 10px;
+}
+
+.deletecreated-trip-btn {
+    width: 100%;
+    font-size: 22px;
+    padding: 10px;
+    border-radius: 6px;
+    color: #fff;
+    background-color: #e33434;
+    border: none;
+    cursor: pointer;
+    margin-top: 13px;
+}
+
+.deletecreated-trip-btn:hover {
+    opacity: 0.8;
+}
+
+
+.deletecreated-trip-btn:active {
+    opacity: 0.5;
 }
