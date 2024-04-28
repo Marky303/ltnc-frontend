@@ -15,7 +15,7 @@ import UserauthContext from "../../context/UserauthContext";
 
 const Infocard = () => {
   // Get le stack
-  const { switchStatus, getwaitingTrip, waitingTrip, cancelTrip, startTrip } =
+  const { switchStatus, getwaitingTrip, waitingTrip, cancelTrip, startTrip, finishTrip } =
     useContext(DriverContext);
   const { userInfo } = useContext(UserauthContext);
 
@@ -69,12 +69,31 @@ const Infocard = () => {
     startTrip();
   };
 
+  let handleFinish = () => {
+    finishTrip();
+  }
+
   return waitingTrip ? (
     waitingTrip.trip.done == false ? (
       <div className="trip-card-inprogress">
-        <div className="trip-title">
-          <button className="stop-trip-btn" onClick={()=>{handleCancel()}}>Stop</button>
+        <div className="trip-title-pending">
+          <button
+            className="stop-trip-btn"
+            onClick={() => {
+              handleCancel();
+            }}
+          >
+            Cancel
+          </button>
           <div className="trip-title-text">Trip in progress</div>
+          <button
+            className="accept-trip-btn"
+            onClick={() => {
+              handleFinish();
+            }}
+          >
+            Finish
+          </button>
         </div>
         <div className="trip-content">
           <div className="trip-info">
@@ -82,17 +101,20 @@ const Infocard = () => {
             <hr></hr>
             <div className="trip-info-text-wrapper">
               <div className="trip-info-text">
-                Helloasdasssssssssssssssssssssssssssssssssssssss
+                <u>Desc</u>: {waitingTrip.trip.description}
               </div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
+              <div className="trip-info-text">
+                From {waitingTrip.trip.source} to {waitingTrip.trip.target}
+              </div>
+              <div className="trip-info-text">
+                <u>Departure</u>: {Date(waitingTrip.trip.departureTime)}
+              </div>
+              <div className="trip-info-text">
+                <u>Arrival</u>: {Date(waitingTrip.trip.expectedTimeCome)}
+              </div>
+              <div className="trip-info-text">
+                <u>Route</u>: {waitingTrip.trip.route}
+              </div>
             </div>
           </div>
           <div className="trip-vehicle">
@@ -100,17 +122,17 @@ const Infocard = () => {
             <hr></hr>
             <div className="trip-vehicle-text-wrapper">
               <div className="trip-info-text">
-                Helloasdasssssssssssssssssssssssssssssssssssssss
+                <u>License plt</u>: {waitingTrip.car.licensePlate}
               </div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
+              <div className="trip-info-text">
+                <u>Fuel</u>: {waitingTrip.car.fuel}
+              </div>
+              <div className="trip-info-text">
+                <u>Size</u>: {waitingTrip.car.size}
+              </div>
+              <div className="trip-info-text">
+                <u>Size</u>: {waitingTrip.car.weight}
+              </div>
             </div>
           </div>
         </div>
@@ -118,9 +140,23 @@ const Infocard = () => {
     ) : (
       <div className="trip-card-pending">
         <div className="trip-title-pending">
-          <button className="stop-trip-btn" onClick={()=>{handleCancel()}}>Cancel</button>
+          <button
+            className="stop-trip-btn"
+            onClick={() => {
+              handleCancel();
+            }}
+          >
+            Cancel
+          </button>
           <div className="trip-title-text">Pending trip</div>
-          <button className="accept-trip-btn" onClick={()=>{handleStart()}}>Accept</button>
+          <button
+            className="accept-trip-btn"
+            onClick={() => {
+              handleStart();
+            }}
+          >
+            Accept
+          </button>
         </div>
         <div className="trip-content">
           <div className="trip-info">
@@ -145,21 +181,21 @@ const Infocard = () => {
             </div>
           </div>
           <div className="trip-vehicle">
-            <div className="trip-vehicle-title">{waitingTrip.trip.vehicle}</div>
+            <div className="trip-vehicle-title">{waitingTrip.car.type}</div>
             <hr></hr>
             <div className="trip-vehicle-text-wrapper">
               <div className="trip-info-text">
-                Helloasdasssssssssssssssssssssssssssssssssssssss
+                <u>License plt</u>: {waitingTrip.car.licensePlate}
               </div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
-              <div className="trip-info-text">Hello</div>
+              <div className="trip-info-text">
+                <u>Fuel</u>: {waitingTrip.car.fuel}
+              </div>
+              <div className="trip-info-text">
+                <u>Size</u>: {waitingTrip.car.size}
+              </div>
+              <div className="trip-info-text">
+                <u>Size</u>: {waitingTrip.car.weight}
+              </div>
             </div>
           </div>
         </div>

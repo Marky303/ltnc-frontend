@@ -1,11 +1,52 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Navigate, Link, useNavigate } from "react-router-dom";
+import Popup from "reactjs-popup";
 
 import "../../pagestyles/bigtable.css";
 
+import ManagerContext from "../../context/ManagerContext";
+import NotifyContext from "../../context/NotifyContext";
+
 const BigTableVehicle = ({ data, tripInfo }) => {
-  // Get navigate function
   const navigate = useNavigate();
+  let { vehicleList, getVehicle, delVehicle, maintVehicle, maintDoneVehicle } =
+    useContext(ManagerContext);
+  let { notify } = useContext(NotifyContext);
+
+  useEffect(() => {
+    getVehicle();
+  }, []);
+
+  useEffect(() => {}, [vehicleList]);
+
+  let handleEdit = (id) => {
+    navigate("/vehicles/edit/" + id);
+  };
+
+  let handleAdd = () => {
+    navigate("/vehicles/add");
+  };
+
+  let handleDel = (id) => {
+    delVehicle(id);
+  };
+
+  let handleMaint = (id, kmMaint) => {
+    maintVehicle(id, kmMaint);
+  };
+
+  let handleMaintDone = (id) => {
+    let cost = prompt("Please enter maintenance cost: ");
+    maintDoneVehicle(id, cost);
+  };
+
+  let handleCheckMaint = (id) => {
+    let i = 0
+    for (i; i < vehicleList.length; i++) {
+      if (vehicleList[i]._id == id) break;
+    }
+    navigate("/vehicles/" + i);
+  };
 
   return (
     <div className="bigtable-content">
@@ -22,22 +63,120 @@ const BigTableVehicle = ({ data, tripInfo }) => {
       </div>
       <div className="bigtable-body">
         <button
-          className="bigtable-entryvehicle"
+          className="bigtable-entryvehicle-addnew"
           id="69420"
           onClick={() => {
-            handleNext(69420);
+            handleAdd();
           }}
         >
-          <div className="fillerdiv"></div>
-          <div className="bigtable-entry-field">Coach</div>
-          <div className="bigtable-entry-field">77F1-65757</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">23%</div>
-          <div className="bigtable-entry-field">23%</div>
-          <div className="bigtable-entry-field">1000/5000</div>
-          <div className="bigtable-entry-field">Active</div>
+          <div className="add-vehicle-text">Add new vehicle</div>
         </button>
-        
+
+        {vehicleList.length != 0 ? (
+          vehicleList.map((vehicle) => (
+            <Popup
+              trigger={
+                <button className="bigtable-entryvehicle" id={vehicle._id}>
+                  <div className="fillerdiv"></div>
+                  <div className="bigtable-entry-field">{vehicle.type}</div>
+                  <div className="bigtable-entry-field">
+                    {vehicle.licensePlate}
+                  </div>
+                  <div className="bigtable-entry-field">{vehicle.size}</div>
+                  <div className="bigtable-entry-field">{vehicle.weight}</div>
+                  <div className="bigtable-entry-field">{vehicle.fuel}</div>
+                  <div className="bigtable-entry-field">
+                    {vehicle.kmTraveled}/{vehicle.kmMaintenance} (km)
+                  </div>
+                  <div className="bigtable-entry-field">{vehicle.status}</div>
+                </button>
+              }
+              position="top center"
+            >
+              {vehicle.status == "maintenance" ? (
+                <div className="vehicle-popup">
+                  <button
+                    className="del-vehicle-btn"
+                    onClick={() => handleDel(vehicle._id)}
+                  >
+                    <i class="fa-solid fa-x"></i>
+                  </button>
+                  <button
+                    className="maint-vehicle-btn"
+                    onClick={() => handleMaintDone(vehicle._id)}
+                  >
+                    <i class="fa-solid fa-circle-check"></i>
+                  </button>
+                  <button
+                    className="maint-vehicle-btn"
+                    onClick={() => handleCheckMaint(vehicle._id)}
+                  >
+                    <i class="fa-solid fa-clipboard-list"></i>
+                  </button>
+                  <button
+                    className="edit-vehicle-btn"
+                    onClick={() => handleEdit(vehicle._id)}
+                  >
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                </div>
+              ) : vehicle.kmTraveled >= vehicle.kmMaintenance &&
+                vehicle.status == "inactive" ? (
+                <div className="vehicle-popup">
+                  <button
+                    className="del-vehicle-btn"
+                    onClick={() => handleDel(vehicle._id)}
+                  >
+                    <i class="fa-solid fa-x"></i>
+                  </button>
+                  <button
+                    className="maint-vehicle-btn"
+                    onClick={() =>
+                      handleMaint(vehicle._id, vehicle.kmMaintenance)
+                    }
+                  >
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                  </button>
+                  <button
+                    className="maint-vehicle-btn"
+                    onClick={() => handleCheckMaint(vehicle._id)}
+                  >
+                    <i class="fa-solid fa-clipboard-list"></i>
+                  </button>
+                  <button
+                    className="edit-vehicle-btn"
+                    onClick={() => handleEdit(vehicle._id)}
+                  >
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                </div>
+              ) : (
+                <div className="vehicle-popup-2btn">
+                  <button
+                    className="del-vehicle-btn"
+                    onClick={() => handleDel(vehicle._id)}
+                  >
+                    <i class="fa-solid fa-x"></i>
+                  </button>
+                  <button
+                    className="maint-vehicle-btn"
+                    onClick={() => handleCheckMaint(vehicle._id)}
+                  >
+                    <i class="fa-solid fa-clipboard-list"></i>
+                  </button>
+                  <button
+                    className="edit-vehicle-btn"
+                    onClick={() => handleEdit(vehicle._id)}
+                  >
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                </div>
+              )}
+            </Popup>
+          ))
+        ) : (
+          <div></div>
+        )}
       </div>
     </div>
   );

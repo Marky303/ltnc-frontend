@@ -23,6 +23,26 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 0.6fr 0.3fr 0.2fr;
 }
 
+.bigtable-header-driver {
+  width: 100%;
+  height: 65px;
+  border-radius: 23px 23px 0px 0px;
+  background-color: rgb(216, 216, 216);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 0.5fr 0.5fr 0.2fr;
+}
+
+.bigtable-header-trip {
+  border: none;
+
+  width: 100%;
+  height: 65px;
+  border-radius: 23px 23px 0px 0px;
+  background-color: rgb(216, 216, 216);
+  display: grid;
+  grid-template-columns: 0.7fr 0.7fr 0.7fr 1fr 1fr 1fr 0.6fr 0.1fr;
+}
+
 .bigtable-header-vehicle {
   border: none;
 
@@ -62,7 +82,49 @@
   background-color: white;
 
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 0.6fr 0.3fr 0.1fr;
+  grid-template-columns: 0.7fr 0.7fr 0.7fr 1fr 1fr 1fr 0.6fr;
+
+  transition: opacity background-color box-shadow 0.2s;
+}
+
+.bigtable-entry-driver {
+  border: none;
+
+  width: 98%;
+  height: 55px;
+  border-radius: 12px;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 3px black;
+  z-index: 15;
+
+  cursor: pointer;
+  background-color: white;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 0.5fr 0.5fr 0.15fr;
+
+  transition: opacity background-color box-shadow 0.2s;
+}
+
+.bigtable-entry-trip {
+  border: none;
+
+  width: 98%;
+  height: 55px;
+  border-radius: 12px;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 3px black;
+  z-index: 15;
+
+  cursor: pointer;
+  background-color: white;
+
+  display: grid;
+  grid-template-columns: 0.6fr 0.7fr 0.7fr 1fr 1fr 1fr 0.62fr;
 
   transition: opacity background-color box-shadow 0.2s;
 }
@@ -80,29 +142,152 @@
   font-size: 18px;
 }
 
-.bigtable-entryvehicle {
-    border: none;
-  
-    width: 98%;
-    height: 55px;
-    border-radius: 12px;
-    margin: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    box-shadow: 0 0 3px black;
-    z-index: 15;
-  
-    cursor: pointer;
-    background-color: white;
-  
-    display: grid;
-    grid-template-columns: 0.2fr 0.8fr 1.05fr 1.05fr 1.1fr 1fr 1fr 0.6fr 0.1fr;
-  
-    transition: opacity background-color box-shadow 0.2s;
-  }
+.bigtable-entryvehicle-addnew {
+  border-style: dashed;
 
-  .bigtable-entryvehicle:hover {
-    opacity: 0.8;
-    background-color: rgb(242, 242, 242);
-    box-shadow: 0 0 5px black;
-  }
+  display: block;
+  width: 98%;
+  height: 55px;
+  border-radius: 12px;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 3px black;
+  z-index: 15;
+
+  cursor: pointer;
+  background-color: white;
+
+  transition: opacity background-color box-shadow 0.2s;
+}
+
+.bigtable-entryvehicle-addnew:hover {
+  opacity: 0.8;
+  background-color: rgb(242, 242, 242);
+  box-shadow: 0 0 5px black;
+}
+
+.add-vehicle-text {
+  text-align: center;
+  vertical-align: middle;
+  font-size: 15px;
+  line-height: 55px;
+}
+
+.bigtable-entryvehicle {
+  border: none;
+
+  width: 98%;
+  height: 55px;
+  border-radius: 12px;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 3px black;
+  z-index: 15;
+
+  cursor: pointer;
+  background-color: white;
+
+  display: grid;
+  grid-template-columns: 0.15fr 0.8fr 1.2fr 1.05fr 1.1fr 1fr 1fr 0.6fr;
+
+  transition: opacity background-color box-shadow 0.2s;
+}
+
+.bigtable-entryvehicle:hover {
+  opacity: 0.8;
+  background-color: rgb(242, 242, 242);
+  box-shadow: 0 0 5px black;
+}
+
+.vehicle-popup {
+  box-shadow: 0 0 3px black;
+  z-index: 999;
+  border-radius: 15px;
+
+  width: 340px;
+  height: 55px;
+
+  display: flex;
+
+  background-color: rgb(225, 225, 225);
+}
+
+.vehicle-popup-2btn {
+  box-shadow: 0 0 3px black;
+  z-index: 999;
+  border-radius: 15px;
+
+  width: 260px;
+  height: 55px;
+
+  display: flex;
+
+  background-color: rgb(225, 225, 225);
+}
+
+.edit-vehicle-btn {
+  margin: 12px;
+  margin-right: 12px;
+  margin-left: 0px;
+
+  width: 100%;
+
+  background-color: rgb(103, 103, 255);
+
+  transition: opacity 0.2s;
+}
+
+.edit-vehicle-btn:hover {
+  opacity: 0.8;
+  box-shadow: 0 0 5px rgb(103, 103, 255);
+  z-index: 9999;
+}
+
+.edit-vehicle-btn:active {
+  opacity: 0.5;
+  box-shadow: 0 0 10px rgb(103, 103, 255);
+  z-index: 9999;
+}
+
+.maint-vehicle-btn {
+  margin: 12px;
+  margin-left: 0px;
+
+  width: 100%;
+
+  background-color: rgb(103, 255, 116);
+}
+
+.maint-vehicle-btn:hover {
+  opacity: 0.8;
+  box-shadow: 0 0 5px rgb(103, 255, 116);
+  z-index: 9999;
+}
+
+.maint-vehicle-btn:active {
+  opacity: 0.5;
+  box-shadow: 0 0 10px rgb(103, 255, 116);
+  z-index: 9999;
+}
+
+.del-vehicle-btn {
+  margin: 12px;
+
+  width: 100%;
+
+  background-color: rgb(255, 54, 54);
+}
+
+.del-vehicle-btn:hover {
+  opacity: 0.8;
+  box-shadow: 0 0 5px rgb(255, 54, 54);
+  z-index: 9999;
+}
+
+.del-vehicle-btn:active {
+  opacity: 0.5;
+  box-shadow: 0 0 10px rgb(255, 54, 54);
+  z-index: 9999;
+}
