@@ -32,6 +32,28 @@ export const AuthProvider = () => {
 
   let location = useLocation();
 
+  // GLOBAL PARSE DATE FUNCTION
+  let parseDate = (unix) => {
+    // Create a Date object from Unix time (convert to milliseconds)
+    const date = new Date(unix);
+
+    // Get the date in 'YYYY-MM-DD' format
+    const datePart = date.toISOString().split("T")[0];
+
+    // Get the time in 'HH:MM:SS' format without timezone
+    const timePart = date.toLocaleTimeString("en-GB", {
+      hour12: false, // 24-hour format
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+
+    // Combine date and time without timezone information
+    const dateTimeString = `${datePart} ${timePart}`;
+
+    return dateTimeString;
+  };
+
   // FUNCTIONS
   let signupUser = async (e) => {
     e.preventDefault();
@@ -278,6 +300,7 @@ export const AuthProvider = () => {
     logoutUser: logoutUser,
     updateProfile: updateProfile,
     updateUserinfo: updateUserinfo,
+    parseDate: parseDate,
   };
 
   return (

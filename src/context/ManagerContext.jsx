@@ -29,6 +29,42 @@ export const ManagerProvider = () => {
 
   const navigate = useNavigate();
 
+  let delCreatedTrip = async (id) => {
+    try {
+      const axiosInstance = axios.create({
+        withCredentials: true, // This allows sending/receiving cookies with requests
+      });
+
+      // Posting to server and get response
+      const url = "http://localhost:3000/trip/" + id;
+
+      const response = await axiosInstance.delete(url);
+
+      if (response.status == 200) {
+        notify("success", response.data.message);
+      } else {
+        notify("error", "Something happened");
+      }
+    } catch (error) {
+      // Error from backend
+      if (error.response) {
+        let messages = error.response.data.error;
+        if (Array.isArray(messages)) {
+          for (let i = 0; i < messages.length; i++) {
+            notify("error", messages[i]);
+          }
+        } else {
+          notify("error", messages);
+        }
+      }
+      // Error from anywhere
+      else {
+        notify("error", error.message);
+      }
+    }
+    navigate("/")
+  };
+
   let maintDoneVehicle = async (id, cost) => {
     try {
       const axiosInstance = axios.create({
@@ -473,6 +509,7 @@ export const ManagerProvider = () => {
     delVehicle: delVehicle,
     maintVehicle: maintVehicle,
     maintDoneVehicle: maintDoneVehicle,
+    delCreatedTrip: delCreatedTrip,
   };
 
   return (
