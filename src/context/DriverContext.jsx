@@ -17,6 +17,46 @@ export const DriverProvider = () => {
 
   let [waitingTrip, setwaitingTrip] = useState(null);
 
+  let [history, setHistory] = useState([]);
+
+  let getHistory = async () => {
+    try {
+      const axiosInstance = axios.create({
+        withCredentials: true, // This allows sending/receiving cookies with requests
+      });
+
+      // Posting to server and get response
+      const url = "http://localhost:3000/user/history";
+
+      const response = await axiosInstance.get(url);
+
+      console.log(response);
+
+      if (response.status == 200) {
+        setHistory(response.data);
+        notify("success", "History acquired!");
+      } else {
+        notify("error", "Something happened");
+      }
+    } catch (error) {
+      // Error from backend
+      if (error.response) {
+        let messages = error.response.data.error;
+        if (Array.isArray(messages)) {
+          for (let i = 0; i < messages.length; i++) {
+            notify("error", messages[i]);
+          }
+        } else {
+          notify("error", messages);
+        }
+      }
+      // Error from anywhere
+      else {
+        notify("error", error.message);
+      }
+    }
+  };
+
   let switchStatus = async (status) => {
     try {
       const axiosInstance = axios.create({
@@ -58,39 +98,46 @@ export const DriverProvider = () => {
   };
 
   let getwaitingTrip = async () => {
-    try {
-      const axiosInstance = axios.create({
-        withCredentials: true, // This allows sending/receiving cookies with requests
-      });
+    if (userInfo.status != "inactive")
+      try {
+        const axiosInstance = axios.create({
+          withCredentials: true, // This allows sending/receiving cookies with requests
+        });
 
-      const url = "http://localhost:3000/user/getWaitingTrip";
+        const url = "http://localhost:3000/user/getWaitingTrip";
 
-      const response = await axiosInstance.get(url);
+        const response = await axiosInstance.get(url);
 
-      if (response.status == 200) {
-        setwaitingTrip(response.data);
-      } else {
-        notify("error", "Something happened");
-      }
-    } catch (error) {
-      console.log(error);
+        console.log(response);
 
-      // Error from backend
-      if (error.response) {
-        let messages = error.response.data.error;
-        if (Array.isArray(messages)) {
-          for (let i = 0; i < messages.length; i++) {
-            notify("error", messages[i]);
-          }
+        if (response.status == 200) {
+          setwaitingTrip(response.data);
+          if (response.data.trip.done == false)
+            notify("warning", "Trip in progress");
+          else notify("warning", "Pending trip");
         } else {
-          notify("error", messages);
+          notify("error", "Something happened");
+        }
+      } catch (error) {
+        console.log(error);
+
+        // Error from backend
+        if (error.response) {
+          let messages = error.response.data.error;
+          if (Array.isArray(messages)) {
+            for (let i = 0; i < messages.length; i++) {
+              notify("error", messages[i]);
+            }
+          } else {
+            // TODO: better way to realise this
+            notify("error", "No trip pending");
+          }
+        }
+        // Error from anywhere
+        else {
+          notify("error", error.message);
         }
       }
-      // Error from anywhere
-      else {
-        notify("error", error.message);
-      }
-    }
   };
 
   let cancelTrip = async () => {
@@ -149,6 +196,48 @@ export const DriverProvider = () => {
       if (response.status == 200) {
         notify("success", "Started trip!");
         setwaitingTrip(response.data);
+        updateUserinfo();
+      } else {
+        notify("error", "Something happened");
+      }
+    } catch (error) {
+      console.log(error);
+
+      // Error from backend
+      if (error.response) {
+        let messages = error.response.data.error;
+        if (Array.isArray(messages)) {
+          for (let i = 0; i < messages.length; i++) {
+            notify("error", messages[i]);
+          }
+        } else {
+          notify("error", messages);
+        }
+      }
+      // Error from anywhere
+      else {
+        notify("error", error.message);
+      }
+    }
+  };
+
+  let finishTrip = async () => {
+    try {
+      const axiosInstance = axios.create({
+        withCredentials: true, // This allows sending/receiving cookies with requests
+      });
+
+      const url =
+        "http://localhost:3000/user/finishTrip/" + waitingTrip.trip._id;
+
+      const response = await axiosInstance.get(url);
+
+      console.log(response.data);
+
+      if (response.status == 200) {
+        notify("success", "Trip finished!");
+        setwaitingTrip(null);
+        updateUserinfo();
       } else {
         notify("error", "Something happened");
       }
@@ -176,12 +265,15 @@ export const DriverProvider = () => {
   let contextData = {
     // trucking related variables
     waitingTrip: waitingTrip,
+    history: history,
 
     // trucking related functions
     switchStatus: switchStatus,
     getwaitingTrip: getwaitingTrip,
     cancelTrip: cancelTrip,
     startTrip: startTrip,
+    finishTrip: finishTrip,
+    getHistory: getHistory,
   };
 
   return (

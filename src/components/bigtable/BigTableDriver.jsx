@@ -3,16 +3,21 @@ import { Navigate, Link, useNavigate } from "react-router-dom";
 
 import "../../pagestyles/bigtable.css";
 
-const BigTableDriver = ({data, tripInfo}) => {
-  // Get navigate function
+import ManagerContext from "../../context/ManagerContext";
+
+const BigTableDriver = ({ data, tripInfo }) => {
   const navigate = useNavigate();
+  let { driverList, getDriver } = useContext(ManagerContext);
 
+  useEffect(() => {
+    getDriver();
+  }, []);
 
-  
+  useEffect(() => {}, [driverList]);
 
   return (
     <div className="bigtable-content">
-      <div className="bigtable-header">
+      <div className="bigtable-header-driver">
         <div className="column-header">Name</div>
         <div className="column-header">Tel</div>
         <div className="column-header">Email</div>
@@ -23,7 +28,7 @@ const BigTableDriver = ({data, tripInfo}) => {
         <div className="fillerdiv"></div>
       </div>
       <div className="bigtable-body">
-        <button className="bigtable-entry" id="69420">
+        <button className="bigtable-entry-driver" id="69420">
           <div className="bigtable-entry-field">Mark</div>
           <div className="bigtable-entry-field">123456</div>
           <div className="bigtable-entry-field">googogaga.emas</div>
@@ -32,132 +37,6 @@ const BigTableDriver = ({data, tripInfo}) => {
           <div className="bigtable-entry-field">42</div>
           <div className="bigtable-entry-field">42</div>
         </button>
-
-        <button className="bigtable-entry" id="69420">
-          <div className="bigtable-entry-field">Mark</div>
-          <div className="bigtable-entry-field">123456</div>
-          <div className="bigtable-entry-field">googogaga.emas</div>
-          <div className="bigtable-entry-field">123 south side mf</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-        </button>
-
-        <button className="bigtable-entry" id="69420">
-          <div className="bigtable-entry-field">Mark</div>
-          <div className="bigtable-entry-field">123456</div>
-          <div className="bigtable-entry-field">googogaga.emas</div>
-          <div className="bigtable-entry-field">123 south side mf</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-        </button>
-
-        <button className="bigtable-entry" id="69420">
-          <div className="bigtable-entry-field">Mark</div>
-          <div className="bigtable-entry-field">123456</div>
-          <div className="bigtable-entry-field">googogaga.emas</div>
-          <div className="bigtable-entry-field">123 south side mf</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-        </button>
-
-        <button className="bigtable-entry" id="69420">
-          <div className="bigtable-entry-field">Mark</div>
-          <div className="bigtable-entry-field">123456</div>
-          <div className="bigtable-entry-field">googogaga.emas</div>
-          <div className="bigtable-entry-field">123 south side mf</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-        </button>
-
-        <button className="bigtable-entry" id="69420">
-          <div className="bigtable-entry-field">Mark</div>
-          <div className="bigtable-entry-field">123456</div>
-          <div className="bigtable-entry-field">googogaga.emas</div>
-          <div className="bigtable-entry-field">123 south side mf</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-        </button>
-
-        <button className="bigtable-entry" id="69420">
-          <div className="bigtable-entry-field">Mark</div>
-          <div className="bigtable-entry-field">123456</div>
-          <div className="bigtable-entry-field">googogaga.emas</div>
-          <div className="bigtable-entry-field">123 south side mf</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-        </button>
-        <button className="bigtable-entry" id="69420">
-          <div className="bigtable-entry-field">Mark</div>
-          <div className="bigtable-entry-field">123456</div>
-          <div className="bigtable-entry-field">googogaga.emas</div>
-          <div className="bigtable-entry-field">123 south side mf</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-        </button>
-        <button className="bigtable-entry" id="69420">
-          <div className="bigtable-entry-field">Mark</div>
-          <div className="bigtable-entry-field">123456</div>
-          <div className="bigtable-entry-field">googogaga.emas</div>
-          <div className="bigtable-entry-field">123 south side mf</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-        </button>
-        <button className="bigtable-entry" id="69420">
-          <div className="bigtable-entry-field">Mark</div>
-          <div className="bigtable-entry-field">123456</div>
-          <div className="bigtable-entry-field">googogaga.emas</div>
-          <div className="bigtable-entry-field">123 south side mf</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-        </button>
-        <button className="bigtable-entry" id="69420">
-          <div className="bigtable-entry-field">Mark</div>
-          <div className="bigtable-entry-field">123456</div>
-          <div className="bigtable-entry-field">googogaga.emas</div>
-          <div className="bigtable-entry-field">123 south side mf</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-        </button>
-        <button className="bigtable-entry" id="69420">
-          <div className="bigtable-entry-field">Mark</div>
-          <div className="bigtable-entry-field">123456</div>
-          <div className="bigtable-entry-field">googogaga.emas</div>
-          <div className="bigtable-entry-field">123 south side mf</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-        </button>
-        <button className="bigtable-entry" id="69420">
-          <div className="bigtable-entry-field">Mark</div>
-          <div className="bigtable-entry-field">123456</div>
-          <div className="bigtable-entry-field">googogaga.emas</div>
-          <div className="bigtable-entry-field">123 south side mf</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-        </button>
-        <button className="bigtable-entry" id="69420">
-          <div className="bigtable-entry-field">Mark</div>
-          <div className="bigtable-entry-field">123456</div>
-          <div className="bigtable-entry-field">googogaga.emas</div>
-          <div className="bigtable-entry-field">123 south side mf</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-        </button>
-
-
-
       </div>
     </div>
   );
