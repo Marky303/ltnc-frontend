@@ -21,6 +21,9 @@ export const ManagerProvider = () => {
   // Vehicle list
   let [vehicleList, setvehicleList] = useState([]);
 
+  // Trip list
+  let [tripList, settripList] = useState([]);
+
   // Create trip
   let [listCar, setlistCar] = useState();
   let [listDriver, setlistDriver] = useState();
@@ -28,6 +31,41 @@ export const ManagerProvider = () => {
   let [fetching, setFetching] = useState(false);
 
   const navigate = useNavigate();
+
+  let getTrip = async () => {
+    try {
+      const axiosInstance = axios.create({
+        withCredentials: true, // This allows sending/receiving cookies with requests
+      });
+
+      // Posting to server and get response
+      const url = "http://localhost:3000/trip";
+
+      const response = await axiosInstance.get(url);
+
+      if (response.status == 200) {
+        settripList(response.data);
+      } else {
+        notify("error", "Something happened");
+      }
+    } catch (error) {
+      // Error from backend
+      if (error.response) {
+        let messages = error.response.data.error;
+        if (Array.isArray(messages)) {
+          for (let i = 0; i < messages.length; i++) {
+            notify("error", messages[i]);
+          }
+        } else {
+          notify("error", messages);
+        }
+      }
+      // Error from anywhere
+      else {
+        notify("error", error.message);
+      }
+    }
+  };
 
   let delCreatedTrip = async (id) => {
     try {
@@ -62,7 +100,7 @@ export const ManagerProvider = () => {
         notify("error", error.message);
       }
     }
-    navigate("/")
+    navigate("/");
   };
 
   let maintDoneVehicle = async (id, cost) => {
@@ -319,11 +357,9 @@ export const ManagerProvider = () => {
       });
 
       // Posting to server and get response
-      const url = "http://localhost:3000/trip";
+      const url = "http://localhost:3000/user";
 
       const response = await axiosInstance.get(url);
-
-      console.log(response);
 
       if (response.status == 200) {
         setdriverList(response.data);
@@ -498,6 +534,7 @@ export const ManagerProvider = () => {
     tripCreated: tripCreated,
     driverList: driverList,
     vehicleList: vehicleList,
+    tripList: tripList,
 
     // trucking related functions
     findOperator: findOperator,
@@ -510,6 +547,7 @@ export const ManagerProvider = () => {
     maintVehicle: maintVehicle,
     maintDoneVehicle: maintDoneVehicle,
     delCreatedTrip: delCreatedTrip,
+    getTrip: getTrip,
   };
 
   return (

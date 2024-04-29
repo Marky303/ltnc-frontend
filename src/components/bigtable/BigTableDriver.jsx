@@ -28,15 +28,21 @@ const BigTableDriver = ({ data, tripInfo }) => {
         <div className="fillerdiv"></div>
       </div>
       <div className="bigtable-body">
-        <button className="bigtable-entry-driver" id="69420">
-          <div className="bigtable-entry-field">Mark</div>
-          <div className="bigtable-entry-field">123456</div>
-          <div className="bigtable-entry-field">googogaga.emas</div>
-          <div className="bigtable-entry-field">123 south side mf</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-          <div className="bigtable-entry-field">42</div>
-        </button>
+        {driverList.length != 0 ? (
+          driverList.map((driver) => (
+            <button className="bigtable-entry-driver" id="69420">
+              <div className="bigtable-entry-field">{driver.fullName}</div>
+              <div className="bigtable-entry-field">{driver.phoneNumber}</div>
+              <div className="bigtable-entry-field">{driver.email}</div>
+              <div className="bigtable-entry-field">{driver.address}</div>
+              <div className="bigtable-entry-field">{driver.drivingLicense.join(", ")}</div>
+              <div className="bigtable-entry-field">{driver.point}</div>
+              <div className="bigtable-entry-field">{driver.status}</div>
+            </button>
+          ))
+        ) : (
+          <div></div>
+        )}
       </div>
     </div>
   );
