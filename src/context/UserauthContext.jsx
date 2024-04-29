@@ -208,6 +208,7 @@ export const AuthProvider = () => {
     setauthTokens(null);
     Cookies.remove("token");
     navigate("/login");
+    window.location.reload();
   };
 
   let updateProfile = async (e) => {
