@@ -32,7 +32,7 @@ export const DriverProvider = () => {
 
       if (response.status == 200) {
         setHistory(response.data);
-        return response.data
+        return response.data;
       } else {
         notify("error", "Something happened");
       }
