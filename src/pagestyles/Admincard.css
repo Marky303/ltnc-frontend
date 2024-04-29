@@ -1,0 +1,62 @@
+
+
+.card {
+  width: 450px;
+  background-color: #d9d9d9;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.card-header {
+  font-size: 1.6rem;
+  margin-bottom: 1.1rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.card-main {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.statistic, .cash-flow {
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.statistic.active, .cash-flow .revenue {
+  background-color: #EAEAEA;
+  color: #2AB91E;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  width: 120px;
+}
+
+.statistic.hold {
+  background-color: #EAEAEA;
+  color: #C8CB38;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  width: 120px;
+}
+
+.cash-flow .expenses {
+  background-color: #EAEAEA;
+  color: #CB3838;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  width: 120px;
+  align-items: center;
+}
+
+.card-children {
+  align-items: center;
+  font-size: 1.7rem;
+}
