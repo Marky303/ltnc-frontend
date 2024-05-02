@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Navigate, Link, useNavigate } from "react-router-dom";
-import Popup from 'reactjs-popup';
-
+import Popup from "reactjs-popup";
 
 import "../../pagestyles/bigtable.css";
 
@@ -18,9 +17,7 @@ const BigTableTripManager = () => {
     getTrip();
   }, []);
 
-  useEffect(() => {
-    console.log(tripList);
-  }, [tripList]);
+  useEffect(() => {}, [tripList]);
 
   const formatter = new Intl.NumberFormat("de-DE");
 
@@ -66,11 +63,21 @@ const BigTableTripManager = () => {
               position="center right"
             >
               <div className="tripdriver-popup">
-                <div className="tripdriver-text">Driver name: {trip.driver.fullName}</div>
-                <div className="tripdriver-text">Point: {trip.driver.point}</div>
-                <div className="tripdriver-text">Tel: {trip.driver.phoneNumber}</div>
-                <div className="tripdriver-text">Email: {trip.driver.email}</div>
-                <div className="tripdriver-text">Driving License: {trip.driver.drivingLicense.join(", ")}</div>
+                <div className="tripdriver-text">
+                  Driver name: {trip.driver.fullName}
+                </div>
+                <div className="tripdriver-text">
+                  Point: {trip.driver.point}
+                </div>
+                <div className="tripdriver-text">
+                  Tel: {trip.driver.phoneNumber}
+                </div>
+                <div className="tripdriver-text">
+                  Email: {trip.driver.email}
+                </div>
+                <div className="tripdriver-text">
+                  Driving License: {trip.driver.drivingLicense.join(", ")}
+                </div>
               </div>
             </Popup>
           ))
