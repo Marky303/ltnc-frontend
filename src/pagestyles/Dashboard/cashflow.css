@@ -1,0 +1,32 @@
+.cashflow-wrapper {
+  height: 97%;
+  width: 52dvw;
+  margin: 30px;
+  margin-left: 0px;
+
+  box-shadow: 0 0 3px black;
+  z-index: 15;
+  border-radius: 23px;
+
+  background-color: rgb(239, 239, 239);
+}
+
+.cashflow-chart {
+    padding: 30px;
+    padding-top: 0px;
+
+    width: 100%;
+
+    height: 90%;
+}
+
+.cashflow-header {
+    text-align: left;
+    vertical-align: middle;
+    line-height: 40px;
+  
+    padding: 20px;
+    padding-left: 40px;
+    
+    font-size: 40px;
+}

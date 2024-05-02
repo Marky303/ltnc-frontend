@@ -10,8 +10,13 @@ import Infocard from "../../components/Dashboard/infoCard";
 import Tripschart from "../../components/Dashboard/tripsChart";
 import Distancechart from "../../components/Dashboard/distanceChart";
 
-{/* <Infocard />
-<Tripschart /> */}
+import ManagerInfo from "../../components/Dashboard/managerInfo";
+import Cashflow from "../../components/Dashboard/Cashflow";
+
+{
+  /* <Infocard />
+<Tripschart /> */
+}
 
 // <Distancechart />
 
@@ -21,17 +26,25 @@ const Dashboard = () => {
 
   return authTokens ? (
     userInfo.admin ? (
-      <div> Manager dashboard </div>
+      <div className="dashboard-wrapper">
+        <div className="dashboard-left-content">
+          <ManagerInfo />
+          
+        </div>
+        <div className="dashboard-right-content">
+          <Cashflow/>
+        </div>
+      </div>
     ) : (
       <div className="dashboard-wrapper">
         <div className="dashboard-left-content">
-            <div className="infocard-wrapper">
-              <Infocard/>
-            </div>
-            <Distancechart />
+          <div className="infocard-wrapper">
+            <Infocard />
+          </div>
+          <Distancechart />
         </div>
         <div className="dashboard-right-content">
-        <Tripschart />
+          <Tripschart />
         </div>
       </div>
     )
