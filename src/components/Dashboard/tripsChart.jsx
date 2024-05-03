@@ -69,7 +69,7 @@ export default function Tripschart() {
   let [data, setData] = useState([]);
 
   let { parseDateOnly } = useContext(UserauthContext);
-  let { history, getHistory } = useContext(DriverContext);
+  let { getHistory } = useContext(DriverContext);
 
   useEffect(() => {
     async function getHist() {

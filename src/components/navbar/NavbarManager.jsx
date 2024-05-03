@@ -21,8 +21,14 @@ const NavbarManager = () => {
           </Link>
         </li>
         <li class="nav-item">
+          <Link to="/createtrip1">
+            <i class="fa-solid fa-plus"></i>
+            Create trip
+          </Link>
+        </li>
+        <li class="nav-item">
           <Link to="/driverlist">
-          <i class="fa-solid fa-id-card"></i>
+            <i class="fa-solid fa-id-card"></i>
             Drivers
           </Link>
         </li>
