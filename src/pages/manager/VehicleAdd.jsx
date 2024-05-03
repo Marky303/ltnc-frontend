@@ -94,7 +94,7 @@ const VehicleAdd = () => {
                         type="text"
                         id="weight"
                         name="weight"
-                        placeholder="Phone number"
+                        placeholder="Vehicle's weight (in tons)"
                       />
                     </div>
                   </div>
