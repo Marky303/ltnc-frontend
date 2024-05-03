@@ -176,7 +176,7 @@ const CreateTrip1 = () => {
 
                   <div className="name-flex">
                     <i class="fa-solid fa-money-bill-trend-up"></i>
-                    <label>Revenue</label>
+                    <label>Revenue (kVND)</label>
                     <input
                       type="text"
                       id="revenue"

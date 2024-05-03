@@ -30,7 +30,46 @@ export const ManagerProvider = () => {
   let [tripCreated, settripCreated] = useState();
   let [fetching, setFetching] = useState(false);
 
+  // All trip list
+  let [allTrip, setallTrip] = useState([]);
+
   const navigate = useNavigate();
+
+  let getallTrip = async () => {
+    try {
+      const axiosInstance = axios.create({
+        withCredentials: true, // This allows sending/receiving cookies with requests
+      });
+
+      // Posting to server and get response
+      const url = "http://localhost:3000/trip/getAll";
+
+      const response = await axiosInstance.get(url);
+
+      if (response.status == 200) {
+        setallTrip(response.data);
+        return response.data;
+      } else {
+        notify("error", "Something happened");
+      }
+    } catch (error) {
+      // Error from backend
+      if (error.response) {
+        let messages = error.response.data.error;
+        if (Array.isArray(messages)) {
+          for (let i = 0; i < messages.length; i++) {
+            notify("error", messages[i]);
+          }
+        } else {
+          notify("error", messages);
+        }
+      }
+      // Error from anywhere
+      else {
+        notify("error", error.message);
+      }
+    }
+  };
 
   let getTrip = async () => {
     try {
@@ -535,6 +574,7 @@ export const ManagerProvider = () => {
     driverList: driverList,
     vehicleList: vehicleList,
     tripList: tripList,
+    allTrip: allTrip,
 
     // trucking related functions
     findOperator: findOperator,
@@ -548,6 +588,7 @@ export const ManagerProvider = () => {
     maintDoneVehicle: maintDoneVehicle,
     delCreatedTrip: delCreatedTrip,
     getTrip: getTrip,
+    getallTrip: getallTrip,
   };
 
   return (
