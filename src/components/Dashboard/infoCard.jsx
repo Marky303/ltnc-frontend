@@ -114,7 +114,7 @@ const Infocard = () => {
                 <u>Est Arrival</u>: {parseDate(waitingTrip.trip.expectedTimeCome)}
               </div>
               <div className="trip-info-text">
-                <u>Route</u>: {waitingTrip.trip.route}
+                <u>Route</u>: {waitingTrip.trip.route.join(" - ")}
               </div>
             </div>
           </div>
@@ -180,7 +180,7 @@ const Infocard = () => {
                 <u>Est Arrival</u>: {parseDate(waitingTrip.trip.expectedTimeCome)}
               </div>
               <div className="trip-info-text">
-                <u>Route</u>: {waitingTrip.trip.route}
+                <u>Route</u>: {waitingTrip.trip.route.join(" - ")}
               </div>
             </div>
           </div>
